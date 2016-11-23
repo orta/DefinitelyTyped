@@ -44,5 +44,5 @@ declare module "babylon" {
 
     export type PluginName = 'jsx' | 'flow' | 'asyncFunctions' | 'classConstructorCall' | 'doExpressions'
         | 'trailingFunctionCommas' | 'objectRestSpread' | 'decorators' | 'classProperties' | 'exportExtensions'
-        | 'exponentiationOperator' | 'asyncGenerators' | 'functionBind' | 'functionSent';
+        | 'exponentiationOperator' | 'asyncGenerators' | 'functionBind' | 'functionSent' | '*';
 }
