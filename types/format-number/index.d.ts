@@ -4,9 +4,9 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 export default function(options?: {
-    negativeType?: "right" | "left" | "brackets" | null;
+    negativeType?: 'right' | 'left' | 'brackets' | null;
     negativeLeftSymbol?: string;
-    negative?: "R" | null;
+    negative?: 'R' | null;
     negativeRightSymbol?: string;
     negativeLeftOut?: boolean;
     negativeOut?: boolean;
@@ -26,5 +26,5 @@ export default function(options?: {
     overrideOptions?: {
         noUnits: boolean;
         noSeparator: boolean;
-    }
+    },
 ) => string;

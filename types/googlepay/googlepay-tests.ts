@@ -4,7 +4,7 @@ const allowedCardNetworks = new Array<google.payments.api.AllowedCardNetwork>(
     'JCB',
     'MASTERCARD',
     'VISA',
-    'INTERAC'
+    'INTERAC',
 );
 
 const allowedPaymentMethods = new Array<google.payments.api.PaymentMethod>({
@@ -14,36 +14,40 @@ const allowedPaymentMethods = new Array<google.payments.api.PaymentMethod>({
         allowedCardNetworks,
         billingAddressRequired: true,
         billingAddressParameters: {
-            format: 'MIN'
-        }
-    }
+            format: 'MIN',
+        },
+    },
 });
 
 const tokenizationSpecification: google.payments.api.PaymentMethodTokenizationSpecification = {
     type: 'PAYMENT_GATEWAY',
     parameters: {
         gateway: 'example',
-        gatewayMerchantId: 'abc123'
-    }
+        gatewayMerchantId: 'abc123',
+    },
 };
 
-const getGooglePaymentsClient = (env?: google.payments.api.EnvironmentType) => new google.payments.api.PaymentsClient({ environment: env });
+const getGooglePaymentsClient = (env?: google.payments.api.EnvironmentType) =>
+    new google.payments.api.PaymentsClient({ environment: env });
 
 function onGooglePayLoaded() {
     const client = getGooglePaymentsClient();
 
-    client.isReadyToPay({
-        apiVersion: 2,
-        apiVersionMinor: 0,
-        allowedPaymentMethods
-    }).then(response => {
-        if (response.result) {
-            addGooglePayButton();
-            prefetchGooglePaymentData();
-        }
-    }).catch(err => {
-        console.error(err);
-    });
+    client
+        .isReadyToPay({
+            apiVersion: 2,
+            apiVersionMinor: 0,
+            allowedPaymentMethods,
+        })
+        .then(response => {
+            if (response.result) {
+                addGooglePayButton();
+                prefetchGooglePaymentData();
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        });
 }
 
 function addGooglePayButton() {
@@ -62,15 +66,15 @@ function getGooglePaymentDataConfiguration(): google.payments.api.PaymentDataReq
         apiVersion: 2,
         apiVersionMinor: 0,
         merchantInfo: {
-            merchantId: '01234567890123456789'
+            merchantId: '01234567890123456789',
         },
         transactionInfo: {
             totalPriceStatus: 'FINAL',
             totalPrice: '123.45',
-            currencyCode: 'USD'
+            currencyCode: 'USD',
         },
         allowedPaymentMethods,
-        shippingAddressRequired: true
+        shippingAddressRequired: true,
     };
 }
 
@@ -83,7 +87,8 @@ function onGooglePaymentButtonClick() {
     const request = getGooglePaymentDataConfiguration();
     const client = getGooglePaymentsClient();
 
-    client.loadPaymentData(request)
+    client
+        .loadPaymentData(request)
         .then(data => console.log(data))
         .catch(err => console.error(err));
 }

@@ -5,12 +5,7 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.8
 
-import {
-    FunctionComponent,
-    ComponentType,
-    ReactElement,
-    ReactNode
-} from "react";
+import { FunctionComponent, ComponentType, ReactElement, ReactNode } from 'react';
 
 export type Params = { [paramName: string]: string } | null;
 export type Path = string;

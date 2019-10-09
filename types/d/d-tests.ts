@@ -49,7 +49,7 @@ Object.defineProperties(
         increment: d(function(this: any) {
             ++this._count;
         }),
-    })
+    }),
 );
 autoBind(
     {
@@ -57,7 +57,7 @@ autoBind(
             ++this._count;
         }),
     },
-    { overwriteDefinition: true }
+    { overwriteDefinition: true },
 );
 autoBind(
     {
@@ -69,7 +69,7 @@ autoBind(
         resolveContext(ctx: any) {
             return ctx;
         },
-    }
+    },
 );
 
 Object.defineProperties(
@@ -78,7 +78,7 @@ Object.defineProperties(
         items: d(() => {
             return [];
         }),
-    })
+    }),
 );
 
 const foo = new Foo();

@@ -60,7 +60,7 @@ export namespace JWA {
         alg: string,
         key: string | Buffer,
         cdata: string | Buffer,
-        props?: DecryptEncryptOptions
+        props?: DecryptEncryptOptions,
     ): Promise<Buffer>;
 
     function derive(alg: string, key: string | Buffer, props?: DeriveOptions): Promise<Buffer>;
@@ -71,14 +71,14 @@ export namespace JWA {
         alg: string,
         key: string | Buffer,
         pdata: string | Buffer,
-        props?: DecryptEncryptOptions
+        props?: DecryptEncryptOptions,
     ): Promise<EncryptReturn>;
 
     function sign(
         alg: string,
         key: string | Buffer,
         pdata: string | Buffer,
-        props: SignVerifyOptions
+        props: SignVerifyOptions,
     ): Promise<SignReturn>;
 
     function verify(
@@ -86,7 +86,7 @@ export namespace JWA {
         key: string | Buffer,
         pdata: string | Buffer,
         mac: string | Buffer,
-        props: SignVerifyOptions
+        props: SignVerifyOptions,
     ): Promise<VerifyReturn>;
 }
 
@@ -98,7 +98,7 @@ export namespace JWE {
             zip?: boolean;
             fields?: object;
         },
-        key: JWK.Key
+        key: JWK.Key,
     ): Encryptor;
 
     function createDecrypt(key: JWK.Key | JWK.KeyStore, opts?: any): Decryptor;
@@ -139,7 +139,7 @@ export namespace JWK {
 
     function asKey(
         key: string | Buffer | object | RawKey,
-        form?: 'json' | 'private' | 'pkcs8' | 'public' | 'spki' | 'pkix' | 'x509' | 'pem'
+        form?: 'json' | 'private' | 'pkcs8' | 'public' | 'spki' | 'pkix' | 'x509' | 'pem',
     ): Promise<Key>;
     /**
      * To import a JWK-set as a keystore
@@ -212,7 +212,7 @@ export namespace JWK {
          */
         add(
             key: string | Buffer | Key | object,
-            form?: 'json' | 'private' | 'pkcs8' | 'public' | 'spki' | 'pkix' | 'x509' | 'pem'
+            form?: 'json' | 'private' | 'pkcs8' | 'public' | 'spki' | 'pkix' | 'x509' | 'pem',
         ): Promise<Key>;
 
         generate(kty: string, size?: string | number, props?: any): Promise<Key>;
@@ -243,7 +243,7 @@ export namespace JWS {
             compact?: boolean;
             fields?: object;
         },
-        key: JWK.Key | JWK.Key[]
+        key: JWK.Key | JWK.Key[],
     ): Signer;
 
     /**
@@ -251,7 +251,7 @@ export namespace JWS {
      */
     function createVerify(
         input?: string | JWK.Key | JWK.KeyStore | object,
-        opts?: { allowEmbeddedKey?: boolean; algorithms?: string[]; handlers?: any }
+        opts?: { allowEmbeddedKey?: boolean; algorithms?: string[]; handlers?: any },
     ): Verifier;
 
     interface CreateSignResult {

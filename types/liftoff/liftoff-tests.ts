@@ -135,7 +135,7 @@ new Liftoff().launch(
         env.modulePackage;
         // $ExpectType { [extensions: string]: { [path: string]: string | null; }; } | undefined
         env.configFiles;
-    }
+    },
 );
 new Liftoff().launch({ cwd: '' }, () => {});
 new Liftoff().launch({ configPath: '' }, () => {});
@@ -150,7 +150,7 @@ new Liftoff().launch(
             return ['--trace-deprecation'];
         },
     },
-    () => {}
+    () => {},
 );
 new Liftoff().launch(
     {
@@ -158,7 +158,7 @@ new Liftoff().launch(
             return '--trace-deprecation';
         },
     },
-    () => {}
+    () => {},
 );
 new Liftoff().launch({ completion: '' }, () => {});
 

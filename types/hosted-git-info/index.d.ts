@@ -19,7 +19,7 @@ declare class HostedGitInfo {
         project: string | null,
         committish: string | null,
         defaultRepresentation: string,
-        opts?: HostedGitInfo.Options
+        opts?: HostedGitInfo.Options,
     );
 
     // From git-host-info
@@ -52,11 +52,7 @@ declare class HostedGitInfo {
     hash(): string;
     ssh(opts?: HostedGitInfo.FillOptions): string | undefined;
     sshurl(opts?: HostedGitInfo.FillOptions): string | undefined;
-    browse(
-        path: string,
-        fragment: string,
-        opts?: HostedGitInfo.FillOptions
-    ): string | undefined;
+    browse(path: string, fragment: string, opts?: HostedGitInfo.FillOptions): string | undefined;
     browse(path: string, opts?: HostedGitInfo.FillOptions): string | undefined;
     browse(opts?: HostedGitInfo.FillOptions): string | undefined;
     docs(opts?: HostedGitInfo.FillOptions): string | undefined;
@@ -70,10 +66,7 @@ declare class HostedGitInfo {
     getDefaultRepresentation(): string;
     toString(opts?: HostedGitInfo.FillOptions): string | undefined;
 
-    static fromUrl(
-        gitUrl: string,
-        options?: HostedGitInfo.Options
-    ): HostedGitInfo;
+    static fromUrl(gitUrl: string, options?: HostedGitInfo.Options): HostedGitInfo;
 }
 
 declare namespace HostedGitInfo {

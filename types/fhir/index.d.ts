@@ -2,6 +2,7 @@
 // Project: http://hl7.org/fhir/index.html
 // Definitions by: Artifact Health <https://www.artifacthealth.com>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
+
 declare module fhir {
     /**
      * Any combination of letters, numerals, "-" and ".", with a length limit of 64 characters.  (This might be an integer, an unprefixed OID, UUID or any other identifier pattern that meets these constraints.)  Ids are case-insensitive.
@@ -209,8 +210,7 @@ declare module fhir {
     /**
      * A duration of time during which an organism (or a process) has existed
      */
-    interface Age extends Quantity {
-    }
+    interface Age extends Quantity {}
     /**
      * A reference to a code defined by a terminology system
      */
@@ -485,18 +485,15 @@ declare module fhir {
     /**
      * A measured or measurable amount
      */
-    interface Count extends Quantity {
-    }
+    interface Count extends Quantity {}
     /**
      * A length - a value with a unit that is a physical distance
      */
-    interface Distance extends Quantity {
-    }
+    interface Distance extends Quantity {}
     /**
      * A length of time
      */
-    interface Duration extends Quantity {
-    }
+    interface Duration extends Quantity {}
     /**
      * Name of a human - parts and usage
      */
@@ -557,13 +554,11 @@ declare module fhir {
     /**
      * An amount of economic utility in some recognized currency
      */
-    interface Money extends Quantity {
-    }
+    interface Money extends Quantity {}
     /**
      * A fixed quantity (no comparator)
      */
-    interface SimpleQuantity extends Quantity {
-    }
+    interface SimpleQuantity extends Quantity {}
     /**
      * Set of values bounded by low and high
      */
@@ -1866,7 +1861,8 @@ declare module fhir {
          */
         identifier?: Identifier;
         /**
-         * AE | PAE An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not
+         * AE | PAE 
+An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not
          */
         category?: code;
         /**
@@ -25622,5 +25618,123 @@ declare module fhir {
     /**
      * Reference to a sub-type of ResourceBase. This is needed for stricter object literal typing introduced in TypeScript 1.6.
      */
-    type Resource = (DomainResource|Account|ActivityDefinition|AdverseEvent|AllergyIntolerance|Appointment|AppointmentResponse|AuditEvent|Basic|BodySite|CapabilityStatement|CarePlan|CareTeam|ChargeItem|Claim|ClaimResponse|ClinicalImpression|CodeSystem|Communication|CommunicationRequest|CompartmentDefinition|Composition|ConceptMap|Condition|Consent|Contract|Coverage|DataElement|DetectedIssue|Device|DeviceComponent|DeviceMetric|DeviceRequest|DeviceUseStatement|DiagnosticReport|DocumentManifest|DocumentReference|EligibilityRequest|EligibilityResponse|Encounter|Endpoint|EnrollmentRequest|EnrollmentResponse|EpisodeOfCare|ExpansionProfile|ExplanationOfBenefit|FamilyMemberHistory|Flag|Goal|GraphDefinition|Group|GuidanceResponse|HealthcareService|ImagingManifest|ImagingStudy|Immunization|ImmunizationRecommendation|ImplementationGuide|Library|Linkage|List|Location|Measure|MeasureReport|Media|Medication|MedicationAdministration|MedicationDispense|MedicationRequest|MedicationStatement|MessageDefinition|MessageHeader|NamingSystem|NutritionOrder|Observation|OperationDefinition|OperationOutcome|Organization|Patient|PaymentNotice|PaymentReconciliation|Person|PlanDefinition|Practitioner|PractitionerRole|Procedure|ProcedureRequest|ProcessRequest|ProcessResponse|Provenance|Questionnaire|QuestionnaireResponse|ReferralRequest|RelatedPerson|RequestGroup|ResearchStudy|ResearchSubject|RiskAssessment|Schedule|SearchParameter|Sequence|ServiceDefinition|Slot|Specimen|StructureDefinition|StructureMap|Subscription|Substance|SupplyDelivery|SupplyRequest|Task|TestReport|TestScript|ValueSet|VisionPrescription|Binary|Bundle|Parameters);
+    type Resource =
+        | DomainResource
+        | Account
+        | ActivityDefinition
+        | AdverseEvent
+        | AllergyIntolerance
+        | Appointment
+        | AppointmentResponse
+        | AuditEvent
+        | Basic
+        | BodySite
+        | CapabilityStatement
+        | CarePlan
+        | CareTeam
+        | ChargeItem
+        | Claim
+        | ClaimResponse
+        | ClinicalImpression
+        | CodeSystem
+        | Communication
+        | CommunicationRequest
+        | CompartmentDefinition
+        | Composition
+        | ConceptMap
+        | Condition
+        | Consent
+        | Contract
+        | Coverage
+        | DataElement
+        | DetectedIssue
+        | Device
+        | DeviceComponent
+        | DeviceMetric
+        | DeviceRequest
+        | DeviceUseStatement
+        | DiagnosticReport
+        | DocumentManifest
+        | DocumentReference
+        | EligibilityRequest
+        | EligibilityResponse
+        | Encounter
+        | Endpoint
+        | EnrollmentRequest
+        | EnrollmentResponse
+        | EpisodeOfCare
+        | ExpansionProfile
+        | ExplanationOfBenefit
+        | FamilyMemberHistory
+        | Flag
+        | Goal
+        | GraphDefinition
+        | Group
+        | GuidanceResponse
+        | HealthcareService
+        | ImagingManifest
+        | ImagingStudy
+        | Immunization
+        | ImmunizationRecommendation
+        | ImplementationGuide
+        | Library
+        | Linkage
+        | List
+        | Location
+        | Measure
+        | MeasureReport
+        | Media
+        | Medication
+        | MedicationAdministration
+        | MedicationDispense
+        | MedicationRequest
+        | MedicationStatement
+        | MessageDefinition
+        | MessageHeader
+        | NamingSystem
+        | NutritionOrder
+        | Observation
+        | OperationDefinition
+        | OperationOutcome
+        | Organization
+        | Patient
+        | PaymentNotice
+        | PaymentReconciliation
+        | Person
+        | PlanDefinition
+        | Practitioner
+        | PractitionerRole
+        | Procedure
+        | ProcedureRequest
+        | ProcessRequest
+        | ProcessResponse
+        | Provenance
+        | Questionnaire
+        | QuestionnaireResponse
+        | ReferralRequest
+        | RelatedPerson
+        | RequestGroup
+        | ResearchStudy
+        | ResearchSubject
+        | RiskAssessment
+        | Schedule
+        | SearchParameter
+        | Sequence
+        | ServiceDefinition
+        | Slot
+        | Specimen
+        | StructureDefinition
+        | StructureMap
+        | Subscription
+        | Substance
+        | SupplyDelivery
+        | SupplyRequest
+        | Task
+        | TestReport
+        | TestScript
+        | ValueSet
+        | VisionPrescription
+        | Binary
+        | Bundle
+        | Parameters;
 }

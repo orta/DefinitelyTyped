@@ -31,7 +31,7 @@ declare namespace HapiPino {
         prettyPrint?: boolean;
         levelTags?: { [key in LogLevels]: string };
         allTags?: LogLevels;
-        serializers?: { [key: string]: (param: any) => void};
+        serializers?: { [key: string]: (param: any) => void };
         instance?: pino.Logger;
         logEvents?: string[] | false | null;
         mergeHapiLogData?: boolean;

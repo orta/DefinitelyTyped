@@ -8,7 +8,7 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.8
 
-import { ReactElement, ReactType } from "react";
+import { ReactElement, ReactType } from 'react';
 
 // extracted from:
 // - https://github.com/facebook/react/blob/v16.0.0/src/renderers/testing/ReactTestRendererFiberEntry.js
@@ -21,7 +21,7 @@ export interface ReactTestRendererJSON {
 }
 export type ReactTestRendererNode = ReactTestRendererJSON | string;
 export interface ReactTestRendererTree extends ReactTestRendererJSON {
-    nodeType: "component" | "host";
+    nodeType: 'component' | 'host';
     instance: any;
     rendered: null | ReactTestRendererTree;
 }
@@ -85,9 +85,6 @@ export function act(callback: () => void | undefined): DebugPromiseLike;
 // Intentionally doesn't extend PromiseLike<never>.
 // Ideally this should be as hard to accidentally use as possible.
 export interface DebugPromiseLike {
-  // the actual then() in here is 1-ary, but that doesn't count as a PromiseLike.
-  then(
-    onfulfilled: (value: never) => never,
-    onrejected: (reason: never) => never,
-  ): never;
+    // the actual then() in here is 1-ary, but that doesn't count as a PromiseLike.
+    then(onfulfilled: (value: never) => never, onrejected: (reason: never) => never): never;
 }

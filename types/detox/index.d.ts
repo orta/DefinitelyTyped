@@ -154,7 +154,7 @@ declare global {
              *     await expect(loopSwitch).toHaveValue('1');
              * }
              */
-            getPlatform(): "ios" | "android";
+            getPlatform(): 'ios' | 'android';
             /**
              * Simulate press back button (Android Only)
              */
@@ -382,11 +382,7 @@ declare global {
              * await element(by.id('scrollView')).swipe('down', 'fast');
              * await element(by.id('scrollView')).swipe('down', 'fast', 0.5);
              */
-            swipe(
-                direction: Direction,
-                speed?: Speed,
-                percentage?: number
-            ): Promise<Actions<R>>;
+            swipe(direction: Direction, speed?: Speed, percentage?: number): Promise<Actions<R>>;
             /**
              * (iOS Only) column - number of datepicker column (starts from 0) value - string value in setted column (must be correct)
              * @param column
@@ -395,15 +391,12 @@ declare global {
              * await element(by.type('UIPickerView')).setColumnToValue(1,"6");
              * await element(by.type('UIPickerView')).setColumnToValue(2,"34");
              */
-            setColumnToValue(
-                column: number,
-                value: string
-            ): Promise<Actions<R>>;
+            setColumnToValue(column: number, value: string): Promise<Actions<R>>;
         }
 
-        type Direction = "left" | "right" | "top" | "bottom" | "up" | "down";
-        type Orientation = "portrait" | "landscape";
-        type Speed = "fast" | "slow";
+        type Direction = 'left' | 'right' | 'top' | 'bottom' | 'up' | 'down';
+        type Orientation = 'portrait' | 'landscape';
+        type Speed = 'fast' | 'slow';
         interface LanguageAndLocale {
             language?: string;
             locale?: string;
@@ -427,7 +420,7 @@ declare global {
         /**
          *  Source for string definitions is https://github.com/wix/AppleSimulatorUtils
          */
-        interface  DevicePermissions {
+        interface DevicePermissions {
             location?: LocationPermission;
             notifications?: NotificationsPermission;
             calendar?: CalendarPermission;
@@ -444,8 +437,8 @@ declare global {
             speech?: SpeechPermission;
         }
 
-        type LocationPermission = "always" | "inuse" | "never" | "unset";
-        type PermissionState = "YES" | "NO" | "unset";
+        type LocationPermission = 'always' | 'inuse' | 'never' | 'unset';
+        type PermissionState = 'YES' | 'NO' | 'unset';
         type CameraPermission = PermissionState;
         type ContactsPermission = PermissionState;
         type CalendarPermission = PermissionState;

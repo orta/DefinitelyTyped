@@ -33,16 +33,14 @@ declare namespace Autosuggest {
      */
 
     /** @internal */
-    type Omit<T, K extends keyof T> = Pick<T, ({ [P in keyof T]: P } & { [P in K]: never } & { [x: string]: never, [x: number]: never })[keyof T]>;
+    type Omit<T, K extends keyof T> = Pick<
+        T,
+        ({ [P in keyof T]: P } & { [P in K]: never } & { [x: string]: never; [x: number]: never })[keyof T]
+    >;
 
     interface SuggestionsFetchRequestedParams {
         value: string;
-        reason:
-            | 'input-changed'
-            | 'input-focused'
-            | 'escape-pressed'
-            | 'suggestions-revealed'
-            | 'suggestion-selected';
+        reason: 'input-changed' | 'input-focused' | 'escape-pressed' | 'suggestions-revealed' | 'suggestion-selected';
     }
 
     interface RenderSuggestionParams {
@@ -63,8 +61,7 @@ declare namespace Autosuggest {
         highlightedSuggestion: TSuggestion;
     }
 
-    interface InputProps<TSuggestion>
-        extends Omit<React.InputHTMLAttributes<any>, 'onChange' | 'onBlur'> {
+    interface InputProps<TSuggestion> extends Omit<React.InputHTMLAttributes<any>, 'onChange' | 'onBlur'> {
         onChange(event: React.FormEvent<any>, params: ChangeEvent): void;
         onBlur?(event: React.FocusEvent<any>, params?: BlurEvent<TSuggestion>): void;
         value: string;
@@ -95,9 +92,7 @@ declare namespace Autosuggest {
         | 'sectionContainerFirst'
         | 'sectionTitle';
 
-    type Theme =
-        | Record<string, string | React.CSSProperties>
-        | Partial<Record<ThemeKey, string | React.CSSProperties>>;
+    type Theme = Record<string, string | React.CSSProperties> | Partial<Record<ThemeKey, string | React.CSSProperties>>;
 
     interface RenderSuggestionsContainerParams {
         containerProps: {
@@ -124,10 +119,7 @@ declare namespace Autosuggest {
     type RenderInputComponent<TSuggestion> = (inputProps: InputProps<TSuggestion>) => React.ReactNode;
     type RenderSuggestionsContainer = (params: RenderSuggestionsContainerParams) => React.ReactNode;
     type RenderSectionTitle = (section: any) => React.ReactNode;
-    type RenderSuggestion<TSuggestion> = (
-        suggestion: TSuggestion,
-        params: RenderSuggestionParams,
-    ) => React.ReactNode;
+    type RenderSuggestion<TSuggestion> = (suggestion: TSuggestion, params: RenderSuggestionParams) => React.ReactNode;
     type ShouldRenderSuggestions = (value: string) => boolean;
 
     interface AutosuggestProps<TSuggestion> {

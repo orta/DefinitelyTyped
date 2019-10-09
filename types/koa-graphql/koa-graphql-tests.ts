@@ -14,6 +14,6 @@ app.use(
             return {
                 schema,
             };
-        })
-    )
+        }),
+    ),
 );

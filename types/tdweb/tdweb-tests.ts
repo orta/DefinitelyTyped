@@ -9,7 +9,7 @@ new TdClient({});
 
 // Testing custom config
 const client = new TdClient({
-    onUpdate: (update) => {
+    onUpdate: update => {
         const type = update['@type']; // $ExpectType string
     },
     instanceName: 'tdweb',
@@ -21,7 +21,7 @@ const client = new TdClient({
     mode: 'auto',
 });
 
-client.send({ '@type': 'getMe', '@extra': 'foo' }).then((data) => {
+client.send({ '@type': 'getMe', '@extra': 'foo' }).then(data => {
     const type = data['@type']; // $ExpectType string
     const extra = data['@extra']; // $ExpectType string | undefined
 

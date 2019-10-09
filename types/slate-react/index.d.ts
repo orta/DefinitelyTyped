@@ -115,7 +115,7 @@ export interface Plugin extends CorePlugin {
         previousProps: RenderNodeProps,
         props: RenderNodeProps,
         editor: CoreEditor,
-        next: () => any
+        next: () => any,
     ) => any;
 
     onBeforeInput?: EventHook;

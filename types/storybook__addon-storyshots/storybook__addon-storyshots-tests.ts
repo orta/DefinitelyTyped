@@ -4,7 +4,7 @@ import initStoryshots, {
     renderOnly,
     renderWithOptions,
     snapshotWithOptions,
-} from "@storybook/addon-storyshots";
+} from '@storybook/addon-storyshots';
 import { shallow, ShallowWrapper } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import 'jest';
@@ -18,32 +18,32 @@ initStoryshots({
 });
 
 initStoryshots({
-  test: ({ story, context }) => {
-    const snapshotFileName = getSnapshotFileName(context);
-    const storyElement = story.render() as JSX.Element;
-    const shallowTree = shallow(storyElement);
+    test: ({ story, context }) => {
+        const snapshotFileName = getSnapshotFileName(context);
+        const storyElement = story.render() as JSX.Element;
+        const shallowTree = shallow(storyElement);
 
-    if (snapshotFileName) {
-      expect(toJson(shallowTree)).toMatchSpecificSnapshot(snapshotFileName);
-    }
-  }
+        if (snapshotFileName) {
+            expect(toJson(shallowTree)).toMatchSpecificSnapshot(snapshotFileName);
+        }
+    },
 });
 
 initStoryshots({
-    configPath: "",
-    test: renderOnly
+    configPath: '',
+    test: renderOnly,
 });
 
 initStoryshots({
-    configPath: "",
-    test: renderWithOptions()
+    configPath: '',
+    test: renderWithOptions(),
 });
 
 initStoryshots({
-    configPath: "",
+    configPath: '',
     test: renderWithOptions({
         createNodeMock: () => undefined,
-    })
+    }),
 });
 
 initStoryshots({
@@ -60,13 +60,13 @@ initStoryshots({
     framework: 'react',
     configPath: '',
     test: snapshotWithOptions({
-        createNodeMock: (element) => {
+        createNodeMock: element => {
             if (element.type === 'div') {
-              return { scrollWidth: 123 };
+                return { scrollWidth: 123 };
             }
             return null;
-        }
-    })
+        },
+    }),
 });
 
 initStoryshots({

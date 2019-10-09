@@ -18,7 +18,7 @@ declare class CountUp {
         endVal: number | string,
         decimals?: number | string,
         duration?: number | string,
-        options?: CountUp.CountUpOptions
+        options?: CountUp.CountUpOptions,
     );
     // #region Dynamic params
     // Will appear(or not) in the CountUpInstance object once the other functions fire

@@ -25,7 +25,7 @@ app.context.logger = {
 app.use((ctx, next) => {
     ctx.state.stateProperty = false;
     return next();
-})
+});
 
 app.use<{ a: boolean }>(async (ctx, next) => {
     ctx.state.a = true;

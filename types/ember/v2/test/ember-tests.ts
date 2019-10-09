@@ -95,7 +95,7 @@ App.userController = Ember.Object.create({
 Ember.Handlebars.registerHelper(
     'highlight',
     (property: string, options: any) =>
-        new Ember.Handlebars.SafeString('<span class="highlight">' + 'some value' + '</span>')
+        new Ember.Handlebars.SafeString('<span class="highlight">' + 'some value' + '</span>'),
 );
 
 const coolView = App.CoolView.create();
@@ -150,7 +150,7 @@ promise.then(
     },
     (reason: any) => {
         // on rejection
-    }
+    },
 );
 
 // make sure Ember.RSVP.Promise can be reference as a type

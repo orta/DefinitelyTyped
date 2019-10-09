@@ -76,7 +76,7 @@ function verifyPatchMethods(oldStr: string, newStr: string, uniDiff: diff.Parsed
     const verifyPatch = diff.parsePatch(
         diff.createTwoFilesPatch('oldFile.ts', 'newFile.ts', oldStr, newStr, 'old', 'new', {
             context: 1,
-        })
+        }),
     );
 
     if (
@@ -115,7 +115,7 @@ function verifyApplyMethods(oldStr: string, newStr: string, uniDiffStr: string) 
             }
             return line === patchContent;
         },
-        fuzzFactor: 0
+        fuzzFactor: 0,
     };
     diff.applyPatches([uniDiff], options);
     diff.applyPatches(uniDiffStr, options);

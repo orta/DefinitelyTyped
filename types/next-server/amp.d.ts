@@ -1,4 +1,4 @@
-import { NextComponentType } from "next";
+import { NextComponentType } from 'next';
 
 export interface WithAmpConfig {
     hybrid: boolean;
@@ -6,7 +6,7 @@ export interface WithAmpConfig {
 
 export function withAmp(
     Component: NextComponentType | React.ComponentType,
-    config?: WithAmpConfig
+    config?: WithAmpConfig,
 ): React.ComponentType;
 
 export function useAmp(): boolean;

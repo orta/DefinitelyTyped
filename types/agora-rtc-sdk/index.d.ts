@@ -105,8 +105,8 @@ declare namespace AgoraRTC {
          * If this parameter is empty, this method gets the supported decoding formats of the web browser as the receiver.
          * Otherwise the method gets the supported encoding formats as the sender. In most cases, the supported decoding and encoding formats are the same.
          */
-        stream: MediaStream
-    }): Promise<{ video: Array<"VP8" | "H264">, audio: Array<"OPUS"> }>;
+        stream: MediaStream;
+    }): Promise<{ video: Array<'VP8' | 'H264'>; audio: Array<'OPUS'> }>;
     /**
      * Enumerates the Media Devices
      *
@@ -178,7 +178,7 @@ declare namespace AgoraRTC {
      *
      */
     interface MediaStreamTrack {
-        kind: "audio" | "video";
+        kind: 'audio' | 'video';
     }
 
     /**
@@ -376,7 +376,16 @@ declare namespace AgoraRTC {
          * Chrome 61+ is required for this function, and the compatibility is not guaranteed.
          * See [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) for details.
          */
-        readonly NetworkType?: "bluetooth" | "cellular" | "ethernet" | "none" | "wifi" | "wimax" | "other" | "unknown" | "UNSUPPORTED";
+        readonly NetworkType?:
+            | 'bluetooth'
+            | 'cellular'
+            | 'ethernet'
+            | 'none'
+            | 'wifi'
+            | 'wimax'
+            | 'other'
+            | 'unknown'
+            | 'UNSUPPORTED';
         /** The estimated available bandwidth for sending the stream, in Kbps. */
         readonly OutgoingAvailableBandwidth?: string;
     }
@@ -528,7 +537,7 @@ declare namespace AgoraRTC {
          * For example, if you set the log level as `AgoraRTC.Logger.setLogLevel(AgoraRTC.Logger.INFO);`, then you can see logs in levels INFO, ERROR, and WARNING.
          * @param level The output log level.
          */
-        function setLogLevel(level: DEBUG|INFO|WARNING|ERROR|NONE): void;
+        function setLogLevel(level: DEBUG | INFO | WARNING | ERROR | NONE): void;
         /**
          * Enables Log Upload
          *
@@ -580,7 +589,7 @@ declare namespace AgoraRTC {
      * }
      * var client = AgoraRTC.createClient(config);```
      */
-    interface ClientConfig  {
+    interface ClientConfig {
         /**
          * The channel profile.
          *
@@ -603,7 +612,7 @@ declare namespace AgoraRTC {
          *
          * If you set {@link mode} as `"rtc"`, the Agora Recording SDK is not supported.
          */
-        mode: "live" | "rtc";
+        mode: 'live' | 'rtc';
         /**
          * The codec the Web browser uses for encoding and decoding.
          * - `"vp8"`: Sets the browser to use VP8 for encoding and decoding.
@@ -613,7 +622,7 @@ declare namespace AgoraRTC {
          *
          * Set {@link codec} as `"h264"` as long as Safari is involved in the session.
          */
-        codec: "vp8" | "h264";
+        codec: 'vp8' | 'h264';
         /**
          * Your Nginx server domain name.
          *
@@ -841,7 +850,7 @@ declare namespace AgoraRTC {
      * A class defining the `spec` paramter in the {@link createStream} method.
      * [[include:StreamSpec-example.md]]
      */
-    interface StreamSpec  {
+    interface StreamSpec {
         /**
          * The stream ID.
          *
@@ -918,7 +927,7 @@ declare namespace AgoraRTC {
          *
          * See [Screen Sharing on Firefox](../../../screensharing_web?platform=Web#a-name-ff-a-screen-sharing-on-firefox) for details.
          */
-        mediaSource?: "screen" | "application" | "window";
+        mediaSource?: 'screen' | 'application' | 'window';
         /** Marks whether to enable audio processing. */
         audioProcessing?: {
             /**
@@ -1048,7 +1057,16 @@ declare namespace AgoraRTC {
          * - "unknown": Unknown network type.
          * - "UNSUPPORTED": The browser does not support getting the network type.
          */
-        NetworkType: "bluetooth" | "cellular" | "ethernet" | "none" | "wifi" | "wimax" | "other" | "unknown" | "UNSUPPORTED";
+        NetworkType:
+            | 'bluetooth'
+            | 'cellular'
+            | 'ethernet'
+            | 'none'
+            | 'wifi'
+            | 'wimax'
+            | 'other'
+            | 'unknown'
+            | 'UNSUPPORTED';
     }
 
     /** System statistics. */
@@ -1066,20 +1084,20 @@ declare namespace AgoraRTC {
      */
     interface Stream {
         /** Occurs when the user gives access to the camera and microphone. */
-        on(event: "accessAllowed", callback: (evt: any) => void): void;
+        on(event: 'accessAllowed', callback: (evt: any) => void): void;
         /** Occurs when the user denies access to the camera and microphone. */
-        on(event: "accessDenied", callback: (evt: any) => void): void;
+        on(event: 'accessDenied', callback: (evt: any) => void): void;
         /** Occurs when screen-sharing stops. */
-        on(event: "stopScreenSharing", callback: (evt: any) => void): void;
+        on(event: 'stopScreenSharing', callback: (evt: any) => void): void;
         /**
          * Occurs when the audio mixing stream playback starts/resumes.
          *
          * **Note:**
          * This callback is triggered when the audio mixing stream is loaded and starts playing, or when the paused audio mixing stream resumes playing.
          */
-        on(event: "audioMixingPlayed", callback: (evt: any) => void): void;
+        on(event: 'audioMixingPlayed', callback: (evt: any) => void): void;
         /** Occurs when the last audio mixing stream playback finishes. */
-        on(event: "audioMixingFinished", callback: (evt: any) => void): void;
+        on(event: 'audioMixingFinished', callback: (evt: any) => void): void;
         /**
          * Initializes the Stream Object
          *
@@ -1137,31 +1155,34 @@ declare namespace AgoraRTC {
          * @param option Options for playing the stream.
          *
          */
-        play(HTMLElementID: string, option?: {
-            /**
-             * Video display mode:
-             *
-             * - `"cover"`: Uniformly scale the video until it fills the visible boundaries (cropped).
-             * One dimension of the video may have clipped contents. Refer to the `cover` option of `object-fit` in CSS.
-             *
-             * - `"contain"`: Uniformly scale the video until one of its dimension fits the boundary (zoomed to fit).
-             * Areas that are not filled due to the disparity in the aspect ratio will be filled with black. Refer to the `contain` option of `object-fit` in CSS.
-             *
-             * For local streams, by default the cover mode is used for video playing and the contain mode is used for screen sharing; for remote streams, by default the cover mode is used.
-             */
-            fit?: "cover" | "contain",
-            /**
-             * Sets whether to mute the playing stream.
-             *
-             * The `muted` flag can be used as a workaround for the browser's autoplay policy.
-             *
-             * On Chrome 70+ and Safari, a video stream with sound does not play until triggered by a user gesture.
-             * If you want to play the video anyway without a user gesture, you can set the `muted` flag to true, so that the video is automatically played without sound.
-             *
-             * For more information, see [Autoplay Policy Changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes).
-             */
-            muted?: boolean,
-        }): void;
+        play(
+            HTMLElementID: string,
+            option?: {
+                /**
+                 * Video display mode:
+                 *
+                 * - `"cover"`: Uniformly scale the video until it fills the visible boundaries (cropped).
+                 * One dimension of the video may have clipped contents. Refer to the `cover` option of `object-fit` in CSS.
+                 *
+                 * - `"contain"`: Uniformly scale the video until one of its dimension fits the boundary (zoomed to fit).
+                 * Areas that are not filled due to the disparity in the aspect ratio will be filled with black. Refer to the `contain` option of `object-fit` in CSS.
+                 *
+                 * For local streams, by default the cover mode is used for video playing and the contain mode is used for screen sharing; for remote streams, by default the cover mode is used.
+                 */
+                fit?: 'cover' | 'contain';
+                /**
+                 * Sets whether to mute the playing stream.
+                 *
+                 * The `muted` flag can be used as a workaround for the browser's autoplay policy.
+                 *
+                 * On Chrome 70+ and Safari, a video stream with sound does not play until triggered by a user gesture.
+                 * If you want to play the video anyway without a user gesture, you can set the `muted` flag to true, so that the video is automatically played without sound.
+                 *
+                 * For more information, see [Autoplay Policy Changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes).
+                 */
+                muted?: boolean;
+            },
+        ): void;
         /**
          * Stops the Audio/Video Stream
          *
@@ -1372,9 +1393,11 @@ declare namespace AgoraRTC {
          * @param onSuccess The callback when the method succeeds.
          * @param onFailure The callback when the method fails.
          */
-        replaceTrack(MediaStreamTrack: MediaStreamTrack,
-                     onSuccess?: () => void,
-                     onFailure?: (err: string) => void): void;
+        replaceTrack(
+            MediaStreamTrack: MediaStreamTrack,
+            onSuccess?: () => void,
+            onFailure?: (err: string) => void,
+        ): void;
         /**
          * Adds the Audio or Video Track
          *
@@ -1441,7 +1464,15 @@ declare namespace AgoraRTC {
          * - `"high_quality"`: Sample rate 48 kHz, mono, encoding rate 128 Kbps.
          * - `"high_quality_stereo"`: Sample rate 48 kHz, stereo, encoding rate 192 Kbps.
          */
-        setAudioProfile(profile: "speech_low_quality" | "speech_standard" | "music_standard" | "standard_stereo" | "high_quality" | "high_quality_stereo"): void;
+        setAudioProfile(
+            profile:
+                | 'speech_low_quality'
+                | 'speech_standard'
+                | 'music_standard'
+                | 'standard_stereo'
+                | 'high_quality'
+                | 'high_quality_stereo',
+        ): void;
         /**
          * Sets the Volume
          *
@@ -1466,9 +1497,7 @@ declare namespace AgoraRTC {
          *
          * The retrieved ID is ASCII characters, and the string length is greater than 0 and less than 256 bytes.
          */
-        setAudioOutput(deviceId: string,
-                       onSuccess?: () => void,
-                       onFailure?: (err: string) => void): void;
+        setAudioOutput(deviceId: string, onSuccess?: () => void, onFailure?: (err: string) => void): void;
         /**
          * Switches the Media Input Device
          *
@@ -1494,10 +1523,10 @@ declare namespace AgoraRTC {
          * @param onFailure The callback when the method fails.
          */
         switchDevice(
-            type: "audio" | "video",
+            type: 'audio' | 'video',
             deviceId: string,
             onSuccess?: () => void,
-            onFailure?: (err: string) => void
+            onFailure?: (err: string) => void,
         ): void;
         /**
          * Sets the Video Profile
@@ -1570,33 +1599,33 @@ declare namespace AgoraRTC {
                  *
                  * Supported audio formats: mp3, aac, and other audio formats depending on the browser.
                  */
-                filePath: string,
+                filePath: string;
                 /**
                  * Whether or not to store the audio mixing file in the cache.
                  *
                  * - `true`: (default) store the audio mixing file in the cache to speed up mixing this file the next time.
                  * - `false`: do not store the audio mixing file in the cache to save RAM.
                  */
-                cacheResource?: boolean,
+                cacheResource?: boolean;
                 /**
                  * Number of playback loops (only supports Chrome 65+)
                  *
                  * A positive integer. The value range is [1,10000]. The default value is 1.
                  */
-                cycle?: number,
+                cycle?: number;
                 /**
                  * Whether the audio mixing file loops infinitely.
                  *
                  * - `true`: The audio mixing file loops infinitely. Do not use this option if `cycle` is specified.
                  * - `false`: (Default) Disables the infinite loops.
                  */
-                loop?: boolean,
+                loop?: boolean;
                 /**
                  * Sets the playback position (ms) of the audio mixing file. An integer, and the value range is [0,100000000].
                  *
                  * If you need to play the file from the beginning, set this paramter to 0.
                  */
-                playTime: number,
+                playTime: number;
                 /**
                  * Whether the online audio file replaces the local audio stream.
                  *
@@ -1607,9 +1636,10 @@ declare namespace AgoraRTC {
                  *
                  * Safari does not support this parameter.
                  */
-                replace?: boolean
+                replace?: boolean;
             },
-            callback?: (err: string | null) => void): void;
+            callback?: (err: string | null) => void,
+        ): void;
         /**
          * Stops Audio Mixing
          *
@@ -1706,7 +1736,7 @@ declare namespace AgoraRTC {
                  *
                  * If the audio effect is preloaded into the memory through the [[preloadEffect]] method, ensure that the soundId value is set to the same value as in [[preloadEffect]].
                  */
-                soundId: number,
+                soundId: number;
                 /**
                  * The URL of the online audio effect file.
                  *
@@ -1714,15 +1744,15 @@ declare namespace AgoraRTC {
                  *
                  * Supported audio formats: MP3, AAC, and other audio formats depending on the browser.
                  */
-                filePath: string,
+                filePath: string;
                 /**
                  * The number of playback loops (only supported on Chrome 65 and later).
                  *
                  * A positive integer. The value range is [1,10000]. The default value is 1.
                  */
-                cycle?: number
+                cycle?: number;
             },
-            callback?: (err: string | null) => void
+            callback?: (err: string | null) => void,
         ): void;
         /**
          * Stops playing a specified audio effect.
@@ -1740,10 +1770,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        stopEffect(
-            soundId: number,
-            callback?: (err: string | null) => void
-        ): void;
+        stopEffect(soundId: number, callback?: (err: string | null) => void): void;
         /**
          * Pauses a specified audio effect.
          *
@@ -1760,10 +1787,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        pauseEffect(
-            soundId: number,
-            callback?: (err: string | null) => void
-        ): void;
+        pauseEffect(soundId: number, callback?: (err: string | null) => void): void;
         /**
          * Resumes playing a specified audio effect.
          *
@@ -1780,10 +1804,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        resumeEffect(
-            soundId: number,
-            callback?: (err: string | null) => void
-        ): void;
+        resumeEffect(soundId: number, callback?: (err: string | null) => void): void;
         /**
          * Sets the volume of a specified audio effect.
          *
@@ -1801,11 +1822,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        setVolumeOfEffect(
-            soundId: number,
-            volume: number,
-            callback?: (err: string | null) => void
-        ): void;
+        setVolumeOfEffect(soundId: number, volume: number, callback?: (err: string | null) => void): void;
         /**
          * Preloads a specified audio effect file into the memory.
          *
@@ -1825,11 +1842,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        preloadEffect(
-            soundId: number,
-            filePath: string,
-            callback?: (err: string | null) => void
-        ): void;
+        preloadEffect(soundId: number, filePath: string, callback?: (err: string | null) => void): void;
         /**
          * Releases a specified preloaded audio effect from the memory.
          *
@@ -1847,10 +1860,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        unloadEffect(
-            soundId: number,
-            callback?: (err: string | null) => void
-        ): void;
+        unloadEffect(soundId: number, callback?: (err: string | null) => void): void;
         /**
          * Gets the volume of the audio effects.
          *
@@ -1867,7 +1877,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        getEffectsVolume(): Array<{ soundId: number, volume: number }>;
+        getEffectsVolume(): Array<{ soundId: number; volume: number }>;
         /**
          * Sets the volume of the audio effects.
          *
@@ -1883,10 +1893,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        setEffectsVolume(
-            volume: number,
-            callback?: (err: string | null) => void
-        ): void;
+        setEffectsVolume(volume: number, callback?: (err: string | null) => void): void;
         /**
          * Stops playing all audio effects.
          *
@@ -1901,9 +1908,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        stopAllEffects(
-            callback?: (err: string | null) => void
-        ): void;
+        stopAllEffects(callback?: (err: string | null) => void): void;
         /**
          * Pauses all audio effects.
          *
@@ -1918,9 +1923,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        pauseAllEffects(
-            callback?: (err: string | null) => void
-        ): void;
+        pauseAllEffects(callback?: (err: string | null) => void): void;
         /**
          * Resumes playing all audio effects.
          *
@@ -1935,9 +1938,7 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        resumeAllEffects(
-            callback?: (err: string | null) => void
-        ): void;
+        resumeAllEffects(callback?: (err: string | null) => void): void;
         /**
          * Retrieves the Stream ID
          *
@@ -2014,7 +2015,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "stream-published", callback: (evt: any) => void): void;
+        on(event: 'stream-published', callback: (evt: any) => void): void;
         /**
          * Occurs when the remote stream is added.
          * @example **Sample Code**
@@ -2029,7 +2030,7 @@ declare namespace AgoraRTC {
          * ```
          *
          */
-        on(event: "stream-added", callback: (evt: any) => void): void;
+        on(event: 'stream-added', callback: (evt: any) => void): void;
         /**
          * Occurs when the remote stream is removed; for example, a peer user calls {@link Client.unpublish}.
          * @example **Sample Code**
@@ -2042,7 +2043,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "stream-removed", callback: (evt: any) => void): void;
+        on(event: 'stream-removed', callback: (evt: any) => void): void;
         /**
          * Occurs when a user subscribes to a remote stream.
          * @example **Sample Code**
@@ -2056,7 +2057,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "stream-subscribed", callback: (evt: any) => void): void;
+        on(event: 'stream-subscribed', callback: (evt: any) => void): void;
         /**
          * Occurs when the peer user leaves the channel; for example, the peer user calls {@link Client.leave}.
          * @example **Sample Code**
@@ -2069,7 +2070,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "peer-leave", callback: (evt: any) => void): void;
+        on(event: 'peer-leave', callback: (evt: any) => void): void;
         /**
          * Occurs when the peer user mutes the audio.
          * @example **Sample Code**
@@ -2082,7 +2083,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "mute-audio", callback: (evt: any) => void): void;
+        on(event: 'mute-audio', callback: (evt: any) => void): void;
         /**
          * Occurs when the peer user unmutes the audio.
          * @example **Sample Code**
@@ -2094,7 +2095,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "unmute-audio", callback: (evt: any) => void): void;
+        on(event: 'unmute-audio', callback: (evt: any) => void): void;
         /**
          * Occurs when the peer user turns off the video.
          * @example **Sample Code**
@@ -2107,7 +2108,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "mute-video", callback: (evt: any) => void): void;
+        on(event: 'mute-video', callback: (evt: any) => void): void;
         /**
          * Occurs when the peer user turns on the video.
          * @example **Sample Code**
@@ -2119,7 +2120,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "unmute-video", callback: (evt: any) => void): void;
+        on(event: 'unmute-video', callback: (evt: any) => void): void;
         /**
          * This callback notifies the peer user that he/she is banned from the channel. Only the banned users receive this callback.
          * @example **Sample Code**
@@ -2133,7 +2134,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "client-banned", callback: (evt: any) => void): void;
+        on(event: 'client-banned', callback: (evt: any) => void): void;
         /**
          * This callback notifies the application who is the active speaker in the channel.
          * @example **Sample Code**
@@ -2145,7 +2146,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "active-speaker", callback: (evt: any) => void): void;
+        on(event: 'active-speaker', callback: (evt: any) => void): void;
         /**
          * This callback notifies the application of all the speaking remote users and their volumes.
          *
@@ -2162,27 +2163,27 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        on(event: "volume-indicator", callback: (evt: any) => void): void;
+        on(event: 'volume-indicator', callback: (evt: any) => void): void;
         /**
          * Occurs when the live streaming starts.
          */
-        on(event: "liveStreamingStarted", callback: (evt: any) => void): void;
+        on(event: 'liveStreamingStarted', callback: (evt: any) => void): void;
         /**
          * Occurs when the live streaming fails.
          */
-        on(event: "liveStreamingFailed", callback: (evt: any) => void): void;
+        on(event: 'liveStreamingFailed', callback: (evt: any) => void): void;
         /**
          * Occurs when the live streaming stops.
          */
-        on(event: "liveStreamingStopped", callback: (evt: any) => void): void;
+        on(event: 'liveStreamingStopped', callback: (evt: any) => void): void;
         /**
          * Occurs when the live transcoding setting is updated.
          */
-        on(event: "liveTranscodingUpdated", callback: (evt: any) => void): void;
+        on(event: 'liveTranscodingUpdated', callback: (evt: any) => void): void;
         /**
          * Occurs when the injected online media stream's status is updated.
          */
-        on(event: "streamInjectedStatus", callback: (evt: any) => void): void;
+        on(event: 'streamInjectedStatus', callback: (evt: any) => void): void;
         /**
          * Occurs when the Token expires in 30 seconds.
          *
@@ -2196,7 +2197,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "onTokenPrivilegeWillExpire", callback: (evt: any) => void): void;
+        on(event: 'onTokenPrivilegeWillExpire', callback: (evt: any) => void): void;
         /**
          * Occurs when the Token expires.
          *
@@ -2210,7 +2211,7 @@ declare namespace AgoraRTC {
          *
          * ```
          */
-        on(event: "onTokenPrivilegeDidExpire", callback: (evt: any) => void): void;
+        on(event: 'onTokenPrivilegeDidExpire', callback: (evt: any) => void): void;
         /**
          * Occurs when an error message is reported and requires error handling.
          * @example **Sample Code**
@@ -2223,7 +2224,7 @@ declare namespace AgoraRTC {
          *
          * For details, see [Error Codes and Warning Codes](../../../the_error_web).
          */
-        on(event: "error", callback: (evt: any) => void): void;
+        on(event: 'error', callback: (evt: any) => void): void;
         /**
          * Occurs when the network type changes.
          * @example **Sample Code**
@@ -2239,7 +2240,7 @@ declare namespace AgoraRTC {
          * Chrome 61+ is required for this function, and the compatibility is not guaranteed.
          * See [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) for details.
          */
-        on(event: "network-type-changed", callback: (evt: any) => void): void;
+        on(event: 'network-type-changed', callback: (evt: any) => void): void;
         /**
          * Occurs when an audio input device is added or removed.
          * @example **Sample Code**
@@ -2251,7 +2252,7 @@ declare namespace AgoraRTC {
          * ```
          *
          */
-        on(event: "recording-device-changed", callback: (evt: any) => void): void;
+        on(event: 'recording-device-changed', callback: (evt: any) => void): void;
         /**
          * Occurs when an audio output device is added or removed.
          * @example **Sample Code**
@@ -2266,7 +2267,7 @@ declare namespace AgoraRTC {
          *
          * Only supports Chrome 49+.
          */
-        on(event: "playout-device-changed", callback: (evt: any) => void): void;
+        on(event: 'playout-device-changed', callback: (evt: any) => void): void;
         /**
          * Occurs when a camera is added or removed.
          * @example **Sample Code**
@@ -2278,7 +2279,7 @@ declare namespace AgoraRTC {
          * ```
          *
          */
-        on(event: "camera-changed", callback: (evt: any) => void): void;
+        on(event: 'camera-changed', callback: (evt: any) => void): void;
         /**
          * Occurs when the type of a video stream changes.
          *
@@ -2298,7 +2299,7 @@ declare namespace AgoraRTC {
          * ```
          *
          */
-        on(event: "stream-type-changed", callback: (evt: any) => void): void;
+        on(event: 'stream-type-changed', callback: (evt: any) => void): void;
         /**
          * Occurs when the network connection state changes.
          *
@@ -2321,12 +2322,15 @@ declare namespace AgoraRTC {
          * })
          * ```
          */
-        on(event: "connection-state-change", callback: (evt: {
-            /**  The previous connection state. */
-            prevState: string,
-            /** The current connection state. */
-            curState: string
-        }) => void): void;
+        on(
+            event: 'connection-state-change',
+            callback: (evt: {
+                /**  The previous connection state. */
+                prevState: string;
+                /** The current connection state. */
+                curState: string;
+            }) => void,
+        ): void;
         /**
          * Occurs when the SDK starts republishing or re-subscribing to a stream.
          *
@@ -2338,10 +2342,13 @@ declare namespace AgoraRTC {
          * })
          * ```
          */
-        on(event: "stream-reconnect-start", callback: (evt: {
-            /** The corresponding uid of the stream being republished or re-subscribed to. */
-            uid: number | string
-        }) => void): void;
+        on(
+            event: 'stream-reconnect-start',
+            callback: (evt: {
+                /** The corresponding uid of the stream being republished or re-subscribed to. */
+                uid: number | string;
+            }) => void,
+        ): void;
         /**
          * Occurs when the SDK finishes republishing or re-subscribing to a stream.
          *
@@ -2353,21 +2360,24 @@ declare namespace AgoraRTC {
          * })
          * ```
          */
-        on(event: "stream-reconnect-end", callback: (evt: {
-            /** The corresponding uid of the stream being republished or re-subscribed to. */
-            uid: number | string,
-            /**
-             * The result of republishing or re-subscribing to the stream.
-             * - `true`: Success.
-             * - `false`: Failure.
-             */
-            success: boolean,
-            /**
-             * - An empty string if `success` is `true`.
-             * - The failure reason if `success` is `false`.
-             */
-            reason: string,
-        }) => void): void;
+        on(
+            event: 'stream-reconnect-end',
+            callback: (evt: {
+                /** The corresponding uid of the stream being republished or re-subscribed to. */
+                uid: number | string;
+                /**
+                 * The result of republishing or re-subscribing to the stream.
+                 * - `true`: Success.
+                 * - `false`: Failure.
+                 */
+                success: boolean;
+                /**
+                 * - An empty string if `success` is `true`.
+                 * - The failure reason if `success` is `false`.
+                 */
+                reason: string;
+            }) => void,
+        ): void;
         /**
          * Occurs when the user role switches in a live broadcast. For example, from a host to an audience or vice versa.
          *
@@ -2379,9 +2389,13 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        on(event: "client-role-changed", callback: (evt:
-                                                        /** @param role Role that the user switches to. */
-                                                        { role: string }) => void): void;
+        on(
+            event: 'client-role-changed',
+            callback: (evt: /** @param role Role that the user switches to. */
+            {
+                role: string;
+            }) => void,
+        ): void;
         /**
          * Occurs when a remote user or host joins the channel.
          *
@@ -2399,9 +2413,13 @@ declare namespace AgoraRTC {
          * ```
          *
          */
-        on(event: "peer-online", callback: (evt:
-                                                /** @param uid ID of the user or host who joins the channel.  */
-                                                { uid: string }) => void): void;
+        on(
+            event: 'peer-online',
+            callback: (evt: /** @param uid ID of the user or host who joins the channel.  */
+            {
+                uid: string;
+            }) => void,
+        ): void;
         /**
          * Reports the network quality of the local user once every two seconds.
          *
@@ -2420,9 +2438,11 @@ declare namespace AgoraRTC {
          * });
          * ```
          */
-        on(event: "network-quality", callback:
-            /** @param stats The local user's network quality, including the uplink and downlink quality, see [[NetworkQualityStats]] for details. */
-            (stats: NetworkQualityStats) => void): void;
+        on(
+            event: 'network-quality',
+            callback: /** @param stats The local user's network quality, including the uplink and downlink quality, see [[NetworkQualityStats]] for details. */
+            (stats: NetworkQualityStats) => void,
+        ): void;
         /**
          * Occurs when the remote video stream falls back to an audio-only stream due to unreliable network conditions or switches back to the video after the network conditions improve.
          *
@@ -2434,31 +2454,35 @@ declare namespace AgoraRTC {
          * Once the remote media stream is switched to the low stream due to unreliable network conditions,
          * you can monitor the stream switch between a high stream and low stream in the `stream-type-changed` callback.
          */
-        on(event: "stream-fallback", callback:
-            (evt: {
+        on(
+            event: 'stream-fallback',
+            callback: (evt: {
                 /** ID of the remote user sending the stream. */
-                uid: string | number,
+                uid: string | number;
                 /**
                  * Whether the remote media stream falls back to audio-only or switches back to the video:
                  * - 1: the remote media stream falls back to audio-only due to unreliable network conditions.
                  * - 0: the remote media stream switches back to the video stream after the network conditions improve.
                  */
-                attr: number
-            }) => void): void;
+                attr: number;
+            }) => void,
+        ): void;
         /**
          * Occurs when a remote stream adds or removes a track.
          *
          * When a remote stream calls the [[addTrack]] or [[removeTrack]] method, the SDK triggers this callback.
          */
-        on(event: "stream-updated", callback:
-            (evt: {
+        on(
+            event: 'stream-updated',
+            callback: (evt: {
                 /**
                  * The stream that adds or removes a track:
                  * - `video`: boolean, marks whether the stream contains a video track.
                  * - `audio`: boolean, marks whether the stream contains an audio track.
                  */
-                stream: Stream
-            }) => void): void;
+                stream: Stream;
+            }) => void,
+        ): void;
         /**
          * Reports exception events in the channel.
          *
@@ -2480,14 +2504,17 @@ declare namespace AgoraRTC {
          * })
          * ```
          */
-        on(event: "exception", callback: (evt: {
-            /** Event code. */
-            code: number,
-            /** Event message. */
-            msg: string,
-            /** The uid of the user who experiences the exception or recovery event. */
-            uid: string
-        }) => void): void;
+        on(
+            event: 'exception',
+            callback: (evt: {
+                /** Event code. */
+                code: number;
+                /** Event message. */
+                msg: string;
+                /** The uid of the user who experiences the exception or recovery event. */
+                uid: string;
+            }) => void,
+        ): void;
         /**
          * Initializes a Client Object
          *
@@ -2509,11 +2536,7 @@ declare namespace AgoraRTC {
          * @param onSuccess The callback when the method succeeds.
          * @param onFailure The callback when the method fails.
          */
-        init(
-            appId: string,
-            onSuccess?: () => void,
-            onFailure?: (err: string) => void
-        ): void;
+        init(appId: string, onSuccess?: () => void, onFailure?: (err: string) => void): void;
         /**
          * Joins an AgoraRTC Channel
          *
@@ -2555,7 +2578,7 @@ declare namespace AgoraRTC {
             channel: string,
             uid: number | string | null,
             onSuccess?: (uid: number | string) => void,
-            onFailure?: (err: any) => void
+            onFailure?: (err: any) => void,
         ): void;
         /**
          * Leaves an AgoraRTC Channel
@@ -2655,15 +2678,16 @@ declare namespace AgoraRTC {
                  *  - `true`: (Default) Receives the video data.
                  *  - `false`: Not receives the video data.
                  */
-                video?: boolean,
+                video?: boolean;
                 /**
                  * Marks whether to receive the audio data.
                  *  - `true`: (Default) Receives the audio data.
                  *  - `false`: Not receives the audio data.
                  */
-                audio?: boolean
+                audio?: boolean;
             },
-            onFailure?: (err: any) => void): void;
+            onFailure?: (err: any) => void,
+        ): void;
         /**
          * Unsubscribes from the Remote Stream
          *
@@ -2720,7 +2744,7 @@ declare namespace AgoraRTC {
          *
          *
          */
-        setClientRole(role: "audience" | "host", callback?: (err: any) => void): void;
+        setClientRole(role: 'audience' | 'host', callback?: (err: any) => void): void;
         /**
          * Enables Dual Stream
          *
@@ -2751,10 +2775,7 @@ declare namespace AgoraRTC {
          * @param onSuccess The callback when the method succeeds.
          * @param onFailure The callback when the method fails.
          */
-        enableDualStream(
-            onSuccess?: () => void,
-            onFailure?: (err: any) => void
-        ): void;
+        enableDualStream(onSuccess?: () => void, onFailure?: (err: any) => void): void;
         /**
          * Sets the Low-video Stream Parameter
          *
@@ -2858,10 +2879,7 @@ declare namespace AgoraRTC {
          * @param onSuccess The callback when the method succeeds.
          * @param onFailure The callback when the method fails.
          */
-        disableDualStream(
-            onSuccess?: () => void,
-            onFailure?: (err: any) => void
-        ): void;
+        disableDualStream(onSuccess?: () => void, onFailure?: (err: any) => void): void;
         /**
          * Enables Volume Indicator
          *
@@ -2985,7 +3003,7 @@ declare namespace AgoraRTC {
          * @example `client.setProxyServer(proxyServer);`
          * @param proxyServer Your Nginx server domain name. ASCII characters only, and the string length must be greater than 0 and less than 256 bytes.
          */
-        setProxyServer(proxyServer: ClientConfig["proxyServer"]): void;
+        setProxyServer(proxyServer: ClientConfig['proxyServer']): void;
         /**
          * Deploys the TURN Server
          *
@@ -2997,7 +3015,7 @@ declare namespace AgoraRTC {
          * @example `client.setTurnServer(config);`
          * @param turnServer The TURN server settings.
          */
-        setTurnServer(turnServer: ClientConfig["turnServer"]): void;
+        setTurnServer(turnServer: ClientConfig['turnServer']): void;
         /**
          * Enables Built-in Encryption
          *
@@ -3025,9 +3043,7 @@ declare namespace AgoraRTC {
          * - aes-256-xts: Sets the encryption mode as AES256XTS.
          * - aes-128-ecb: Sets the encryption mode as AES128ECB.
          */
-        setEncryptionMode(
-            encryptionMode: "aes-128-xts" | "aes-256-xts" | "aes-128-ecb"
-        ): void;
+        setEncryptionMode(encryptionMode: 'aes-128-xts' | 'aes-256-xts' | 'aes-128-ecb'): void;
         /**
          * Renews the Token
          *
@@ -3038,9 +3054,7 @@ declare namespace AgoraRTC {
          * Not doing so will result in SDK disconnecting with the server.
          * @param token Specifies the renewed Token.
          */
-        renewToken(
-            token: string,
-        ): void;
+        renewToken(token: string): void;
         /**
          * Renews the Channel Key
          *
@@ -3053,11 +3067,7 @@ declare namespace AgoraRTC {
          * @param onSuccess The callback when the method succeeds.
          * @param onFailure The callback when the method fails.
          */
-        renewChannelKey(
-            key: string,
-            onSuccess?: () => void,
-            onFailure?: (err: any) => void
-        ): void;
+        renewChannelKey(key: string, onSuccess?: () => void, onFailure?: (err: any) => void): void;
         /**
          * Gets the Statistics of the System Network
          *

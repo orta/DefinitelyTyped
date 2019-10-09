@@ -18,17 +18,25 @@ declare class sftp {
 
     list(remoteFilePath: string): Promise<sftp.FileInfo[]>;
 
-    exists(remotePath: string): Promise<false | "d" | "-" | "l">;
+    exists(remotePath: string): Promise<false | 'd' | '-' | 'l'>;
 
     stat(remotePath: string): Promise<sftp.FileStats>;
 
     realPath(remotePath: string): Promise<string>;
 
-    get(path: string, dst?: string | NodeJS.ReadableStream, options?: boolean): Promise<string | NodeJS.ReadableStream | Buffer>;
+    get(
+        path: string,
+        dst?: string | NodeJS.ReadableStream,
+        options?: boolean,
+    ): Promise<string | NodeJS.ReadableStream | Buffer>;
 
     fastGet(remoteFilePath: string, localPath: string, options?: ssh2Stream.TransferOptions): Promise<string>;
 
-    put(input: string | Buffer | NodeJS.ReadableStream, remoteFilePath: string, options?: ssh2Stream.TransferOptions): Promise<string>;
+    put(
+        input: string | Buffer | NodeJS.ReadableStream,
+        remoteFilePath: string,
+        options?: ssh2Stream.TransferOptions,
+    ): Promise<string>;
 
     fastPut(localPath: string, remoteFilePath: string, options?: ssh2Stream.TransferOptions): Promise<string>;
 
@@ -44,7 +52,11 @@ declare class sftp {
 
     chmod(remotePath: string, mode: number | string): Promise<string>;
 
-    append(input: Buffer | NodeJS.ReadableStream, remotePath: string, options?: ssh2Stream.TransferOptions): Promise<string>;
+    append(
+        input: Buffer | NodeJS.ReadableStream,
+        remotePath: string,
+        options?: ssh2Stream.TransferOptions,
+    ): Promise<string>;
 
     end(): Promise<void>;
 

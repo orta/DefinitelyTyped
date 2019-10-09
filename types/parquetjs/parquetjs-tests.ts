@@ -26,11 +26,11 @@ let readRows = async () => {
 };
 
 schema = new parquet.ParquetSchema({
-    name: { type: 'UTF8', encoding: 'PLAIN' }
+    name: { type: 'UTF8', encoding: 'PLAIN' },
 });
 
 schema = new parquet.ParquetSchema({
-    age: { type: 'UINT_32', encoding: 'RLE', bitWidth: 7 }
+    age: { type: 'UINT_32', encoding: 'RLE', bitWidth: 7 },
 });
 
 schema = new parquet.ParquetSchema({
@@ -48,12 +48,12 @@ schema = new parquet.ParquetSchema({
     name: { type: 'UTF8' },
     colours: { type: 'UTF8', repeated: true },
     stock: {
-      repeated: true,
-      fields: {
-        price: { type: 'DOUBLE' },
-        quantity: { type: 'INT64' },
-      }
-    }
+        repeated: true,
+        fields: {
+            price: { type: 'DOUBLE' },
+            quantity: { type: 'INT64' },
+        },
+    },
 });
 
 writeRows = async () => {
@@ -92,8 +92,8 @@ const writeFile = async () => {
             fields: {
                 price: { type: 'DOUBLE' },
                 quantity: { type: 'INT64' },
-            }
-        }
+            },
+        },
     });
 
     const writer = await parquet.ParquetWriter.openFile(schema, 'fruits.parquet');
@@ -102,10 +102,7 @@ const writeFile = async () => {
         await writer.appendRow({
             name: 'banana',
             colours: ['yellow'],
-            stock: [
-                { price: 2.45, quantity: 16 },
-                { price: 2.60, quantity: 420 }
-            ]
+            stock: [{ price: 2.45, quantity: 16 }, { price: 2.6, quantity: 420 }],
         });
     }
 

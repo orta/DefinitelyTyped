@@ -1,4 +1,4 @@
-import allSettled = require("promise.allsettled");
+import allSettled = require('promise.allsettled');
 
 type Result<T extends [unknown, ...unknown[]]> = Promise<allSettled.PromiseResultTuple<T>>;
 type ArrayResult<T, E = unknown> = Promise<Array<allSettled.PromiseResult<T>>>;

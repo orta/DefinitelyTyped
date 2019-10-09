@@ -6,7 +6,7 @@
 
 export type ArrayOrObject = any[] | object;
 
-export type Path = number | string | Array<number|string>;
+export type Path = number | string | Array<number | string>;
 
 /**
  * Access a nested property by a dot path
@@ -55,16 +55,9 @@ export type Path = number | string | Array<number|string>;
  * //=> 'gold-unicorn'
  * ```
  */
-export function get(
-    object: ArrayOrObject,
-    path: Path
-): any;
+export function get(object: ArrayOrObject, path: Path): any;
 
-export function get<V>(
-    object: ArrayOrObject,
-    path: Path,
-    defaultValue: V
-): V;
+export function get<V>(object: ArrayOrObject, path: Path, defaultValue: V): V;
 
 /**
  * Modify a nested property by a dot path
@@ -107,11 +100,7 @@ export function get<V>(
  * //=> {foo: [{ bar: 'gold-unicorn'}, 'white-unicorn', 'platin-unicorn']}
  * ```
  */
-export function set<T extends ArrayOrObject>(
-    object: T,
-    path: Path,
-    value: any
-): T;
+export function set<T extends ArrayOrObject>(object: T, path: Path, value: any): T;
 
 /**
  * Delete a nested property/array by a dot path
@@ -130,10 +119,7 @@ export function set<T extends ArrayOrObject>(
  * //=> {foo: [{}, 'white-unicorn', 'silver-unicorn']}
  * ```
  */
-declare function _delete<T extends ArrayOrObject>(
-    object: T,
-    path: Path
-): T;
+declare function _delete<T extends ArrayOrObject>(object: T, path: Path): T;
 export { _delete as delete };
 
 /**
@@ -150,10 +136,7 @@ export { _delete as delete };
  * //=> {foo: { bar: false } }
  * ```
  */
-export function toggle<T extends ArrayOrObject>(
-    object: T,
-    path: Path
-): T;
+export function toggle<T extends ArrayOrObject>(object: T, path: Path): T;
 
 /**
  * Merge a value by a dot path.
@@ -181,8 +164,4 @@ export function toggle<T extends ArrayOrObject>(
  * };
  * ```
  */
-export function merge<T extends ArrayOrObject>(
-    object: T,
-    path: Path,
-    value: ArrayOrObject
-): T;
+export function merge<T extends ArrayOrObject>(object: T, path: Path, value: ArrayOrObject): T;

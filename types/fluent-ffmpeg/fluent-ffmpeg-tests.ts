@@ -13,7 +13,6 @@ ffmpeg('/path/to/file.avi')
 
 // Output-related methods apply to the last output added
 ffmpeg('/path/to/file.avi')
-
     .output('outputfile.mp4')
     .audioCodec('libfaac')
     .videoCodec('libx264')
@@ -24,20 +23,20 @@ ffmpeg('/path/to/file.avi')
     .size('640x480');
 
 // get arguments
-ffmpeg('/path/to/file.avi')
-
-    ._getArguments();
+ffmpeg('/path/to/file.avi')._getArguments();
 
 // ComplexFilter
 ffmpeg('/path/to/file.avi')
-
     .output('outputfile.mp4')
-    .complexFilter([
-      { inputs: '0:v', filter: 'scale', options: { w: 1920, h: 1080, interl: 1 }, outputs: [] },
-      { inputs: '0:a', filter: 'amerge', options: { inputs: 2 }, outputs: 'am'},
-      '[am]aresample=48000:async=1[are]',
-      { inputs: 'are', filter: 'channelsplit' , options: { channel_layout: 'stereo'}, outputs: [] }
-    ], [])
+    .complexFilter(
+        [
+            { inputs: '0:v', filter: 'scale', options: { w: 1920, h: 1080, interl: 1 }, outputs: [] },
+            { inputs: '0:a', filter: 'amerge', options: { inputs: 2 }, outputs: 'am' },
+            '[am]aresample=48000:async=1[are]',
+            { inputs: 'are', filter: 'channelsplit', options: { channel_layout: 'stereo' }, outputs: [] },
+        ],
+        [],
+    )
     .audioCodec('libfaac')
     .videoCodec('libx264')
     .size('320x200');
@@ -58,12 +57,14 @@ const command = ffmpeg('/path/to/source.avi')
     .format('mp4');
 
 // Create a clone to save a small resized version
-command.clone()
+command
+    .clone()
     .size('320x200')
     .save('/path/to/output-small.mp4');
 
 // Create a clone to save a medium resized version
-command.clone()
+command
+    .clone()
     .size('640x400')
     .save('/path/to/output-medium.mp4');
 
@@ -79,23 +80,23 @@ ffmpeg.setFfprobePath('path/to/ffprobe');
 ffmpeg.setFfmpegPath('path/to/ffmpeg');
 
 ffmpeg.getAvailableFormats((err, formats) => {
-  console.log('Available formats:');
-  console.dir(formats);
+    console.log('Available formats:');
+    console.dir(formats);
 });
 
 ffmpeg.getAvailableCodecs((err, codecs) => {
-  console.log('Available codecs:');
-  console.dir(codecs);
+    console.log('Available codecs:');
+    console.dir(codecs);
 });
 
 ffmpeg.getAvailableEncoders((err, encoders) => {
-  console.log('Available encoders:');
-  console.dir(encoders);
+    console.log('Available encoders:');
+    console.dir(encoders);
 });
 
 ffmpeg.getAvailableFilters((err, filters) => {
-  console.log("Available filters:");
-  console.dir(filters);
+    console.log('Available filters:');
+    console.dir(filters);
 });
 
 ffmpeg.ffprobe('/path/to/file.mp4', (err, data) => {

@@ -6,17 +6,14 @@ const url = '';
 
 // $ExpectType void
 jsmediatags.read(url, {
-  onSuccess(tag: any) {
-  },
-  onError(error: any) {
-  },
+    onSuccess(tag: any) {},
+    onError(error: any) {},
 });
 
 class TestFileReader extends MediaFileReader {
     static canReadFile = (_file: any) => false;
 }
-class TestTagReader extends MediaTagReader {
-}
+class TestTagReader extends MediaTagReader {}
 
 // $ExpectType Config
 jsmediatags.Config.addFileReader(TestFileReader)

@@ -150,7 +150,17 @@ declare namespace PDFKit.Mixins {
         //TODO check this
         align?: 'center' | 'justify' | 'left' | 'right' | string;
         /** the vertical alignment of the text with respect to its insertion point */
-        baseline?: number | 'svg-middle' | 'middle' | 'svg-central' | 'bottom' | 'ideographic' | 'alphabetic' | 'mathematical' | 'hanging' | 'top';
+        baseline?:
+            | number
+            | 'svg-middle'
+            | 'middle'
+            | 'svg-central'
+            | 'bottom'
+            | 'ideographic'
+            | 'alphabetic'
+            | 'mathematical'
+            | 'hanging'
+            | 'top';
     }
 
     interface PDFText {

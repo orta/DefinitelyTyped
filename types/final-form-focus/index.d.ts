@@ -7,17 +7,14 @@
 import { Decorator } from 'final-form';
 
 export interface FocusableInput {
-  name: string;
-  focus: () => void;
+    name: string;
+    focus: () => void;
 }
 
 export type GetInputs = () => FocusableInput[];
 
 export type FindInput = (inputs: FocusableInput[], errors: object) => FocusableInput | undefined;
 
-export default function createDecorator(
-  getInputs?: GetInputs,
-  findInput?: FindInput,
-): Decorator;
+export default function createDecorator(getInputs?: GetInputs, findInput?: FindInput): Decorator;
 
 export function getFormInputs(formName: string): GetInputs;

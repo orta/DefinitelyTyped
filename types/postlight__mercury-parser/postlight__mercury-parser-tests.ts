@@ -1,6 +1,6 @@
 import * as Mercury from 'postlight__mercury-parser';
 
-const url = "https://en.wikipedia.org/wiki/Thunder_(mascot)";
+const url = 'https://en.wikipedia.org/wiki/Thunder_(mascot)';
 
 // Example 1 from readme
 Mercury.parse(url).then(result => console.log(result));

@@ -26,11 +26,11 @@ import {
     ViewProps,
     ViewStyle,
     Permission,
-    StyleProp
+    StyleProp,
 } from 'react-native';
 
 export type Axis = number;
-export type BarCodeReadCallback = (params: { type: string; data: string; }) => void;
+export type BarCodeReadCallback = (params: { type: string; data: string }) => void;
 export type Md5 = string;
 export type Orientation = 'portrait' | 'landscape';
 export type RequireSource = ImageRequireSource;
@@ -39,8 +39,12 @@ export type ResizeModeCover = 'cover';
 export type ResizeModeStretch = 'stretch';
 export type URISource = ImageURISource;
 
-export interface HashMap { [key: string]: any; }
-export interface StringHashMap { [key: string]: string; }
+export interface HashMap {
+    [key: string]: any;
+}
+export interface StringHashMap {
+    [key: string]: string;
+}
 
 /** Access the device accelerometer sensor(s) to respond to changes in acceleration in 3d space. */
 export namespace Accelerometer {
@@ -90,7 +94,7 @@ export interface AdMobBannerProperties extends ViewProps {
     adViewWillLeaveApplication?(): void;
 }
 
-export class AdMobBanner extends Component<AdMobBannerProperties> { }
+export class AdMobBanner extends Component<AdMobBannerProperties> {}
 export interface AdMobAppEvent {
     name: string;
     info: string;
@@ -98,7 +102,7 @@ export interface AdMobAppEvent {
 export interface PublisherBannerProperties extends AdMobBannerProperties {
     onAdMobDispatchAppEvent?(event: AdMobAppEvent): void;
 }
-export class PublisherBanner extends Component<PublisherBannerProperties> { }
+export class PublisherBanner extends Component<PublisherBannerProperties> {}
 
 export type AdMobInterstitialEmptyEvent =
     | 'interstitialDidLoad'
@@ -134,10 +138,16 @@ export namespace AdMobRewarded {
     function showAdAsync(): Promise<void>;
     function dismissAdAsync(): Promise<void>;
     function getIsReadyAsync(): Promise<boolean>;
-    function addEventListener(event: 'rewardedVideoDidRewardUser', handler: (type: string, amount: number) => void): void;
+    function addEventListener(
+        event: 'rewardedVideoDidRewardUser',
+        handler: (type: string, amount: number) => void,
+    ): void;
     function addEventListener(event: 'rewardedVideoDidFailToLoad', handler: (error: string) => void): void;
     function addEventListener(event: AdMobRewardedEmptyEvent, handler: () => void): void;
-    function removeEventListener(event: 'rewardedVideoDidRewardUser', handler: (type: string, amount: number) => void): void;
+    function removeEventListener(
+        event: 'rewardedVideoDidRewardUser',
+        handler: (type: string, amount: number) => void,
+    ): void;
     function removeEventListener(event: 'rewardedVideoDidFailToLoad', handler: (error: string) => void): void;
     function removeEventListener(event: AdMobRewardedEmptyEvent, handler: () => void): void;
     function removeAllListeners(): void;
@@ -169,7 +179,7 @@ export namespace Amplitude {
         eventName: string,
 
         /** A map of custom properties. */
-        properties: HashMap
+        properties: HashMap,
     ): void;
 
     /** Add the current user to a group. */
@@ -178,7 +188,7 @@ export namespace Amplitude {
         groupType: string,
 
         /** An array of group names, e.g. `['tennis', 'soccer']`. */
-        groupNames: string[]
+        groupNames: string[],
     ): void;
 }
 
@@ -200,12 +210,19 @@ export interface AppLoadingProps {
  *
  * This is incredibly useful to let you download and cache fonts, logo and icon images and other assets that you want to be sure the user has on their device for an optimal experience before rendering they start using the app.
  */
-export class AppLoading extends Component<AppLoadingProps> { }
+export class AppLoading extends Component<AppLoadingProps> {}
 // #endregion AppLoading
 
 /** This module provides an interface to Expo’s asset system. An asset is any file that lives alongside the source code of your app that the app needs at runtime. Examples include images, fonts and sounds. Expo’s asset system integrates with React Native’s, so that you can refer to files with require('path/to/file'). This is how you refer to static image files in React Native for use in an Image component, for example. */
 export class Asset {
-    constructor({ name, type, hash, uri, width, height }: {
+    constructor({
+        name,
+        type,
+        hash,
+        uri,
+        width,
+        height,
+    }: {
         name: string;
         type: string;
         hash: string;
@@ -237,7 +254,7 @@ export class Asset {
 
     downloading: boolean;
     downloaded: boolean;
-    downloadCallbacks: Array<{ resolve: () => any, reject: (e?: any) => any }>;
+    downloadCallbacks: Array<{ resolve: () => any; reject: (e?: any) => any }>;
 
     /** Downloads the asset data to a local file in the device’s cache directory. Once the returned promise is fulfilled without error, the localUri field of this asset points to a local file containing the asset data. The asset is only downloaded if an up-to-date local file for the asset isn’t already present due to an earlier download. */
     downloadAsync(): Promise<void>;
@@ -266,7 +283,7 @@ export namespace Audio {
         INTERRUPTION_MODE_IOS_DO_NOT_MIX = 1,
 
         /** If this option is set, your experience’s audio lowers the volume ("ducks") of audio from other apps while your audio plays. */
-        INTERRUPTION_MODE_IOS_DUCK_OTHERS = 2
+        INTERRUPTION_MODE_IOS_DUCK_OTHERS = 2,
     }
 
     const INTERRUPTION_MODE_IOS_MIX_WITH_OTHERS: 0;
@@ -278,7 +295,7 @@ export namespace Audio {
         INTERRUPTION_MODE_ANDROID_DO_NOT_MIX = 1,
 
         /** This is the default option. If this option is set, your experience’s audio lowers the volume ("ducks") of audio from other apps while your audio plays. */
-        INTERRUPTION_MODE_ANDROID_DUCK_OTHERS = 2
+        INTERRUPTION_MODE_ANDROID_DUCK_OTHERS = 2,
     }
 
     const INTERRUPTION_MODE_ANDROID_DO_NOT_MIX: 1;
@@ -349,18 +366,21 @@ export namespace Audio {
     const RECORDING_OPTION_IOS_BIT_RATE_STRATEGY_VARIABLE_CONSTRAINED: 2;
     const RECORDING_OPTION_IOS_BIT_RATE_STRATEGY_VARIABLE: 3;
 
-    type RecordingStatus = {
-        canRecord: false,
-        isDoneRecording: false
-    } | {
-        canRecord: true,
-        isRecording: boolean,
-        durationMillis: number
-    } | {
-        canRecord: false,
-        isDoneRecording: true,
-        durationMillis: number
-    };
+    type RecordingStatus =
+        | {
+              canRecord: false;
+              isDoneRecording: false;
+          }
+        | {
+              canRecord: true;
+              isRecording: boolean;
+              durationMillis: number;
+          }
+        | {
+              canRecord: false;
+              isDoneRecording: true;
+              durationMillis: number;
+          };
 
     const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions;
     const RECORDING_OPTIONS_PRESET_LOW_QUALITY: RecordingOptions;
@@ -438,8 +458,8 @@ export namespace Audio {
             onPlaybackStatusUpdate?: ((status: PlaybackStatus) => void) | null,
 
             /** If set to true, the system will attempt to download the resource to the device before loading. This value defaults to `true`. Note that at the moment, this will only work for `source`s of the form `require('path/to/file')` or `Asset` objects. */
-            downloadFirst?: boolean
-        ): Promise<{ sound: Sound, status: PlaybackStatus }>;
+            downloadFirst?: boolean,
+        ): Promise<{ sound: Sound; status: PlaybackStatus }>;
     }
 
     class Recording {
@@ -457,7 +477,7 @@ export namespace Audio {
         /** Loads the recorder into memory and prepares it for recording. This must be called before calling `startAsync()`. This method can only be called if the `Recording` instance has never yet been prepared. */
         prepareToRecordAsync(
             /** Options for the recording, including sample rate, bitrate, channels, format, encoder, and extension. If no options are passed to `prepareToRecordAsync()`, the recorder will be created with options `Expo.Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY`. */
-            options?: RecordingOptions
+            options?: RecordingOptions,
         ): Promise<RecordingStatus>;
 
         /** Begins recording. This method can only be called if the `Recording` has been prepared. */
@@ -492,8 +512,8 @@ export namespace Audio {
             initialStatus?: PlaybackStatusToSet,
 
             /** A function taking a single parameter `PlaybackStatus`. This value defaults to `null` if no parameter is passed. */
-            onPlaybackStatusUpdate?: ((status: PlaybackStatus) => void) | null
-        ): Promise<{ sound: Sound, status: PlaybackStatus }>;
+            onPlaybackStatusUpdate?: ((status: PlaybackStatus) => void) | null,
+        ): Promise<{ sound: Sound; status: PlaybackStatus }>;
     }
 }
 
@@ -501,22 +521,26 @@ export namespace Audio {
  * AuthSession
  */
 export namespace AuthSession {
-    type StartAsyncResponse = {
-        type: 'cancel';
-    } | {
-        type: 'dismissed';
-    } | {
-        type: 'success';
-        params: HashMap;
-        event: HashMap;
-    } | {
-        type: 'error';
-        params: HashMap;
-        errorCode: string;
-        event: HashMap;
-    };
+    type StartAsyncResponse =
+        | {
+              type: 'cancel';
+          }
+        | {
+              type: 'dismissed';
+          }
+        | {
+              type: 'success';
+              params: HashMap;
+              event: HashMap;
+          }
+        | {
+              type: 'error';
+              params: HashMap;
+              errorCode: string;
+              event: HashMap;
+          };
 
-    function startAsync(options: { authUrl: string; returnUrl?: string; }): Promise<StartAsyncResponse>;
+    function startAsync(options: { authUrl: string; returnUrl?: string }): Promise<StartAsyncResponse>;
     function dismiss(): void;
     function getRedirectUrl(): string;
 }
@@ -525,32 +549,34 @@ export namespace AuthSession {
 /**
  * AV
  */
-export type PlaybackStatus = {
-    isLoaded: false;
-    androidImplementation?: string;
+export type PlaybackStatus =
+    | {
+          isLoaded: false;
+          androidImplementation?: string;
 
-    /** Populated exactly once when an error forces the object to unload. */
-    error?: string;
-} | {
-    isLoaded: true;
-    androidImplementation?: string;
-    uri: string;
-    progressUpdateIntervalMillis: number;
-    durationMillis?: number;
-    positionMillis: number;
-    playableDurationMillis?: number;
-    shouldPlay: boolean;
-    isPlaying: boolean;
-    isBuffering: boolean;
-    rate: number;
-    shouldCorrectPitch: boolean;
-    volume: number;
-    isMuted: boolean;
-    isLooping: boolean;
+          /** Populated exactly once when an error forces the object to unload. */
+          error?: string;
+      }
+    | {
+          isLoaded: true;
+          androidImplementation?: string;
+          uri: string;
+          progressUpdateIntervalMillis: number;
+          durationMillis?: number;
+          positionMillis: number;
+          playableDurationMillis?: number;
+          shouldPlay: boolean;
+          isPlaying: boolean;
+          isBuffering: boolean;
+          rate: number;
+          shouldCorrectPitch: boolean;
+          volume: number;
+          isMuted: boolean;
+          isLooping: boolean;
 
-    /** True exactly once when the track plays to finish. */
-    didJustFinish: boolean;
-};
+          /** True exactly once when the track plays to finish. */
+          didJustFinish: boolean;
+      };
 
 export interface PlaybackStatusToSet {
     androidImplementation?: string;
@@ -594,7 +620,7 @@ export class PlaybackObject {
         initialStatus?: PlaybackStatusToSet,
 
         /** If set to `true`, the system will attempt to download the resource to the device before loading. This value defaults to true. Note that at the moment, this will only work for sources of the form `require('path/to/file')` or `Expo.Asset` objects. */
-        downloadFirst?: boolean
+        downloadFirst?: boolean,
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: false })`. */
@@ -618,9 +644,9 @@ export class PlaybackObject {
 
         /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis, seekMillisToleranceBefore: toleranceMillisBefore, seekMillisToleranceAfter: toleranceMillisAfter })`. The tolerances are used only on iOS. */
         tolerances?: {
-            toleranceMillisBefore: number,
-            toleranceMillisAfter: number
-        }
+            toleranceMillisBefore: number;
+            toleranceMillisAfter: number;
+        },
     ): Promise<PlaybackStatus>;
 
     /**
@@ -630,19 +656,19 @@ export class PlaybackObject {
      */
     replayAsync(
         /** The new `PlaybackStatusToSet` of the `playbackObject`, whose values will override the current playback status. */
-        status: PlaybackStatusToSet
+        status: PlaybackStatusToSet,
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ isLooping: value })`. */
     setIsLoopingAsync(
         /** A boolean describing if the media should play once (`false`) or loop indefinitely (`true`). */
-        isLooping: boolean
+        isLooping: boolean,
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ isMuted: value })`. */
     setIsMutedAsync(
         /**  A boolean describing if the audio of this media should be muted. */
-        isMuted: boolean
+        isMuted: boolean,
     ): Promise<PlaybackStatus>;
 
     /**
@@ -652,7 +678,7 @@ export class PlaybackObject {
      */
     setOnPlaybackStatusUpdate(
         /** A function taking a single parameter `PlaybackStatus`. */
-        onPlaybackStatusUpdate?: (status: PlaybackStatus) => void
+        onPlaybackStatusUpdate?: (status: PlaybackStatus) => void,
     ): void;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis })`. */
@@ -661,15 +687,15 @@ export class PlaybackObject {
 
         /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis, seekMillisToleranceBefore: toleranceMillisBefore, seekMillisToleranceAfter: toleranceMillisAfter })`. The tolerances are used only on iOS. */
         tolerances?: {
-            toleranceMillisBefore: number,
-            toleranceMillisAfter: number
-        }
+            toleranceMillisBefore: number;
+            toleranceMillisAfter: number;
+        },
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ progressUpdateIntervalMillis: millis })`. */
     setProgressUpdateIntervalAsync(
         /** The new minimum interval in milliseconds between calls of `onPlaybackStatusUpdate`. */
-        progressUpdateIntervalMillis: number
+        progressUpdateIntervalMillis: number,
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ rate: value, shouldCorrectPitch: shouldCorrectPitch })`. */
@@ -677,19 +703,19 @@ export class PlaybackObject {
         /** The desired playback rate of the media. This value must be between `0.0` and `32.0`. Only available on Android API version 23 and later and iOS. */
         rate: number,
         /** A boolean describing if we should correct the pitch for a changed rate. If set to `true`, the pitch of the audio will be corrected (so a rate different than `1.0` will timestretch the audio). */
-        shouldCorrectPitch: boolean
+        shouldCorrectPitch: boolean,
     ): Promise<PlaybackStatus>;
 
     /** Sets a new `PlaybackStatusToSet` on the `playbackObject`. This method can only be called if the media has been loaded. Return a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once the new status has been set successfully, or rejects if setting the new status failed. */
     setStatusAsync(
         /** The new `PlaybackStatusToSet` of the `playbackObject`, whose values will override the current playback status. */
-        status: PlaybackStatusToSet
+        status: PlaybackStatusToSet,
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ volume: value })`. */
     setVolumeAsync(
         /** A number between `0.0` (silence) and `1.0` (maximum volume). */
-        volume: number
+        volume: number,
     ): Promise<PlaybackStatus>;
 
     /** This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: false, positionMillis: 0 })`. */
@@ -719,8 +745,8 @@ export class BarCodeScanner extends Component<BarCodeScannerProps> {
     static Constants: {
         TorchMode: {
             on: string;
-            off: string
-        }
+            off: string;
+        };
     } & CameraConstants;
 }
 // #endregion
@@ -733,7 +759,7 @@ export interface BlurViewProps extends ViewProps {
     tint: 'light' | 'default' | 'dark';
     intensity: number;
 }
-export class BlurView extends Component<BlurViewProps> { }
+export class BlurView extends Component<BlurViewProps> {}
 // #endregion
 
 /**
@@ -743,7 +769,7 @@ export namespace Brightness {
     /** Sets screen brightness. */
     function setBrightnessAsync(
         /** A number between `0` and `1`, representing the desired screen brightness. */
-        brightnessValue: number
+        brightnessValue: number,
     ): Promise<void>;
 
     /**
@@ -761,7 +787,7 @@ export namespace Brightness {
     /** Sets global system screen brightness, requires `WRITE_SETTINGS` permissions on Android. */
     function setSystemBrightnessAsync(
         /** A number between `0` and `1`, representing the desired screen brightness. */
-        brightnessValue: number
+        brightnessValue: number,
     ): Promise<void>;
 }
 
@@ -792,7 +818,7 @@ export interface RecordingOptions {
 
 export class CameraObject {
     takePictureAsync(options?: PictureOptions): Promise<PictureResponse>;
-    recordAsync(options: RecordingOptions): Promise<{ uri: string; }>;
+    recordAsync(options: RecordingOptions): Promise<{ uri: string }>;
     stopRecording(): void;
     getSupportedRatiosAsync(): Promise<string[]>; // Android only
 }
@@ -915,70 +941,70 @@ export namespace Constants {
         platforms?: string[];
         githubUrl?: string;
         notification?: {
-            icon?: string,
-            color?: string,
-            androidMode?: 'default' | 'collapse',
-            androidCollapsedTitle?: string
+            icon?: string;
+            color?: string;
+            androidMode?: 'default' | 'collapse';
+            androidCollapsedTitle?: string;
         };
         loading?: {
-            icon?: string,
-            exponentIconColor?: 'white' | 'blue',
-            exponentIconGrayscale?: 1 | 0,
-            backgroundImage?: string,
-            backgroundColor?: string,
-            hideExponentText?: boolean
+            icon?: string;
+            exponentIconColor?: 'white' | 'blue';
+            exponentIconGrayscale?: 1 | 0;
+            backgroundImage?: string;
+            backgroundColor?: string;
+            hideExponentText?: boolean;
         };
         appKey?: string;
         androidStatusBar?: {
-            barStyle?: 'light-content' | 'dark-content',
-            backgroundColor?: string
+            barStyle?: 'light-content' | 'dark-content';
+            backgroundColor?: string;
         };
         androidShowExponentNotificationInShellApp?: boolean;
         extra?: {
-            [propName: string]: any
+            [propName: string]: any;
         };
         rnCliPath?: any;
         entryPoint?: string;
         packagerOpts?: {
-            hostType?: string,
-            dev?: boolean,
-            strict?: boolean,
-            minify?: boolean,
-            urlType?: string,
-            urlRandomness?: string,
-            lanType?: string,
-            [propName: string]: any
+            hostType?: string;
+            dev?: boolean;
+            strict?: boolean;
+            minify?: boolean;
+            urlType?: string;
+            urlRandomness?: string;
+            lanType?: string;
+            [propName: string]: any;
         };
         ignoreNodeModulesValidation?: any;
         nodeModulesPath?: string;
         ios?: {
-            bundleIdentifier?: string,
-            buildNumber?: string,
+            bundleIdentifier?: string;
+            buildNumber?: string;
             config?: {
-                usesNonExemptEncryption?: boolean,
+                usesNonExemptEncryption?: boolean;
                 googleSignIn?: {
-                    reservedClientId: string
-                }
-            },
-            supportsTablet?: boolean,
-            infoPlist?: any
+                    reservedClientId: string;
+                };
+            };
+            supportsTablet?: boolean;
+            infoPlist?: any;
         };
         android?: {
-            package?: string,
-            versionCode?: string,
+            package?: string;
+            versionCode?: string;
             config?: {
                 fabric?: {
-                    apiKey: string,
-                    buildSecret: string
-                },
+                    apiKey: string;
+                    buildSecret: string;
+                };
                 googleMaps?: {
-                    apiKey: string
-                },
+                    apiKey: string;
+                };
                 googleSignIn?: {
-                    apiKey: string,
-                    certificateHash: string
-                }
-            }
+                    apiKey: string;
+                    certificateHash: string;
+                };
+            };
         };
         facebookScheme?: any;
         facebookAppId?: string;
@@ -1040,10 +1066,25 @@ export namespace Contacts {
     const DATES: Dates;
     const RELATIONSHIPS: Relationships;
 
-    type FieldType = PhoneNumbers | Emails | Addresses | Image | Thumbnail |
-        Note | Birthday | NonGregorianBirthday | NamePrefix | NameSuffix |
-        PhoneticFirstName | PhoneticMiddleName | PhoneticLastName | SocialProfiles |
-        InstantMessageAddresses | UrlAddresses | Dates | Relationships;
+    type FieldType =
+        | PhoneNumbers
+        | Emails
+        | Addresses
+        | Image
+        | Thumbnail
+        | Note
+        | Birthday
+        | NonGregorianBirthday
+        | NamePrefix
+        | NameSuffix
+        | PhoneticFirstName
+        | PhoneticMiddleName
+        | PhoneticLastName
+        | SocialProfiles
+        | InstantMessageAddresses
+        | UrlAddresses
+        | Dates
+        | Relationships;
 
     interface Options {
         pageSize?: number;
@@ -1156,14 +1197,16 @@ export namespace DocumentPicker {
         type?: string;
     }
 
-    type Response = {
-        type: 'success';
-        uri: string;
-        name: string;
-        size: number;
-    } | {
-        type: 'cancel';
-    };
+    type Response =
+        | {
+              type: 'success';
+              uri: string;
+              name: string;
+              size: number;
+          }
+        | {
+              type: 'cancel';
+          };
 
     function getDocumentAsync(options?: Options): Promise<Response>;
 }
@@ -1212,15 +1255,17 @@ export namespace FacebookAds {
         setMediaCachePolicy(cachePolicy: MediaCachePolicy): void;
     }
 
-    function withNativeAd(component: Component<{
-        icon?: string;
-        coverImage?: string;
-        title?: string;
-        subtitle?: string;
-        description?: string;
-        callToActionText?: string;
-        socialContext?: string;
-    }>): Component<{ adsManager: NativeAdsManager }, { ad: any, canRequestAds: boolean }>;
+    function withNativeAd(
+        component: Component<{
+            icon?: string;
+            coverImage?: string;
+            title?: string;
+            subtitle?: string;
+            description?: string;
+            callToActionText?: string;
+            socialContext?: string;
+        }>,
+    ): Component<{ adsManager: NativeAdsManager }, { ad: any; canRequestAds: boolean }>;
 
     /**
      * Banner View
@@ -1234,7 +1279,7 @@ export namespace FacebookAds {
         onError: () => void;
     }
 
-    class BannerView extends Component<BannerViewProps> { }
+    class BannerView extends Component<BannerViewProps> {}
 
     /**
      * Ad Settings
@@ -1264,7 +1309,7 @@ export interface FaceFeature {
         size: {
             width: number;
             height: number;
-        },
+        };
         origin: Point;
     };
     smilingProbability?: number;
@@ -1329,17 +1374,19 @@ export namespace FaceDetector {
  * FileSystem
  */
 export namespace FileSystem {
-    type FileInfo = {
-        exists: true;
-        isDirectory: boolean;
-        uri: string;
-        size: number;
-        modificationTime: number;
-        md5?: Md5;
-    } | {
-        exists: false;
-        isDirectory: false;
-    };
+    type FileInfo =
+        | {
+              exists: true;
+              isDirectory: boolean;
+              uri: string;
+              size: number;
+              modificationTime: number;
+              md5?: Md5;
+          }
+        | {
+              exists: false;
+              isDirectory: false;
+          };
 
     interface DownloadResult {
         uri: string;
@@ -1351,27 +1398,27 @@ export namespace FileSystem {
     const documentDirectory: string;
     const cacheDirectory: string;
 
-    function getInfoAsync(fileUri: string, options?: { md5?: string, size?: boolean; }): Promise<FileInfo>;
+    function getInfoAsync(fileUri: string, options?: { md5?: string; size?: boolean }): Promise<FileInfo>;
     function readAsStringAsync(fileUri: string): Promise<string>;
     function writeAsStringAsync(fileUri: string, contents: string): Promise<void>;
-    function deleteAsync(fileUri: string, options?: { idempotent: boolean; }): Promise<void>;
-    function moveAsync(options: { from: string, to: string; }): Promise<void>;
-    function copyAsync(options: { from: string, to: string; }): Promise<void>;
+    function deleteAsync(fileUri: string, options?: { idempotent: boolean }): Promise<void>;
+    function moveAsync(options: { from: string; to: string }): Promise<void>;
+    function copyAsync(options: { from: string; to: string }): Promise<void>;
     function makeDirectoryAsync(dirUri: string, options?: { intermediates: boolean }): Promise<void>;
     function readDirectoryAsync(dirUri: string): Promise<string[]>;
-    function downloadAsync(uri: string, fileUri: string, options?: { md5?: boolean; }): Promise<DownloadResult>;
+    function downloadAsync(uri: string, fileUri: string, options?: { md5?: boolean }): Promise<DownloadResult>;
     function createDownloadResumable(
         uri: string,
         fileUri: string,
         options?: DownloadOptions,
         callback?: (totalBytesWritten: number, totalBytesExpectedToWrite: number) => void,
-        resumeData?: string | null
+        resumeData?: string | null,
     ): DownloadResumable;
 
     interface PauseResult {
         url: string;
         fileUri: string;
-        options: { md5: boolean; };
+        options: { md5: boolean };
         resumeData: string;
     }
 
@@ -1393,7 +1440,7 @@ export namespace FileSystem {
             fileUri: string,
             options: DownloadOptions,
             callback?: DownloadProgressCallback,
-            resumeData?: string
+            resumeData?: string,
         );
 
         downloadAsync(): Promise<DownloadResult>;
@@ -1405,14 +1452,16 @@ export namespace FileSystem {
 
 /** Use TouchID/FaceID (iOS) or the Fingerprint API (Android) to authenticate the user with a fingerprint scan. */
 export namespace LocalAuthentication {
-    type LocalAuthenticationResult = {
-        success: true
-    } | {
-        success: false,
+    type LocalAuthenticationResult =
+        | {
+              success: true;
+          }
+        | {
+              success: false;
 
-        /** Error code in the case where authentication fails. */
-        error: string
-    };
+              /** Error code in the case where authentication fails. */
+              error: string;
+          };
 
     /** Determine whether a face or fingerprint scanner is available on the device. */
     function hasHardwareAsync(): Promise<boolean>;
@@ -1464,7 +1513,7 @@ export interface GLViewProps extends ViewProps {
     msaaSamples?: number;
 }
 
-export class GLView extends Component<GLViewProps, { msaaSamples: number }> { }
+export class GLView extends Component<GLViewProps, { msaaSamples: number }> {}
 // #endregion
 
 /**
@@ -1481,23 +1530,25 @@ export namespace Google {
         scopes?: string[];
     }
 
-    type LogInResult = {
-        type: 'cancel';
-    } | {
-        type: 'success';
-        accessToken: string;
-        idToken?: string;
-        refreshToken?: string;
-        serverAuthCode?: string;
-        user: {
-            id: string;
-            name: string;
-            givenName: string;
-            familyName: string;
-            photoUrl?: string;
-            email?: string;
-        }
-    };
+    type LogInResult =
+        | {
+              type: 'cancel';
+          }
+        | {
+              type: 'success';
+              accessToken: string;
+              idToken?: string;
+              refreshToken?: string;
+              serverAuthCode?: string;
+              user: {
+                  id: string;
+                  name: string;
+                  givenName: string;
+                  familyName: string;
+                  photoUrl?: string;
+                  email?: string;
+              };
+          };
 
     function logInAsync(config: LogInConfig): Promise<LogInResult>;
 }
@@ -1527,7 +1578,7 @@ export namespace ImageManipulator {
     type Action = Resize | Rotate | Flip | Crop;
 
     interface Resize {
-        resize: { width?: number, height?: number };
+        resize: { width?: number; height?: number };
     }
 
     interface Rotate {
@@ -1722,7 +1773,7 @@ export interface LinearGradientProps {
     style?: StyleProp<ViewStyle>;
 }
 
-export class LinearGradient extends Component<LinearGradientProps> { }
+export class LinearGradient extends Component<LinearGradientProps> {}
 // #endregion
 
 /**
@@ -1763,7 +1814,7 @@ export namespace Location {
     interface LocationData {
         coords: {
             heading: number;
-            speed: number
+            speed: number;
         } & Coords;
         timestamp: number;
     }
@@ -1833,7 +1884,7 @@ export namespace Notifications {
         body?: string;
         data?: any;
         ios?: {
-            sound?: boolean
+            sound?: boolean;
         };
         android?: {
             sound?: boolean;
@@ -1853,7 +1904,7 @@ export namespace Notifications {
     function presentLocalNotificationAsync(localNotification: LocalNotification): Promise<LocalNotificationId>;
     function scheduleLocalNotificationAsync(
         localNotification: LocalNotification,
-        schedulingOptions: { time: Date | number, repeat?: 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year' }
+        schedulingOptions: { time: Date | number; repeat?: 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year' },
     ): Promise<LocalNotificationId>;
     function dismissNotificationAsync(localNotificationId: LocalNotificationId): Promise<void>;
     function dismissAllNotificationsAsync(): Promise<void>;
@@ -1868,17 +1919,25 @@ export namespace Notifications {
  */
 export namespace Pedometer {
     function isAvailableAsync(): Promise<boolean>;
-    function getStepCountAsync(start: Date, end: Date): Promise<{ steps: number; }>;
-    function watchStepCount(callback: (params: { steps: number; }) => void): EventSubscription;
+    function getStepCountAsync(start: Date, end: Date): Promise<{ steps: number }>;
+    function watchStepCount(callback: (params: { steps: number }) => void): EventSubscription;
 }
 
 /**
  * Permissions
  */
 export namespace Permissions {
-    type PermissionType = 'audioRecording' | 'calendar' |
-    'cameraRoll' | 'camera' | 'contacts' | 'location' | 'reminders' |
-    'remoteNotifications' | 'systemBrightness' | 'userFacingNotifications';
+    type PermissionType =
+        | 'audioRecording'
+        | 'calendar'
+        | 'cameraRoll'
+        | 'camera'
+        | 'contacts'
+        | 'location'
+        | 'reminders'
+        | 'remoteNotifications'
+        | 'systemBrightness'
+        | 'userFacingNotifications';
     type PermissionStatus = 'undetermined' | 'granted' | 'denied';
     type PermissionExpires = 'never';
 
@@ -1958,10 +2017,7 @@ export namespace SecureStore {
  * Segment
  */
 export namespace Segment {
-    function initialize(keys: {
-        androidWriteKey: string;
-        iosWriteKey: string;
-    }): void;
+    function initialize(keys: { androidWriteKey: string; iosWriteKey: string }): void;
     function identify(userId: string): void;
     function identifyWithTraits(userId: string, traits: object): void;
     function track(event: string): void;
@@ -2014,8 +2070,8 @@ export namespace SQLite {
     interface Database {
         transaction(
             callback: (transaction: Transaction) => any,
-            error?: (error: Error) => any,     // TODO def of error
-            success?: () => any
+            error?: (error: Error) => any, // TODO def of error
+            success?: () => any,
         ): void;
     }
 
@@ -2024,7 +2080,7 @@ export namespace SQLite {
             sqlStatement: string,
             arguments?: string[] | number[],
             success?: (transaction: Transaction, resultSet: ResultSet) => any,
-            error?: (transaction: Transaction, error: Error) => any
+            error?: (transaction: Transaction, error: Error) => any,
         ): void;
     }
 
@@ -2039,17 +2095,19 @@ export namespace SQLite {
     }
 
     function openDatabase(
-        name: string | {
-            name: string,
-            version?: string,
-            description?: string,
-            size?: number,
-            callback?: () => any
-        },
+        name:
+            | string
+            | {
+                  name: string;
+                  version?: string;
+                  description?: string;
+                  size?: number;
+                  callback?: () => any;
+              },
         version?: string,
         description?: string,
         size?: number,
-        callback?: () => any
+        callback?: () => any,
     ): any;
 }
 
@@ -2178,7 +2236,7 @@ export interface SvgStopProps extends SvgCommonProps {
     stopOpacity?: string;
 }
 
-export class Svg extends Component<{ width: number, height: number, viewBox?: string, preserveAspectRatio?: string }> {
+export class Svg extends Component<{ width: number; height: number; viewBox?: string; preserveAspectRatio?: string }> {
     static Circle: ComponentClass<SvgCircleProps>;
     static ClipPath: ComponentClass<SvgCommonProps>;
     static Defs: ComponentClass;
@@ -2204,14 +2262,14 @@ export class Svg extends Component<{ width: number, height: number, viewBox?: st
  * Take Snapshot
  */
 export function takeSnapshotAsync(
-    view?: (number | React.ReactElement),
+    view?: number | React.ReactElement,
     options?: {
-        width?: number,
-        height?: number,
-        format?: 'png' | 'jpg' | 'jpeg' | 'webm',
-        quality?: number,
-        result?: 'file' | 'base64' | 'data-uri',
-    }
+        width?: number;
+        height?: number;
+        format?: 'png' | 'jpg' | 'jpeg' | 'webm';
+        quality?: number;
+        result?: 'file' | 'base64' | 'data-uri';
+    },
 ): Promise<string>;
 
 /** Helpful utility functions that don’t fit anywhere else, including some localization and internationalization methods. */
@@ -2229,9 +2287,7 @@ export namespace Util {
     function reload(): void;
 
     /** _Android only_. Invokes a callback when a new version of your app is successfully downloaded in the background. */
-    function addNewVersionListenerExperimental(listener: (event: {
-        manifest: object;
-    }) => void): { remove(): void; };
+    function addNewVersionListenerExperimental(listener: (event: { manifest: object }) => void): { remove(): void };
 }
 
 // #region Video
@@ -2253,7 +2309,7 @@ export enum FullscreenUpdateVariants {
     IOS_FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT = 0,
     IOS_FULLSCREEN_UPDATE_PLAYER_DID_PRESENT = 1,
     IOS_FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS = 2,
-    IOS_FULLSCREEN_UPDATE_PLAYER_DID_DISMISS = 3
+    IOS_FULLSCREEN_UPDATE_PLAYER_DID_DISMISS = 3,
 }
 
 export interface FullscreenUpdateEvent {
@@ -2597,7 +2653,7 @@ export namespace Calendar {
         CALDAV = 'caldav',
         EXCHANGE = 'exchange',
         SUBSCRIBED = 'subscribed',
-        BIRTHDAYS = 'birthdays'
+        BIRTHDAYS = 'birthdays',
     }
 
     enum Availability {
@@ -2605,7 +2661,7 @@ export namespace Calendar {
         BUSY = 'busy',
         FREE = 'free',
         TENTATIVE = 'tentative',
-        UNAVAILABLE = 'unavailable' // iOS
+        UNAVAILABLE = 'unavailable', // iOS
     }
 
     enum AlarmMethod {
@@ -2624,7 +2680,7 @@ export namespace Calendar {
         RESOURCE = 'resource',
         OPTIONAL = 'optional', // Android
         REQUIRED = 'required', // Android
-        NONE = 'none' // Android
+        NONE = 'none', // Android
     }
 
     enum CalendarAccessLevel {
@@ -2636,21 +2692,21 @@ export namespace Calendar {
         READ = 'read',
         RESPOND = 'respond',
         ROOT = 'root',
-        NONE = 'none'
+        NONE = 'none',
     }
 
     enum EventAccessLevel {
         CONFIDENTIAL = 'confidential',
         PRIVATE = 'private',
         PUBLIC = 'public',
-        DEFAULT = 'default'
+        DEFAULT = 'default',
     }
 
     enum EventStatus {
         NONE = 'none',
         CONFIRMED = 'confirmed',
         TENTATIVE = 'tentative',
-        CANCELED = 'canceled'
+        CANCELED = 'canceled',
     }
 
     enum AttendeeRole {
@@ -2663,7 +2719,7 @@ export namespace Calendar {
         ORGANIZER = 'organizer', // Android
         PERFORMER = 'performer', // Android
         SPEAKER = 'speaker', // Android
-        NONE = 'none' // Android
+        NONE = 'none', // Android
     }
 
     enum AttendeeStatus {
@@ -2676,19 +2732,19 @@ export namespace Calendar {
         COMPLETED = 'completed', // iOS
         IN_PROCESS = 'inProcess', // iOS
         INVITED = 'invited', // Android
-        NONE = 'none' // Android
+        NONE = 'none', // Android
     }
 
     enum Frequency {
         DAILY = 'daily',
         WEEKLY = 'weekly',
         MONTHLY = 'monthly',
-        YEARLY = 'yearly'
+        YEARLY = 'yearly',
     }
 
     enum ReminderStatus {
         COMPLETED = 'completed',
-        INCOMPLETE = 'incomplete'
+        INCOMPLETE = 'incomplete',
     }
 
     interface RecurringEventOptions {
@@ -2699,7 +2755,7 @@ export namespace Calendar {
     /** Gets an array of calendar objects with details about the different calendars stored on the device. */
     function getCalendarsAsync(
         /** (iOS only) Not required, but if defined, filters the returned calendars to a specific entity type.  */
-        entityType?: EntityTypes
+        entityType?: EntityTypes,
     ): Promise<Calendar[]>;
 
     /** Creates a new calendar on the device, allowing events to be added later and displayed. */
@@ -2720,7 +2776,7 @@ export namespace Calendar {
         startDate: Date,
 
         /** End of time period to search for events in. Required. */
-        endDate: Date
+        endDate: Date,
     ): Promise<Event[]>;
 
     /** Returns a specific event selected by ID. If a specific instance of a recurring event is desired, the start date of this instance must also be provided, as instances of recurring events do not have their own unique and stable IDs on either iOS or Android. */
@@ -2729,14 +2785,14 @@ export namespace Calendar {
         id: string,
 
         /** A map of options for recurring events */
-        recurringEventOptions?: RecurringEventOptions
+        recurringEventOptions?: RecurringEventOptions,
     ): Promise<Event>;
 
     /** Creates a new event on the specified calendar. */
     function createEventAsync(
         /** ID of the calendar to create this event in. Required. */
         calendarId: string,
-        details?: Event
+        details?: Event,
     ): Promise<string>;
 
     /** Updates the provided details of an existing calendar stored on the device. To remove a property, explicitly set it to null in details */
@@ -2748,7 +2804,7 @@ export namespace Calendar {
         details?: Event | null,
 
         /** A map of options for recurring events */
-        recurrentEventOptions?: RecurringEventOptions
+        recurrentEventOptions?: RecurringEventOptions,
     ): Promise<string>;
 
     /** Deletes an existing event from the device. Use with caution. */
@@ -2757,7 +2813,7 @@ export namespace Calendar {
         id: string,
 
         /** A map of options for recurring events */
-        recurringEventOptions?: RecurringEventOptions
+        recurringEventOptions?: RecurringEventOptions,
     ): Promise<void>;
 
     /** Gets all attendees for a given event (or instance of a recurring event). */
@@ -2766,7 +2822,7 @@ export namespace Calendar {
         eventId: string,
 
         /** A map of options for recurring events */
-        recurrentEventOptions?: RecurringEventOptions
+        recurrentEventOptions?: RecurringEventOptions,
     ): Promise<Attendee[]>;
 
     /** Available on Android only. Creates a new attendee record and adds it to the specified event. Note that if eventId specifies a recurring event, this will add the attendee to every instance of the event. */
@@ -2775,7 +2831,7 @@ export namespace Calendar {
         eventId: string,
 
         /** A map of details for the attendee to be created  */
-        details?: Attendee
+        details?: Attendee,
     ): Promise<string>;
 
     /** Available on Android only. Updates an existing attendee record. To remove a property, explicitly set it to null in details. */
@@ -2784,7 +2840,7 @@ export namespace Calendar {
         id: string,
 
         /** A map of properties to be updated  */
-        details?: Attendee | null
+        details?: Attendee | null,
     ): Promise<string>;
 
     /** Available on Android only. Deletes an existing attendee record from the device. Use with caution. */
@@ -2801,7 +2857,7 @@ export namespace Calendar {
         startDate?: Date,
 
         /** End of time period to search for reminders in. Required if status is defined. */
-        endDate?: Date
+        endDate?: Date,
     ): Promise<Reminder[]>;
 
     /** Available on iOS only. Returns a specific reminder selected by ID. */
@@ -2813,7 +2869,7 @@ export namespace Calendar {
         calendarId: string,
 
         /** A map of details for the reminder to be created */
-        details?: Reminder
+        details?: Reminder,
     ): Promise<string>;
 
     /** Available on iOS only. Updates the provided details of an existing reminder stored on the device. To remove a property, explicitly set it to null in details. */
@@ -2822,7 +2878,7 @@ export namespace Calendar {
         id: string,
 
         /** A map of properties to be updated */
-        details?: Reminder | null
+        details?: Reminder | null,
     ): Promise<string>;
 
     /** Available on iOS only. Deletes an existing reminder from the device. Use with caution. */
@@ -2837,7 +2893,7 @@ export namespace Calendar {
     /** Available on Android only. Sends an intent to open the specified event in the OS Calendar app. */
     function openEventInCalendar(
         /** ID of the event to open. Required. */
-        id: string
+        id: string,
     ): void;
 }
 // #endregion
@@ -2873,7 +2929,7 @@ export namespace MailComposer {
     /** Resolves to a promise with object containing status field that could be either sent, saved or cancelled. Android does not provide such info so it always resolves to sent. */
     function composeAsync(
         /** A map defining the data to fill the mail */
-        options: ComposeOptions
+        options: ComposeOptions,
     ): Promise<{ status: 'sent' | 'saved' | 'cancelled' }>;
 }
 // #endregion
@@ -2920,7 +2976,8 @@ export namespace Updates {
     /** An object that is passed into each event listener when a new version is available. */
     interface UpdateEvent {
         /** Type of the event */
-        type: EventType.DownloadStart
+        type:
+            | EventType.DownloadStart
             | EventType.DownloadProgress
             | EventType.DownloadFinished
             | EventType.NoUpdateAvailable
@@ -2979,153 +3036,157 @@ export namespace Updates {
  */
 
 export namespace MediaLibrary {
-  /**
-   * Creates an asset from existing file. The most common use case is to save a picture taken by Camera.
-   */
-  function createAssetAsync(localUri: string): Promise<Asset>;
+    /**
+     * Creates an asset from existing file. The most common use case is to save a picture taken by Camera.
+     */
+    function createAssetAsync(localUri: string): Promise<Asset>;
 
-  /**
-   * Fetches a page of assets matching the provided criteria.
-   */
-  function getAssetsAsync(options: GetAssetsOptions): Promise<GetAssetsResult>;
+    /**
+     * Fetches a page of assets matching the provided criteria.
+     */
+    function getAssetsAsync(options: GetAssetsOptions): Promise<GetAssetsResult>;
 
-  /**
-   * Provides more informations about an asset, including GPS location, local URI and EXIF metadata.
-   */
-  function getAssetInfoAsync(asset: string | Asset): Promise<Asset>;
+    /**
+     * Provides more informations about an asset, including GPS location, local URI and EXIF metadata.
+     */
+    function getAssetInfoAsync(asset: string | Asset): Promise<Asset>;
 
-  /**
-   * Deletes assets from the library. On iOS it deletes assets from all albums they belong to, while on Android it keeps all copies of them
-   * (album is strictly connected to the asset). Also, there is additional dialog on iOS that requires user to confirm this action.
-   */
-  function deleteAssetsAsync(asset: string[] | Asset[]): Promise<boolean>;
+    /**
+     * Deletes assets from the library. On iOS it deletes assets from all albums they belong to, while on Android it keeps all copies of them
+     * (album is strictly connected to the asset). Also, there is additional dialog on iOS that requires user to confirm this action.
+     */
+    function deleteAssetsAsync(asset: string[] | Asset[]): Promise<boolean>;
 
-  /**
-   * Queries for user-created albums in media gallery.
-   */
-  function getAlbumsAsync(): Promise<Album[]>;
+    /**
+     * Queries for user-created albums in media gallery.
+     */
+    function getAlbumsAsync(): Promise<Album[]>;
 
-  /**
-   * Queries for an album with a specific name.
-   */
-  function getAlbumAsync(albumName: string): Promise<Album>;
+    /**
+     * Queries for an album with a specific name.
+     */
+    function getAlbumAsync(albumName: string): Promise<Album>;
 
-  /**
-   * Creates an album with given name and initial asset.
-   * The asset parameter is required on Android, since it's not possible to create empty album on this platform.
-   */
-  function createAlbumAsync(albumName: string, asset: string | Asset): Promise<Album>;
+    /**
+     * Creates an album with given name and initial asset.
+     * The asset parameter is required on Android, since it's not possible to create empty album on this platform.
+     */
+    function createAlbumAsync(albumName: string, asset: string | Asset): Promise<Album>;
 
-  /**
-   * Adds array of assets to the album.
-   * On Android, by default it copies assets from the current album to provided one, however it's also possible to move them by passing false as copyAssets argument.
-   * In case they're copied you should keep in mind that getAssetsAsync will return duplicated assets.
-   */
-  function addAssetsToAlbumAsync(assets: Asset[], album: string | Album, copyAssets?: boolean /* default true */): Promise<boolean>;
+    /**
+     * Adds array of assets to the album.
+     * On Android, by default it copies assets from the current album to provided one, however it's also possible to move them by passing false as copyAssets argument.
+     * In case they're copied you should keep in mind that getAssetsAsync will return duplicated assets.
+     */
+    function addAssetsToAlbumAsync(
+        assets: Asset[],
+        album: string | Album,
+        copyAssets?: boolean /* default true */,
+    ): Promise<boolean>;
 
-  /**
-   * Removes given assets from album.
-   * On Android, album will be automatically deleted if there are no more assets inside.
-   */
-  function removeAssetsFromAlbumAsync(assets: Asset[], album: string | Album): Promise<boolean>;
+    /**
+     * Removes given assets from album.
+     * On Android, album will be automatically deleted if there are no more assets inside.
+     */
+    function removeAssetsFromAlbumAsync(assets: Asset[], album: string | Album): Promise<boolean>;
 
-  /**
-   * Available on iOS only. Fetches a list of moments, which is a group of assets taken around the same place and time.
-   */
-  function getMomentsAsync(): Promise<Album[]>;
+    /**
+     * Available on iOS only. Fetches a list of moments, which is a group of assets taken around the same place and time.
+     */
+    function getMomentsAsync(): Promise<Album[]>;
 
-  enum MediaType {
-    audio = 'audio',
-    photo = 'photo',
-    video = 'video',
-    unknow = 'unknow'
-  }
+    enum MediaType {
+        audio = 'audio',
+        photo = 'photo',
+        video = 'video',
+        unknow = 'unknow',
+    }
 
-  enum SortBy {
-    default = 'default',
-    id = 'id',
-    creationTime = 'creationTime',
-    modificationTime = 'modificationTime',
-    mediaType = 'mediaType',
-    width = 'width',
-    height = 'height',
-    duration = 'duration'
-  }
+    enum SortBy {
+        default = 'default',
+        id = 'id',
+        creationTime = 'creationTime',
+        modificationTime = 'modificationTime',
+        mediaType = 'mediaType',
+        width = 'width',
+        height = 'height',
+        duration = 'duration',
+    }
 
-  // region Asset
-  interface AssetAndroid {
-    albumId?: string;
-  }
+    // region Asset
+    interface AssetAndroid {
+        albumId?: string;
+    }
 
-  interface AssetIos {
-    mediaSubtypes?: MediaType[];
-    // *
-    orientation: number;
-    // *
-    isFavorite: boolean;
-  }
+    interface AssetIos {
+        mediaSubtypes?: MediaType[];
+        // *
+        orientation: number;
+        // *
+        isFavorite: boolean;
+    }
 
-  interface Asset extends AssetAndroid, AssetIos {
-    id: string;
-    filename: string;
-    uri: string;
-    mediaType: string;
-    width: number;
-    height: number;
-    creationTime: number;
-    modificationTime: number;
-    duration: number;
-    // *
-    localUri?: string;
-    // *
-    location?: Location.LocationProps;
-    // *
-    exif?: object;
-  }
+    interface Asset extends AssetAndroid, AssetIos {
+        id: string;
+        filename: string;
+        uri: string;
+        mediaType: string;
+        width: number;
+        height: number;
+        creationTime: number;
+        modificationTime: number;
+        duration: number;
+        // *
+        localUri?: string;
+        // *
+        location?: Location.LocationProps;
+        // *
+        exif?: object;
+    }
 
-  /**
-   * These fields can be obtained only by calling getAssetInfoAsync method
-   */
-  //#endregion
+    /**
+     * These fields can be obtained only by calling getAssetInfoAsync method
+     */
+    //#endregion
 
-  // #region Album
-  interface AlbumIos {
-    type?: string;
-    // *
-    startTime: number;
-    // *
-    endTime: number;
-    // *
-    approximateLocation?: Location.LocationProps;
-    // *
-    locationNames?: string[];
-  }
+    // #region Album
+    interface AlbumIos {
+        type?: string;
+        // *
+        startTime: number;
+        // *
+        endTime: number;
+        // *
+        approximateLocation?: Location.LocationProps;
+        // *
+        locationNames?: string[];
+    }
 
-  /**
-   * These fields apply only to albums whose type is moment
-   */
+    /**
+     * These fields apply only to albums whose type is moment
+     */
 
-  interface Album extends AlbumIos {
-    id: string;
-    title: string;
-    assetCount: number;
-  }
-  // #endregion
+    interface Album extends AlbumIos {
+        id: string;
+        title: string;
+        assetCount: number;
+    }
+    // #endregion
 
-  interface GetAssetsOptions {
-    first?: number;
-    after?: string;
-    album?: string | Album;
-    sortBy?: SortBy;
-    mediaType?: MediaType;
-  }
+    interface GetAssetsOptions {
+        first?: number;
+        after?: string;
+        album?: string | Album;
+        sortBy?: SortBy;
+        mediaType?: MediaType;
+    }
 
-  interface GetAssetsResult {
-    assets: Asset[];
-    endCursor: string;
-    hasNextPage: boolean;
-    totalCount: number;
-  }
+    interface GetAssetsResult {
+        assets: Asset[];
+        endCursor: string;
+        hasNextPage: boolean;
+        totalCount: number;
+    }
 }
 // #endregion
 
@@ -3136,23 +3197,23 @@ export namespace MediaLibrary {
  * If this is used in Android the device will use ReactNative.Vibrate instead, it's best to just avoid this.
  */
 export namespace Haptic {
-  /**
-   * Used to let a user know when a selection change has been registered
-   */
-  function selection(): void;
-  function notification(notificationType?: NotificationType): void;
-  function impact(impactStyles?: ImpactStyles): void;
+    /**
+     * Used to let a user know when a selection change has been registered
+     */
+    function selection(): void;
+    function notification(notificationType?: NotificationType): void;
+    function impact(impactStyles?: ImpactStyles): void;
 
-  enum ImpactStyles {
-    Light = 'light',
-    Medium = 'medium',
-    Heavy = 'heavy'
-  }
+    enum ImpactStyles {
+        Light = 'light',
+        Medium = 'medium',
+        Heavy = 'heavy',
+    }
 
-  enum NotificationType {
-    Success = 'success',
-    Warning = 'warning',
-    Error = 'error'
-  }
+    enum NotificationType {
+        Success = 'success',
+        Warning = 'warning',
+        Error = 'error',
+    }
 }
 // #endregion

@@ -78,7 +78,7 @@ export interface PlaidLinkProps {
                     | 'manually_verified'
                     | null;
             }>;
-        }
+        },
     ) => void;
 
     // A function that is called when a user has specifically exited Link flow
@@ -110,7 +110,7 @@ export interface PlaidLinkProps {
                 | 'choose_device'
                 | 'requires_credentials'
                 | 'institution_not_found';
-        }
+        },
     ) => void;
 
     // A function that is called when the Link module has finished loading.
@@ -163,7 +163,7 @@ export interface PlaidLinkProps {
                 | 'SELECT_ACCOUNT'
                 | 'SELECT_INSTITUTION'
                 | null;
-        }
+        },
     ) => void;
 
     // Button Styles as an Object

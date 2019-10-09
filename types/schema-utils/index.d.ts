@@ -4,9 +4,6 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.2
 
-declare function validate(
-    schema: object | string | boolean,
-    options: any,
-    name: string): true;
+declare function validate(schema: object | string | boolean, options: any, name: string): true;
 
 export = validate;

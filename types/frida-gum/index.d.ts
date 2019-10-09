@@ -69,7 +69,9 @@ declare function recv(callback: MessageCallback): MessageRecvOperation;
  */
 declare function recv(type: string, callback: MessageCallback): MessageRecvOperation;
 
-interface MessageCallback { (message: any, data: ArrayBuffer | null): void; }
+interface MessageCallback {
+    (message: any, data: ArrayBuffer | null): void;
+}
 
 interface MessageRecvOperation {
     /**
@@ -233,7 +235,7 @@ declare namespace Script {
     function setGlobalAccessHandler(handler: GlobalAccessHandler | null): void;
 }
 
-type ScriptRuntime = "DUK" | "V8";
+type ScriptRuntime = 'DUK' | 'V8';
 
 interface GlobalAccessHandler {
     /**
@@ -575,7 +577,12 @@ declare namespace Memory {
      *                which gets translated into masks behind the scenes.
      * @param callbacks Object with callbacks.
      */
-    function scan(address: NativePointerValue, size: number | UInt64, pattern: string, callbacks: MemoryScanCallbacks): void;
+    function scan(
+        address: NativePointerValue,
+        size: number | UInt64,
+        pattern: string,
+        callbacks: MemoryScanCallbacks,
+    ): void;
 
     /**
      * Synchronous version of `scan()`.
@@ -800,22 +807,11 @@ declare class Backtracer {
     static FUZZY: Backtracer;
 }
 
-type Architecture =
-    | "ia32"
-    | "x64"
-    | "arm"
-    | "arm64"
-    | "mips"
-    ;
+type Architecture = 'ia32' | 'x64' | 'arm' | 'arm64' | 'mips';
 
-type Platform =
-    | "windows"
-    | "darwin"
-    | "linux"
-    | "qnx"
-    ;
+type Platform = 'windows' | 'darwin' | 'linux' | 'qnx';
 
-type CodeSigningPolicy = "optional" | "required";
+type CodeSigningPolicy = 'optional' | 'required';
 
 /**
  * Given as a string of the form: rwx, where rw- means “readable and writable”.
@@ -824,13 +820,7 @@ type PageProtection = string;
 
 type ThreadId = number;
 
-type ThreadState =
-    | "running"
-    | "stopped"
-    | "waiting"
-    | "uninterruptible"
-    | "halted"
-    ;
+type ThreadState = 'running' | 'stopped' | 'waiting' | 'uninterruptible' | 'halted';
 
 interface ThreadDetails {
     /**
@@ -937,28 +927,27 @@ interface ModuleSymbolDetails {
     address: NativePointer;
 }
 
-type ModuleImportType = "function" | "variable";
+type ModuleImportType = 'function' | 'variable';
 
-type ModuleExportType = "function" | "variable";
+type ModuleExportType = 'function' | 'variable';
 
 type ModuleSymbolType =
     // Common
-    | "unknown"
-    | "section"
+    | 'unknown'
+    | 'section'
 
     // Mach-O
-    | "undefined"
-    | "absolute"
-    | "prebound-undefined"
-    | "indirect"
+    | 'undefined'
+    | 'absolute'
+    | 'prebound-undefined'
+    | 'indirect'
 
     // ELF
-    | "object"
-    | "function"
-    | "file"
-    | "common"
-    | "tls"
-    ;
+    | 'object'
+    | 'function'
+    | 'file'
+    | 'common'
+    | 'tls';
 
 interface ModuleSymbolSectionDetails {
     /**
@@ -1096,16 +1085,15 @@ interface ExceptionDetails {
 }
 
 type ExceptionType =
-    | "abort"
-    | "access-violation"
-    | "guard-page"
-    | "illegal-instruction"
-    | "stack-overflow"
-    | "arithmetic"
-    | "breakpoint"
-    | "single-step"
-    | "system"
-    ;
+    | 'abort'
+    | 'access-violation'
+    | 'guard-page'
+    | 'illegal-instruction'
+    | 'stack-overflow'
+    | 'arithmetic'
+    | 'breakpoint'
+    | 'single-step'
+    | 'system';
 
 interface ExceptionMemoryDetails {
     /**
@@ -1119,14 +1107,14 @@ interface ExceptionMemoryDetails {
     address: NativePointer;
 }
 
-type MemoryOperation = "read" | "write" | "execute";
+type MemoryOperation = 'read' | 'write' | 'execute';
 
 interface EnumerateCallbacks<T> {
     onMatch: (item: T) => void | EnumerateAction;
     onComplete: () => void;
 }
 
-type EnumerateAction = "stop";
+type EnumerateAction = 'stop';
 
 interface MemoryScanCallbacks {
     /**
@@ -1501,7 +1489,12 @@ type NativePointerValue = NativePointer | ObjectWrapper;
 declare const NativeFunction: NativeFunctionConstructor;
 
 interface NativeFunctionConstructor {
-    new(address: NativePointerValue, retType: NativeType, argTypes: NativeType[], abiOrOptions?: NativeABI | NativeFunctionOptions): NativeFunction;
+    new (
+        address: NativePointerValue,
+        retType: NativeType,
+        argTypes: NativeType[],
+        abiOrOptions?: NativeABI | NativeFunctionOptions,
+    ): NativeFunction;
     readonly prototype: NativeFunction;
 }
 
@@ -1514,7 +1507,12 @@ interface NativeFunction extends NativePointer {
 declare const SystemFunction: SystemFunctionConstructor;
 
 interface SystemFunctionConstructor {
-    new(address: NativePointerValue, retType: NativeType, argTypes: NativeType[], abiOrOptions?: NativeABI | NativeFunctionOptions): SystemFunction;
+    new (
+        address: NativePointerValue,
+        retType: NativeType,
+        argTypes: NativeType[],
+        abiOrOptions?: NativeABI | NativeFunctionOptions,
+    ): SystemFunction;
     readonly prototype: SystemFunction;
 }
 
@@ -1548,17 +1546,7 @@ type NativeReturnValue = NativePointer | UInt64 | Int64 | number | boolean | any
 
 type NativeType = string | any[];
 
-type NativeABI =
-    | "default"
-    | "sysv"
-    | "stdcall"
-    | "thiscall"
-    | "fastcall"
-    | "mscdecl"
-    | "win64"
-    | "unix64"
-    | "vfp"
-    ;
+type NativeABI = 'default' | 'sysv' | 'stdcall' | 'thiscall' | 'fastcall' | 'mscdecl' | 'win64' | 'unix64' | 'vfp';
 
 interface NativeFunctionOptions {
     abi?: NativeABI;
@@ -1566,11 +1554,17 @@ interface NativeFunctionOptions {
     exceptions?: ExceptionsBehavior;
 }
 
-type SchedulingBehavior = "cooperative" | "exclusive";
+type SchedulingBehavior = 'cooperative' | 'exclusive';
 
-type ExceptionsBehavior = "steal" | "propagate";
+type ExceptionsBehavior = 'steal' | 'propagate';
 
-type CpuContext = PortableCpuContext | Ia32CpuContext | X64CpuContext | ArmCpuContext | Arm64CpuContext | MipsCpuContext;
+type CpuContext =
+    | PortableCpuContext
+    | Ia32CpuContext
+    | X64CpuContext
+    | ArmCpuContext
+    | Arm64CpuContext
+    | MipsCpuContext;
 
 interface PortableCpuContext {
     pc: NativePointer;
@@ -1972,27 +1966,11 @@ interface WindowsStreamOptions {
     autoClose?: boolean;
 }
 
-type AddressFamily =
-    | "unix"
-    | "ipv4"
-    | "ipv6"
-    ;
+type AddressFamily = 'unix' | 'ipv4' | 'ipv6';
 
-type SocketType =
-    | "tcp"
-    | "udp"
-    | "tcp6"
-    | "udp6"
-    | "unix:stream"
-    | "unix:dgram"
-    ;
+type SocketType = 'tcp' | 'udp' | 'tcp6' | 'udp6' | 'unix:stream' | 'unix:dgram';
 
-type UnixSocketType =
-    | "anonymous"
-    | "path"
-    | "abstract"
-    | "abstract-padded"
-    ;
+type UnixSocketType = 'anonymous' | 'path' | 'abstract' | 'abstract-padded';
 
 type SocketListenOptions = TcpListenOptions | UnixListenOptions;
 
@@ -2000,7 +1978,7 @@ interface TcpListenOptions extends BaseListenOptions {
     /**
      * Address family. Omit to listen on both ipv4 and ipv6 – if supported by the OS.
      */
-    family?: "ipv4" | "ipv6";
+    family?: 'ipv4' | 'ipv6';
 
     /**
      * Host or IP address to listen on. Omit to listen on all interfaces.
@@ -2017,7 +1995,7 @@ interface UnixListenOptions extends BaseListenOptions {
     /**
      * Address family.
      */
-    family: "unix";
+    family: 'unix';
 
     /**
      * Type of UNIX socket to listen on. Defaults to UnixSocketType.Path.
@@ -2043,7 +2021,7 @@ interface TcpConnectOptions {
     /**
      * Address family. Omit to determine based on the host specified.
      */
-    family?: "ipv4" | "ipv6";
+    family?: 'ipv4' | 'ipv6';
 
     /**
      * Host or IP address to connect to. Defaults to `localhost`.
@@ -2065,7 +2043,7 @@ interface UnixConnectOptions {
     /**
      * Address family.
      */
-    family: "unix";
+    family: 'unix';
 
     /**
      * Type of UNIX socket to connect to. Defaults to UnixSocketType.Path.
@@ -2208,11 +2186,7 @@ interface SqliteOpenOptions {
     flags?: SqliteOpenFlag[];
 }
 
-type SqliteOpenFlag =
-    | "readonly"
-    | "readwrite"
-    | "create"
-    ;
+type SqliteOpenFlag = 'readonly' | 'readwrite' | 'create';
 
 /**
  * Pre-compiled SQL statement.
@@ -2286,8 +2260,11 @@ declare namespace Interceptor {
      * @param data User data exposed to `NativeInvocationListenerCallbacks`
      *             through the `GumInvocationContext *`.
      */
-    function attach(target: NativePointerValue, callbacksOrProbe: InvocationListenerCallbacks | InstructionProbeCallback,
-        data?: NativePointerValue): InvocationListener;
+    function attach(
+        target: NativePointerValue,
+        callbacksOrProbe: InvocationListenerCallbacks | InstructionProbeCallback,
+        data?: NativePointerValue,
+    ): InvocationListener;
 
     /**
      * Detaches all previously attached listeners.
@@ -2305,8 +2282,7 @@ declare namespace Interceptor {
      *             `GumInvocationContext *`, obtained using
      *             `gum_interceptor_get_current_invocation()`.
      */
-    function replace(target: NativePointerValue, replacement: NativePointerValue,
-        data?: NativePointerValue): void;
+    function replace(target: NativePointerValue, replacement: NativePointerValue, data?: NativePointerValue): void;
 
     /**
      * Reverts the previously replaced function at `target`.
@@ -2485,8 +2461,11 @@ declare namespace Stalker {
      *                 thread is about to call the function at `address`.
      * @param data User data to be passed to `StalkerNativeCallProbeCallback`.
      */
-    function addCallProbe(address: NativePointerValue, callback: StalkerCallProbeCallback,
-        data?: NativePointerValue): StalkerCallProbeId;
+    function addCallProbe(
+        address: NativePointerValue,
+        callback: StalkerCallProbeCallback,
+        data?: NativePointerValue,
+    ): StalkerCallProbeId;
 
     /**
      * Removes a call probe added by `addCallProbe()`.
@@ -2638,39 +2617,40 @@ type StalkerNativeCallProbeCallback = NativePointer;
 
 type StalkerCallProbeId = number;
 
-type StalkerEventType =
-    | "call"
-    | "ret"
-    | "exec"
-    | "block"
-    | "compile"
-    ;
+type StalkerEventType = 'call' | 'ret' | 'exec' | 'block' | 'compile';
 
-type StalkerEventFull = StalkerCallEventFull | StalkerRetEventFull | StalkerExecEventFull |
-    StalkerBlockEventFull | StalkerCompileEventFull;
-type StalkerEventBare = StalkerCallEventBare | StalkerRetEventBare | StalkerExecEventBare |
-    StalkerBlockEventBare | StalkerCompileEventBare;
+type StalkerEventFull =
+    | StalkerCallEventFull
+    | StalkerRetEventFull
+    | StalkerExecEventFull
+    | StalkerBlockEventFull
+    | StalkerCompileEventFull;
+type StalkerEventBare =
+    | StalkerCallEventBare
+    | StalkerRetEventBare
+    | StalkerExecEventBare
+    | StalkerBlockEventBare
+    | StalkerCompileEventBare;
 
-type StalkerCallEventFull = [ "call", NativePointer | string, NativePointer | string, number ];
-type StalkerCallEventBare = [         NativePointer | string, NativePointer | string, number ];
+type StalkerCallEventFull = ['call', NativePointer | string, NativePointer | string, number];
+type StalkerCallEventBare = [NativePointer | string, NativePointer | string, number];
 
-type StalkerRetEventFull = [ "ret", NativePointer | string, NativePointer | string, number ];
-type StalkerRetEventBare = [        NativePointer | string, NativePointer | string, number ];
+type StalkerRetEventFull = ['ret', NativePointer | string, NativePointer | string, number];
+type StalkerRetEventBare = [NativePointer | string, NativePointer | string, number];
 
-type StalkerExecEventFull = [ "exec", NativePointer | string ];
-type StalkerExecEventBare = [         NativePointer | string ];
+type StalkerExecEventFull = ['exec', NativePointer | string];
+type StalkerExecEventBare = [NativePointer | string];
 
-type StalkerBlockEventFull = [ "block", NativePointer | string, NativePointer | string ];
-type StalkerBlockEventBare = [          NativePointer | string, NativePointer | string ];
+type StalkerBlockEventFull = ['block', NativePointer | string, NativePointer | string];
+type StalkerBlockEventBare = [NativePointer | string, NativePointer | string];
 
-type StalkerCompileEventFull = [ "compile", NativePointer | string, NativePointer | string ];
-type StalkerCompileEventBare = [            NativePointer | string, NativePointer | string ];
+type StalkerCompileEventFull = ['compile', NativePointer | string, NativePointer | string];
+type StalkerCompileEventBare = [NativePointer | string, NativePointer | string];
 
 type StalkerTransformCallback =
     | StalkerX86TransformCallback
     | StalkerArm64TransformCallback
-    | StalkerNativeTransformCallback
-    ;
+    | StalkerNativeTransformCallback;
 
 type StalkerX86TransformCallback = (iterator: StalkerX86Iterator) => void;
 
@@ -2752,7 +2732,7 @@ type ApiResolverType =
      * Example query: `"exports:*!open*"`
      * Which may resolve to: `"/usr/lib/libSystem.B.dylib!opendir$INODE64"`
      */
-    | "module"
+    | 'module'
 
     /**
      * Resolves Objective-C methods of classes currently loaded.
@@ -2764,8 +2744,7 @@ type ApiResolverType =
      * Example query: `"-[NSURL* *HTTP*]"`
      * Which may resolve to: `"-[NSURLRequest valueForHTTPHeaderField:]"`
      */
-    | "objc"
-    ;
+    | 'objc';
 
 declare class DebugSymbol {
     /**
@@ -2862,22 +2841,22 @@ declare class DebugSymbol {
  * through the constructor's second argument.
  */
 declare class CModule {
-  /**
-   * Creates a new C module by compiling the provided C source code to machine
-   * code, straight to memory.
-   *
-   * @param source C source code to compile.
-   * @param symbols Symbols to expose to the C module. Declare them as `extern`.
-   */
-  constructor(source: string, symbols?: CSymbols);
+    /**
+     * Creates a new C module by compiling the provided C source code to machine
+     * code, straight to memory.
+     *
+     * @param source C source code to compile.
+     * @param symbols Symbols to expose to the C module. Declare them as `extern`.
+     */
+    constructor(source: string, symbols?: CSymbols);
 
-  /**
-   * Eagerly unmaps the module from memory. Useful for short-lived modules
-   * when waiting for a future garbage collection isn't desirable.
-   */
-  dispose(): void;
+    /**
+     * Eagerly unmaps the module from memory. Useful for short-lived modules
+     * when waiting for a future garbage collection isn't desirable.
+     */
+    dispose(): void;
 
-  readonly [name: string]: any;
+    readonly [name: string]: any;
 }
 
 interface CSymbols {
@@ -2895,7 +2874,9 @@ declare class Instruction {
      *
      * @param target Memory location containing instruction to parse.
      */
-    static parse(target: NativePointerValue): Instruction | X86Instruction | ArmInstruction | Arm64Instruction | MipsInstruction;
+    static parse(
+        target: NativePointerValue,
+    ): Instruction | X86Instruction | ArmInstruction | Arm64Instruction | MipsInstruction;
 
     /**
      * Address (EIP) of this instruction.
@@ -3003,24 +2984,24 @@ declare class MipsInstruction extends Instruction {
 
 type X86Operand = X86RegOperand | X86ImmOperand | X86MemOperand;
 
-type X86OperandType = "reg" | "imm" | "mem";
+type X86OperandType = 'reg' | 'imm' | 'mem';
 
 interface X86BaseOperand {
     size: number;
 }
 
 interface X86RegOperand extends X86BaseOperand {
-    type: "reg";
+    type: 'reg';
     value: X86Register;
 }
 
 interface X86ImmOperand extends X86BaseOperand {
-    type: "imm";
+    type: 'imm';
     value: number | Int64;
 }
 
 interface X86MemOperand extends X86BaseOperand {
-    type: "mem";
+    type: 'mem';
     value: {
         segment?: X86Register;
         base?: X86Register;
@@ -3030,20 +3011,17 @@ interface X86MemOperand extends X86BaseOperand {
     };
 }
 
-type ArmOperand = ArmRegOperand | ArmImmOperand | ArmMemOperand |
-    ArmFpOperand | ArmCimmOperand | ArmPimmOperand | ArmSetendOperand |
-    ArmSysregOperand;
+type ArmOperand =
+    | ArmRegOperand
+    | ArmImmOperand
+    | ArmMemOperand
+    | ArmFpOperand
+    | ArmCimmOperand
+    | ArmPimmOperand
+    | ArmSetendOperand
+    | ArmSysregOperand;
 
-type ArmOperandType =
-    | "reg"
-    | "imm"
-    | "mem"
-    | "fp"
-    | "cimm"
-    | "pimm"
-    | "setend"
-    | "sysreg"
-    ;
+type ArmOperandType = 'reg' | 'imm' | 'mem' | 'fp' | 'cimm' | 'pimm' | 'setend' | 'sysreg';
 
 interface ArmBaseOperand {
     shift?: {
@@ -3055,17 +3033,17 @@ interface ArmBaseOperand {
 }
 
 interface ArmRegOperand extends ArmBaseOperand {
-    type: "reg";
+    type: 'reg';
     value: ArmRegister;
 }
 
 interface ArmImmOperand extends ArmBaseOperand {
-    type: "imm";
+    type: 'imm';
     value: number;
 }
 
 interface ArmMemOperand extends ArmBaseOperand {
-    type: "mem";
+    type: 'mem';
     value: {
         base?: ArmRegister;
         index?: ArmRegister;
@@ -3075,60 +3053,57 @@ interface ArmMemOperand extends ArmBaseOperand {
 }
 
 interface ArmFpOperand extends ArmBaseOperand {
-    type: "fp";
+    type: 'fp';
     value: number;
 }
 
 interface ArmCimmOperand extends ArmBaseOperand {
-    type: "cimm";
+    type: 'cimm';
     value: number;
 }
 
 interface ArmPimmOperand extends ArmBaseOperand {
-    type: "pimm";
+    type: 'pimm';
     value: number;
 }
 
 interface ArmSetendOperand extends ArmBaseOperand {
-    type: "setend";
+    type: 'setend';
     value: Endian;
 }
 
 interface ArmSysregOperand extends ArmBaseOperand {
-    type: "sysreg";
+    type: 'sysreg';
     value: ArmRegister;
 }
 
-type ArmShifter =
-    | "asr"
-    | "lsl"
-    | "lsr"
-    | "ror"
-    | "rrx"
-    | "asr-reg"
-    | "lsl-reg"
-    | "lsr-reg"
-    | "ror-reg"
-    | "rrx-reg"
-    ;
+type ArmShifter = 'asr' | 'lsl' | 'lsr' | 'ror' | 'rrx' | 'asr-reg' | 'lsl-reg' | 'lsr-reg' | 'ror-reg' | 'rrx-reg';
 
-type Arm64Operand = Arm64RegOperand | Arm64ImmOperand | Arm64MemOperand |
-    Arm64FpOperand | Arm64CimmOperand | Arm64RegMrsOperand | Arm64RegMsrOperand |
-    Arm64PstateOperand | Arm64SysOperand | Arm64PrefetchOperand | Arm64BarrierOperand;
+type Arm64Operand =
+    | Arm64RegOperand
+    | Arm64ImmOperand
+    | Arm64MemOperand
+    | Arm64FpOperand
+    | Arm64CimmOperand
+    | Arm64RegMrsOperand
+    | Arm64RegMsrOperand
+    | Arm64PstateOperand
+    | Arm64SysOperand
+    | Arm64PrefetchOperand
+    | Arm64BarrierOperand;
 
 type Arm64OperandType =
-    | "reg"
-    | "imm"
-    | "mem"
-    | "fp"
-    | "cimm"
-    | "reg-mrs"
-    | "reg-msr"
-    | "pstate"
-    | "sys"
-    | "prefetch"
-    | "barrier"
-    ;
+    | 'reg'
+    | 'imm'
+    | 'mem'
+    | 'fp'
+    | 'cimm'
+    | 'reg-mrs'
+    | 'reg-msr'
+    | 'pstate'
+    | 'sys'
+    | 'prefetch'
+    | 'barrier';
 
 interface Arm64BaseOperand {
     shift?: {
@@ -3141,17 +3116,17 @@ interface Arm64BaseOperand {
 }
 
 interface Arm64RegOperand extends Arm64BaseOperand {
-    type: "reg";
+    type: 'reg';
     value: Arm64Register;
 }
 
 interface Arm64ImmOperand extends Arm64BaseOperand {
-    type: "imm";
+    type: 'imm';
     value: Int64;
 }
 
 interface Arm64MemOperand extends Arm64BaseOperand {
-    type: "mem";
+    type: 'mem';
     value: {
         base?: Arm64Register;
         index?: Arm64Register;
@@ -3160,99 +3135,74 @@ interface Arm64MemOperand extends Arm64BaseOperand {
 }
 
 interface Arm64FpOperand extends Arm64BaseOperand {
-    type: "fp";
+    type: 'fp';
     value: number;
 }
 
 interface Arm64CimmOperand extends Arm64BaseOperand {
-    type: "cimm";
+    type: 'cimm';
     value: Int64;
 }
 
 interface Arm64RegMrsOperand extends Arm64BaseOperand {
-    type: "reg-mrs";
+    type: 'reg-mrs';
     value: Arm64Register;
 }
 
 interface Arm64RegMsrOperand extends Arm64BaseOperand {
-    type: "reg-msr";
+    type: 'reg-msr';
     value: Arm64Register;
 }
 
 interface Arm64PstateOperand extends Arm64BaseOperand {
-    type: "pstate";
+    type: 'pstate';
     value: number;
 }
 
 interface Arm64SysOperand extends Arm64BaseOperand {
-    type: "sys";
+    type: 'sys';
     value: number;
 }
 
 interface Arm64PrefetchOperand extends Arm64BaseOperand {
-    type: "prefetch";
+    type: 'prefetch';
     value: number;
 }
 
 interface Arm64BarrierOperand extends Arm64BaseOperand {
-    type: "barrier";
+    type: 'barrier';
     value: number;
 }
 
-type Arm64Shifter =
-    | "lsl"
-    | "msl"
-    | "lsr"
-    | "asr"
-    | "ror"
-    ;
+type Arm64Shifter = 'lsl' | 'msl' | 'lsr' | 'asr' | 'ror';
 
-type Arm64Extender =
-    | "uxtb"
-    | "uxth"
-    | "uxtw"
-    | "uxtx"
-    | "sxtb"
-    | "sxth"
-    | "sxtw"
-    | "sxtx"
-    ;
+type Arm64Extender = 'uxtb' | 'uxth' | 'uxtw' | 'uxtx' | 'sxtb' | 'sxth' | 'sxtw' | 'sxtx';
 
-type Arm64Vas =
-    | "8b"
-    | "16b"
-    | "4h"
-    | "8h"
-    | "2s"
-    | "4s"
-    | "1d"
-    | "2d"
-    | "1q"
-    ;
+type Arm64Vas = '8b' | '16b' | '4h' | '8h' | '2s' | '4s' | '1d' | '2d' | '1q';
 
 type MipsOperand = MipsRegOperand | MipsImmOperand | MipsMemOperand;
 
-type MipsOperandType = "reg" | "imm" | "mem";
+type MipsOperandType = 'reg' | 'imm' | 'mem';
 
 interface MipsRegOperand {
-    type: "reg";
+    type: 'reg';
     value: MipsRegister;
 }
 
 interface MipsImmOperand {
-    type: "imm";
+    type: 'imm';
     value: number;
 }
 
 interface MipsMemOperand {
-    type: "mem";
+    type: 'mem';
     value: {
         base?: MipsRegister;
         disp: number;
     };
 }
 
-type Endian = "be" | "le";
+type Endian = 'be' | 'le';
 
 declare namespace Kernel {
     /**
@@ -3408,14 +3358,14 @@ declare namespace ObjC {
      * Note the underscore after the method name.
      */
     const classes: {
-        [name: string]: ObjC.Object
+        [name: string]: ObjC.Object;
     };
 
     /**
      * Dynamically generated bindings for each of the currently registered protocols.
      */
     const protocols: {
-        [name: string]: Protocol
+        [name: string]: Protocol;
     };
 
     /**
@@ -3551,7 +3501,7 @@ declare namespace ObjC {
     /**
      * What kind of object an ObjC.Object represents.
      */
-    type ObjectKind = "instance" | "class" | "meta-class";
+    type ObjectKind = 'instance' | 'class' | 'meta-class';
 
     /**
      * Dynamically generated language binding for any Objective-C protocol.
@@ -3570,7 +3520,7 @@ declare namespace ObjC {
          * Protocols that this protocol conforms to.
          */
         protocols: {
-            [name: string]: Protocol
+            [name: string]: Protocol;
         };
 
         /**
@@ -3684,7 +3634,10 @@ declare namespace ObjC {
      * @param options Options customizing the enumeration.
      * @param callbacks Object with callbacks.
      */
-    function enumerateLoadedClasses(options: EnumerateLoadedClassesOptions, callbacks: EnumerateLoadedClassesCallbacks): void;
+    function enumerateLoadedClasses(
+        options: EnumerateLoadedClassesOptions,
+        callbacks: EnumerateLoadedClassesCallbacks,
+    ): void;
 
     /**
      * Synchronous version of `enumerateLoadedClasses()`.
@@ -4806,7 +4759,13 @@ declare class X86Writer {
     /**
      * Puts a MOV instruction.
      */
-    putMovRegBaseIndexScaleOffsetPtr(dstReg: X86Register, baseReg: X86Register, indexReg: X86Register, scale: number, offset: number | Int64 | UInt64): void;
+    putMovRegBaseIndexScaleOffsetPtr(
+        dstReg: X86Register,
+        baseReg: X86Register,
+        indexReg: X86Register,
+        scale: number,
+        offset: number | Int64 | UInt64,
+    ): void;
 
     /**
      * Puts a MOV instruction.
@@ -5133,76 +5092,74 @@ declare class X86Relocator {
 }
 
 type X86Register =
-    | "xax"
-    | "xcx"
-    | "xdx"
-    | "xbx"
-    | "xsp"
-    | "xbp"
-    | "xsi"
-    | "xdi"
-    | "eax"
-    | "ecx"
-    | "edx"
-    | "ebx"
-    | "esp"
-    | "ebp"
-    | "esi"
-    | "edi"
-    | "rax"
-    | "rcx"
-    | "rdx"
-    | "rbx"
-    | "rsp"
-    | "rbp"
-    | "rsi"
-    | "rdi"
-    | "r8"
-    | "r9"
-    | "r10"
-    | "r11"
-    | "r12"
-    | "r13"
-    | "r14"
-    | "r15"
-    | "r8d"
-    | "r9d"
-    | "r10d"
-    | "r11d"
-    | "r12d"
-    | "r13d"
-    | "r14d"
-    | "r15d"
-    | "xip"
-    | "eip"
-    | "rip"
-    ;
+    | 'xax'
+    | 'xcx'
+    | 'xdx'
+    | 'xbx'
+    | 'xsp'
+    | 'xbp'
+    | 'xsi'
+    | 'xdi'
+    | 'eax'
+    | 'ecx'
+    | 'edx'
+    | 'ebx'
+    | 'esp'
+    | 'ebp'
+    | 'esi'
+    | 'edi'
+    | 'rax'
+    | 'rcx'
+    | 'rdx'
+    | 'rbx'
+    | 'rsp'
+    | 'rbp'
+    | 'rsi'
+    | 'rdi'
+    | 'r8'
+    | 'r9'
+    | 'r10'
+    | 'r11'
+    | 'r12'
+    | 'r13'
+    | 'r14'
+    | 'r15'
+    | 'r8d'
+    | 'r9d'
+    | 'r10d'
+    | 'r11d'
+    | 'r12d'
+    | 'r13d'
+    | 'r14d'
+    | 'r15d'
+    | 'xip'
+    | 'eip'
+    | 'rip';
 
 type X86InstructionId =
-    | "jo"
-    | "jno"
-    | "jb"
-    | "jae"
-    | "je"
-    | "jne"
-    | "jbe"
-    | "ja"
-    | "js"
-    | "jns"
-    | "jp"
-    | "jnp"
-    | "jl"
-    | "jge"
-    | "jle"
-    | "jg"
-    | "jcxz"
-    | "jecxz"
-    | "jrcxz"
-    ;
+    | 'jo'
+    | 'jno'
+    | 'jb'
+    | 'jae'
+    | 'je'
+    | 'jne'
+    | 'jbe'
+    | 'ja'
+    | 'js'
+    | 'jns'
+    | 'jp'
+    | 'jnp'
+    | 'jl'
+    | 'jge'
+    | 'jle'
+    | 'jg'
+    | 'jcxz'
+    | 'jecxz'
+    | 'jrcxz';
 
-type X86BranchHint = "no-hint" | "likely" | "unlikely";
+type X86BranchHint = 'no-hint' | 'likely' | 'unlikely';
 
-type X86PointerTarget = "byte" | "dword" | "qword";
+type X86PointerTarget = 'byte' | 'dword' | 'qword';
 
 /**
  * Generates machine code for arm.
@@ -5801,50 +5758,48 @@ declare class ThumbRelocator {
 }
 
 type ArmRegister =
-    | "r0"
-    | "r1"
-    | "r2"
-    | "r3"
-    | "r4"
-    | "r5"
-    | "r6"
-    | "r7"
-    | "r8"
-    | "r9"
-    | "r10"
-    | "r11"
-    | "r12"
-    | "r13"
-    | "r14"
-    | "r15"
-    | "sp"
-    | "lr"
-    | "sb"
-    | "sl"
-    | "fp"
-    | "ip"
-    | "pc"
-    ;
+    | 'r0'
+    | 'r1'
+    | 'r2'
+    | 'r3'
+    | 'r4'
+    | 'r5'
+    | 'r6'
+    | 'r7'
+    | 'r8'
+    | 'r9'
+    | 'r10'
+    | 'r11'
+    | 'r12'
+    | 'r13'
+    | 'r14'
+    | 'r15'
+    | 'sp'
+    | 'lr'
+    | 'sb'
+    | 'sl'
+    | 'fp'
+    | 'ip'
+    | 'pc';
 
-type ArmSystemRegister = "apsr-nzcvq";
+type ArmSystemRegister = 'apsr-nzcvq';
 
 type ArmConditionCode =
-    | "eq"
-    | "ne"
-    | "hs"
-    | "lo"
-    | "mi"
-    | "pl"
-    | "vs"
-    | "vc"
-    | "hi"
-    | "ls"
-    | "ge"
-    | "lt"
-    | "gt"
-    | "le"
-    | "al"
-    ;
+    | 'eq'
+    | 'ne'
+    | 'hs'
+    | 'lo'
+    | 'mi'
+    | 'pl'
+    | 'vs'
+    | 'vc'
+    | 'hi'
+    | 'ls'
+    | 'ge'
+    | 'lt'
+    | 'gt'
+    | 'le'
+    | 'al';
 
 /**
  * Generates machine code for arm64.
@@ -6066,12 +6021,24 @@ declare class Arm64Writer {
     /**
      * Puts an LDP instruction.
      */
-    putLdpRegRegRegOffset(regA: Arm64Register, regB: Arm64Register, regSrc: Arm64Register, srcOffset: number | Int64 | UInt64, mode: Arm64IndexMode): void;
+    putLdpRegRegRegOffset(
+        regA: Arm64Register,
+        regB: Arm64Register,
+        regSrc: Arm64Register,
+        srcOffset: number | Int64 | UInt64,
+        mode: Arm64IndexMode,
+    ): void;
 
     /**
      * Puts a STP instruction.
      */
-    putStpRegRegRegOffset(regA: Arm64Register, regB: Arm64Register, regDst: Arm64Register, dstOffset: number | Int64 | UInt64, mode: Arm64IndexMode): void;
+    putStpRegRegRegOffset(
+        regA: Arm64Register,
+        regB: Arm64Register,
+        regDst: Arm64Register,
+        dstOffset: number | Int64 | UInt64,
+        mode: Arm64IndexMode,
+    ): void;
 
     /**
      * Puts a MOV instruction.
@@ -6237,195 +6204,193 @@ declare class Arm64Relocator {
 }
 
 type Arm64Register =
-    | "x0"
-    | "x1"
-    | "x2"
-    | "x3"
-    | "x4"
-    | "x5"
-    | "x6"
-    | "x7"
-    | "x8"
-    | "x9"
-    | "x10"
-    | "x11"
-    | "x12"
-    | "x13"
-    | "x14"
-    | "x15"
-    | "x16"
-    | "x17"
-    | "x18"
-    | "x19"
-    | "x20"
-    | "x21"
-    | "x22"
-    | "x23"
-    | "x24"
-    | "x25"
-    | "x26"
-    | "x27"
-    | "x28"
-    | "x29"
-    | "x30"
-    | "w0"
-    | "w1"
-    | "w2"
-    | "w3"
-    | "w4"
-    | "w5"
-    | "w6"
-    | "w7"
-    | "w8"
-    | "w9"
-    | "w10"
-    | "w11"
-    | "w12"
-    | "w13"
-    | "w14"
-    | "w15"
-    | "w16"
-    | "w17"
-    | "w18"
-    | "w19"
-    | "w20"
-    | "w21"
-    | "w22"
-    | "w23"
-    | "w24"
-    | "w25"
-    | "w26"
-    | "w27"
-    | "w28"
-    | "w29"
-    | "w30"
-    | "sp"
-    | "lr"
-    | "fp"
-    | "wsp"
-    | "wzr"
-    | "xzr"
-    | "nzcv"
-    | "ip0"
-    | "ip1"
-    | "s0"
-    | "s1"
-    | "s2"
-    | "s3"
-    | "s4"
-    | "s5"
-    | "s6"
-    | "s7"
-    | "s8"
-    | "s9"
-    | "s10"
-    | "s11"
-    | "s12"
-    | "s13"
-    | "s14"
-    | "s15"
-    | "s16"
-    | "s17"
-    | "s18"
-    | "s19"
-    | "s20"
-    | "s21"
-    | "s22"
-    | "s23"
-    | "s24"
-    | "s25"
-    | "s26"
-    | "s27"
-    | "s28"
-    | "s29"
-    | "s30"
-    | "s31"
-    | "d0"
-    | "d1"
-    | "d2"
-    | "d3"
-    | "d4"
-    | "d5"
-    | "d6"
-    | "d7"
-    | "d8"
-    | "d9"
-    | "d10"
-    | "d11"
-    | "d12"
-    | "d13"
-    | "d14"
-    | "d15"
-    | "d16"
-    | "d17"
-    | "d18"
-    | "d19"
-    | "d20"
-    | "d21"
-    | "d22"
-    | "d23"
-    | "d24"
-    | "d25"
-    | "d26"
-    | "d27"
-    | "d28"
-    | "d29"
-    | "d30"
-    | "d31"
-    | "q0"
-    | "q1"
-    | "q2"
-    | "q3"
-    | "q4"
-    | "q5"
-    | "q6"
-    | "q7"
-    | "q8"
-    | "q9"
-    | "q10"
-    | "q11"
-    | "q12"
-    | "q13"
-    | "q14"
-    | "q15"
-    | "q16"
-    | "q17"
-    | "q18"
-    | "q19"
-    | "q20"
-    | "q21"
-    | "q22"
-    | "q23"
-    | "q24"
-    | "q25"
-    | "q26"
-    | "q27"
-    | "q28"
-    | "q29"
-    | "q30"
-    | "q31"
-    ;
+    | 'x0'
+    | 'x1'
+    | 'x2'
+    | 'x3'
+    | 'x4'
+    | 'x5'
+    | 'x6'
+    | 'x7'
+    | 'x8'
+    | 'x9'
+    | 'x10'
+    | 'x11'
+    | 'x12'
+    | 'x13'
+    | 'x14'
+    | 'x15'
+    | 'x16'
+    | 'x17'
+    | 'x18'
+    | 'x19'
+    | 'x20'
+    | 'x21'
+    | 'x22'
+    | 'x23'
+    | 'x24'
+    | 'x25'
+    | 'x26'
+    | 'x27'
+    | 'x28'
+    | 'x29'
+    | 'x30'
+    | 'w0'
+    | 'w1'
+    | 'w2'
+    | 'w3'
+    | 'w4'
+    | 'w5'
+    | 'w6'
+    | 'w7'
+    | 'w8'
+    | 'w9'
+    | 'w10'
+    | 'w11'
+    | 'w12'
+    | 'w13'
+    | 'w14'
+    | 'w15'
+    | 'w16'
+    | 'w17'
+    | 'w18'
+    | 'w19'
+    | 'w20'
+    | 'w21'
+    | 'w22'
+    | 'w23'
+    | 'w24'
+    | 'w25'
+    | 'w26'
+    | 'w27'
+    | 'w28'
+    | 'w29'
+    | 'w30'
+    | 'sp'
+    | 'lr'
+    | 'fp'
+    | 'wsp'
+    | 'wzr'
+    | 'xzr'
+    | 'nzcv'
+    | 'ip0'
+    | 'ip1'
+    | 's0'
+    | 's1'
+    | 's2'
+    | 's3'
+    | 's4'
+    | 's5'
+    | 's6'
+    | 's7'
+    | 's8'
+    | 's9'
+    | 's10'
+    | 's11'
+    | 's12'
+    | 's13'
+    | 's14'
+    | 's15'
+    | 's16'
+    | 's17'
+    | 's18'
+    | 's19'
+    | 's20'
+    | 's21'
+    | 's22'
+    | 's23'
+    | 's24'
+    | 's25'
+    | 's26'
+    | 's27'
+    | 's28'
+    | 's29'
+    | 's30'
+    | 's31'
+    | 'd0'
+    | 'd1'
+    | 'd2'
+    | 'd3'
+    | 'd4'
+    | 'd5'
+    | 'd6'
+    | 'd7'
+    | 'd8'
+    | 'd9'
+    | 'd10'
+    | 'd11'
+    | 'd12'
+    | 'd13'
+    | 'd14'
+    | 'd15'
+    | 'd16'
+    | 'd17'
+    | 'd18'
+    | 'd19'
+    | 'd20'
+    | 'd21'
+    | 'd22'
+    | 'd23'
+    | 'd24'
+    | 'd25'
+    | 'd26'
+    | 'd27'
+    | 'd28'
+    | 'd29'
+    | 'd30'
+    | 'd31'
+    | 'q0'
+    | 'q1'
+    | 'q2'
+    | 'q3'
+    | 'q4'
+    | 'q5'
+    | 'q6'
+    | 'q7'
+    | 'q8'
+    | 'q9'
+    | 'q10'
+    | 'q11'
+    | 'q12'
+    | 'q13'
+    | 'q14'
+    | 'q15'
+    | 'q16'
+    | 'q17'
+    | 'q18'
+    | 'q19'
+    | 'q20'
+    | 'q21'
+    | 'q22'
+    | 'q23'
+    | 'q24'
+    | 'q25'
+    | 'q26'
+    | 'q27'
+    | 'q28'
+    | 'q29'
+    | 'q30'
+    | 'q31';
 
 type Arm64ConditionCode =
-    | "eq"
-    | "ne"
-    | "hs"
-    | "lo"
-    | "mi"
-    | "pl"
-    | "vs"
-    | "vc"
-    | "hi"
-    | "ls"
-    | "ge"
-    | "lt"
-    | "gt"
-    | "le"
-    | "al"
-    | "nv"
-    ;
+    | 'eq'
+    | 'ne'
+    | 'hs'
+    | 'lo'
+    | 'mi'
+    | 'pl'
+    | 'vs'
+    | 'vc'
+    | 'hi'
+    | 'ls'
+    | 'ge'
+    | 'lt'
+    | 'gt'
+    | 'le'
+    | 'al'
+    | 'nv';
 
-type Arm64IndexMode = "post-adjust" | "signed-offset" | "pre-adjust";
+type Arm64IndexMode = 'post-adjust' | 'signed-offset' | 'pre-adjust';
 
 /**
  * Generates machine code for mips.
@@ -6740,71 +6705,70 @@ declare class MipsRelocator {
 }
 
 type MipsRegister =
-    | "v0"
-    | "v1"
-    | "a0"
-    | "a1"
-    | "a2"
-    | "a3"
-    | "t0"
-    | "t1"
-    | "t2"
-    | "t3"
-    | "t4"
-    | "t5"
-    | "t6"
-    | "t7"
-    | "s0"
-    | "s1"
-    | "s2"
-    | "s3"
-    | "s4"
-    | "s5"
-    | "s6"
-    | "s7"
-    | "t8"
-    | "t9"
-    | "k0"
-    | "k1"
-    | "gp"
-    | "sp"
-    | "fp"
-    | "s8"
-    | "ra"
-    | "hi"
-    | "lo"
-    | "zero"
-    | "at"
-    | "0"
-    | "1"
-    | "2"
-    | "3"
-    | "4"
-    | "5"
-    | "6"
-    | "7"
-    | "8"
-    | "9"
-    | "10"
-    | "11"
-    | "12"
-    | "13"
-    | "14"
-    | "15"
-    | "16"
-    | "17"
-    | "18"
-    | "19"
-    | "20"
-    | "21"
-    | "22"
-    | "23"
-    | "24"
-    | "25"
-    | "26"
-    | "27"
-    | "28"
-    | "29"
-    | "30"
-    | "31"
-    ;
+    | 'v0'
+    | 'v1'
+    | 'a0'
+    | 'a1'
+    | 'a2'
+    | 'a3'
+    | 't0'
+    | 't1'
+    | 't2'
+    | 't3'
+    | 't4'
+    | 't5'
+    | 't6'
+    | 't7'
+    | 's0'
+    | 's1'
+    | 's2'
+    | 's3'
+    | 's4'
+    | 's5'
+    | 's6'
+    | 's7'
+    | 't8'
+    | 't9'
+    | 'k0'
+    | 'k1'
+    | 'gp'
+    | 'sp'
+    | 'fp'
+    | 's8'
+    | 'ra'
+    | 'hi'
+    | 'lo'
+    | 'zero'
+    | 'at'
+    | '0'
+    | '1'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
+    | '16'
+    | '17'
+    | '18'
+    | '19'
+    | '20'
+    | '21'
+    | '22'
+    | '23'
+    | '24'
+    | '25'
+    | '26'
+    | '27'
+    | '28'
+    | '29'
+    | '30'
+    | '31';

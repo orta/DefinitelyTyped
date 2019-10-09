@@ -12,9 +12,9 @@
 
 /// <reference types="node" />
 
-import * as http from "http";
-import { NextConfig } from "./next-config";
-import { UrlLike, DefaultQuery } from "./router";
+import * as http from 'http';
+import { NextConfig } from './next-config';
+import { UrlLike, DefaultQuery } from './router';
 
 declare namespace next {
     interface RenderOptions {
@@ -44,7 +44,11 @@ declare namespace next {
     interface ServerRouter {
         routes: ServerRoute[];
         add(route: ServerRoute): void;
-        match(req: http.IncomingMessage, res: http.ServerResponse, parsedUrl: UrlLike): (() => Promise<void>) | undefined;
+        match(
+            req: http.IncomingMessage,
+            res: http.ServerResponse,
+            parsedUrl: UrlLike,
+        ): (() => Promise<void>) | undefined;
     }
 
     /**
@@ -60,15 +64,11 @@ declare namespace next {
         renderOpts: RenderOptions;
 
         currentPhase(): string;
-        handleRequest(
-            req: http.IncomingMessage,
-            res: http.ServerResponse,
-            parsedUrl?: UrlLike
-        ): Promise<void>;
+        handleRequest(req: http.IncomingMessage, res: http.ServerResponse, parsedUrl?: UrlLike): Promise<void>;
         getRequestHandler(): (
             req: http.IncomingMessage,
             res: http.ServerResponse,
-            parsedUrl?: UrlLike
+            parsedUrl?: UrlLike,
         ) => Promise<void>;
 
         setAssetPrefix(prefix: string): void;
@@ -83,39 +83,31 @@ declare namespace next {
             res: http.ServerResponse,
             pathname: string,
             query?: DefaultQuery,
-            parsedUrl?: UrlLike
+            parsedUrl?: UrlLike,
         ): Promise<void>;
         renderToHTML(
             req: http.IncomingMessage,
             res: http.ServerResponse,
             pathname: string,
-            query?: DefaultQuery
+            query?: DefaultQuery,
         ): Promise<string>;
         renderError(
             err: any,
             req: http.IncomingMessage,
             res: http.ServerResponse,
             pathname: string,
-            query?: DefaultQuery
+            query?: DefaultQuery,
         ): Promise<void>;
         renderErrorToHTML(
             err: any,
             req: http.IncomingMessage,
             res: http.ServerResponse,
             pathname: string,
-            query?: DefaultQuery
+            query?: DefaultQuery,
         ): Promise<string>;
-        render404(
-            req: http.IncomingMessage,
-            res: http.ServerResponse,
-            parsedUrl?: UrlLike
-        ): Promise<void>;
+        render404(req: http.IncomingMessage, res: http.ServerResponse, parsedUrl?: UrlLike): Promise<void>;
 
-        serveStatic(
-            req: http.IncomingMessage,
-            res: http.ServerResponse,
-            path: string
-        ): Promise<void>;
+        serveStatic(req: http.IncomingMessage, res: http.ServerResponse, path: string): Promise<void>;
         isServeableUrl(path: string): boolean;
         readBuildId(): string;
     }

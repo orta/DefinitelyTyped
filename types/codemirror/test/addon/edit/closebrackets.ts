@@ -1,10 +1,7 @@
-
-
-
 var myCodeMirror: CodeMirror.Editor = CodeMirror(document.body, {
-    autoCloseBrackets: "()[]{}''\"\""
+    autoCloseBrackets: '()[]{}\'\'""',
 });
 
 var myCodeMirror2: CodeMirror.Editor = CodeMirror(document.body, {
-    autoCloseBrackets: true
+    autoCloseBrackets: true,
 });

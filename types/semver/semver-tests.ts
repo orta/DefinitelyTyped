@@ -1,4 +1,4 @@
-import * as semver from "semver";
+import * as semver from 'semver';
 
 let bool: boolean;
 let num: number;
@@ -21,8 +21,8 @@ const versions: string[] = [];
 const loose = true;
 let sem: semver.SemVer | null = new semver.SemVer(str, {});
 
-sem = new semver.SemVer(str, {includePrerelease: false});
-sem = new semver.SemVer(str, {loose: true});
+sem = new semver.SemVer(str, { includePrerelease: false });
+sem = new semver.SemVer(str, { loose: true });
 
 sem = semver.parse(str);
 strn = semver.valid(str);
@@ -30,14 +30,14 @@ strn = semver.clean(str);
 
 strn = semver.valid(str, loose);
 strn = semver.clean(str, loose);
-strn = semver.inc(str, "major", loose);
-strn = semver.inc(str, "premajor", loose);
-strn = semver.inc(str, "minor", loose);
-strn = semver.inc(str, "preminor", loose);
-strn = semver.inc(str, "patch", loose);
-strn = semver.inc(str, "prepatch", loose);
-strn = semver.inc(str, "prerelease", loose);
-strn = semver.inc(str, "prerelease", loose, "alpha");
+strn = semver.inc(str, 'major', loose);
+strn = semver.inc(str, 'premajor', loose);
+strn = semver.inc(str, 'minor', loose);
+strn = semver.inc(str, 'preminor', loose);
+strn = semver.inc(str, 'patch', loose);
+strn = semver.inc(str, 'prepatch', loose);
+strn = semver.inc(str, 'prerelease', loose);
+strn = semver.inc(str, 'prerelease', loose, 'alpha');
 strn = semver.inc(str, 'prerelease', 'beta');
 num = semver.major(str, loose);
 num = semver.minor(str, loose);
@@ -92,14 +92,14 @@ ver.prerelease = strNumArr;
 comparatorResult = ver.compare(ver);
 comparatorResult = ver.compareMain(ver);
 comparatorResult = ver.comparePre(ver);
-ver = ver.inc("major");
-ver = ver.inc("premajor");
-ver = ver.inc("minor");
-ver = ver.inc("preminor");
-ver = ver.inc("patch");
-ver = ver.inc("prepatch");
-ver = ver.inc("prerelease");
-ver = ver.inc("prerelease", "alpha");
+ver = ver.inc('major');
+ver = ver.inc('premajor');
+ver = ver.inc('minor');
+ver = ver.inc('preminor');
+ver = ver.inc('patch');
+ver = ver.inc('prepatch');
+ver = ver.inc('prerelease');
+ver = ver.inc('prerelease', 'alpha');
 
 const comp = new semver.Comparator(str, bool);
 str = comp.toString();

@@ -1,5 +1,5 @@
 import hash = require('object-hash');
-import stream = require('stream')
+import stream = require('stream');
 
 var hashed: string;
 
@@ -18,10 +18,10 @@ hash.writeToStream(obj, passThroughStream);
 hashed = passThroughStream.read().toString();
 
 var options = {
-	algorithm: 'md5',
-	encoding: 'utf8',
-	excludeValues: true,
-	unorderedArrays: true
+    algorithm: 'md5',
+    encoding: 'utf8',
+    excludeValues: true,
+    unorderedArrays: true,
 };
 
 hashed = hash(obj, options);

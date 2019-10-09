@@ -83,18 +83,10 @@ export interface DecodeOptions {
     complete?: boolean;
     json?: boolean;
 }
-export type VerifyErrors =
-    | JsonWebTokenError
-    | NotBeforeError
-    | TokenExpiredError;
-export type VerifyCallback = (
-    err: VerifyErrors,
-    decoded: object | string,
-) => void;
+export type VerifyErrors = JsonWebTokenError | NotBeforeError | TokenExpiredError;
+export type VerifyCallback = (err: VerifyErrors, decoded: object | string) => void;
 
-export type SignCallback = (
-    err: Error, encoded: string
-) => void;
+export type SignCallback = (err: Error, encoded: string) => void;
 
 export interface JwtHeader {
     alg: string;
@@ -105,20 +97,11 @@ export interface JwtHeader {
     x5t?: string;
 }
 
-export type SigningKeyCallback = (
-    err: any,
-    signingKey?: Secret,
-) => void;
+export type SigningKeyCallback = (err: any, signingKey?: Secret) => void;
 
-export type GetPublicKeyOrSecret = (
-    header: JwtHeader,
-    callback: SigningKeyCallback
-) => void;
+export type GetPublicKeyOrSecret = (header: JwtHeader, callback: SigningKeyCallback) => void;
 
-export type Secret =
-    | string
-    | Buffer
-    | { key: string | Buffer; passphrase: string };
+export type Secret = string | Buffer | { key: string | Buffer; passphrase: string };
 
 /**
  * Synchronously sign the given payload into a JSON Web Token string
@@ -127,11 +110,7 @@ export type Secret =
  * [options] - Options for the signature
  * returns - The JSON Web Token string
  */
-export function sign(
-    payload: string | Buffer | object,
-    secretOrPrivateKey: Secret,
-    options?: SignOptions,
-): string;
+export function sign(payload: string | Buffer | object, secretOrPrivateKey: Secret, options?: SignOptions): string;
 
 /**
  * Sign the given payload into a JSON Web Token string
@@ -140,11 +119,7 @@ export function sign(
  * [options] - Options for the signature
  * callback - Callback to get the encoded token on
  */
-export function sign(
-    payload: string | Buffer | object,
-    secretOrPrivateKey: Secret,
-    callback: SignCallback,
-): void;
+export function sign(payload: string | Buffer | object, secretOrPrivateKey: Secret, callback: SignCallback): void;
 export function sign(
     payload: string | Buffer | object,
     secretOrPrivateKey: Secret,
@@ -159,11 +134,7 @@ export function sign(
  * [options] - Options for the verification
  * returns - The decoded token.
  */
-export function verify(
-    token: string,
-    secretOrPublicKey: string | Buffer,
-    options?: VerifyOptions,
-): object | string;
+export function verify(token: string, secretOrPublicKey: string | Buffer, options?: VerifyOptions): object | string;
 
 /**
  * Asynchronously verify given token using a secret or a public key to get a decoded token
@@ -192,7 +163,4 @@ export function verify(
  * [options] - Options for decoding
  * returns - The decoded Token
  */
-export function decode(
-    token: string,
-    options?: DecodeOptions,
-): null | { [key: string]: any } | string;
+export function decode(token: string, options?: DecodeOptions): null | { [key: string]: any } | string;

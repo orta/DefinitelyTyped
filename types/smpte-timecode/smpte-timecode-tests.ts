@@ -72,15 +72,15 @@ Timecode('01:02:03;04', 59.94).toString('field');
 t = Timecode('01:23:45;06');
 t.add(60).toString();
 Timecode('23:59:40;00')
-  .add(Timecode('00:00:21;00'))
-  .toString();
+    .add(Timecode('00:00:21;00'))
+    .toString();
 
 t = Timecode('01:23:45;06');
 t.subtract(60).toString();
 
 Timecode('01:23:45;06')
-  .add('01:23:13;01')
-  .toString();
+    .add('01:23:13;01')
+    .toString();
 
 t = Timecode('00:01:15;00');
 t2 = Timecode('00:01:15;00');

@@ -1,4 +1,4 @@
-import * as Spectrogram from "spectrogram";
+import * as Spectrogram from 'spectrogram';
 
 // XHR
 const canvas1 = document.createElement('canvas');
@@ -13,7 +13,7 @@ request.open('GET', 'audio.mp3', true);
 request.responseType = 'arraybuffer';
 
 request.onload = () => {
-    audioContext1.decodeAudioData(request.response, (buffer) => {
+    audioContext1.decodeAudioData(request.response, buffer => {
         spectro1.connectSource(buffer, audioContext1);
         spectro1.start();
     });
@@ -28,7 +28,7 @@ const spectro2 = new Spectrogram(canvas2, {
         width: 1280,
         height: 720,
     },
-    colors: (steps) => {
+    colors: steps => {
         const frequency = Math.PI / steps;
         const amplitude = 127;
         const center = 128;
@@ -40,22 +40,22 @@ const spectro2 = new Spectrogram(canvas2, {
         }
 
         for (let i = 0; i < steps; i++) {
-            const v = (Math.sin((frequency * i) + slice) * amplitude + center) >> 0;
+            const v = (Math.sin(frequency * i + slice) * amplitude + center) >> 0;
 
             colors.push(toRGBString(v));
         }
 
         return colors;
-    }
+    },
 });
 
 const audioContext2 = new AudioContext();
 navigator.getUserMedia(
     {
         video: false,
-        audio: true
+        audio: true,
     },
-    (stream) => {
+    stream => {
         const input = audioContext2.createMediaStreamSource(stream);
         const analyser = audioContext2.createAnalyser();
 
@@ -67,7 +67,7 @@ navigator.getUserMedia(
         spectro2.connectSource(analyser, audioContext2);
         spectro2.start();
     },
-    (error) => {
+    error => {
         spectro2.stop();
     },
 );

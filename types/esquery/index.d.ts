@@ -9,20 +9,28 @@ export as namespace esquery;
 
 export = query;
 
-interface Atom { type: string; }
+interface Atom {
+    type: string;
+}
 
 interface Literal extends Atom {
     type: 'literal';
     value: string | number;
 }
-interface StringLiteral extends Literal { value: string; }
-interface NumericLiteral extends Literal { value: number; }
+interface StringLiteral extends Literal {
+    value: string;
+}
+interface NumericLiteral extends Literal {
+    value: number;
+}
 interface RegExpSelector extends Atom {
     type: 'regexp';
     value: RegExp;
 }
 
-interface Nth extends query.Selector { index: NumericLiteral; }
+interface Nth extends query.Selector {
+    index: NumericLiteral;
+}
 interface BinarySelector extends query.Selector {
     type: 'child' | 'sibling' | 'adjacent' | 'descendant';
     left: query.Selector;
@@ -45,7 +53,9 @@ declare namespace query {
     /** Query the code AST using the selector string. */
     function query(ast: Node, selector: string): Node[];
 
-    interface Selector extends Atom { subject?: boolean; }
+    interface Selector extends Atom {
+        subject?: boolean;
+    }
 
     interface Field extends Atom {
         type: 'field';
@@ -55,7 +65,9 @@ declare namespace query {
         type: 'type';
         value: string;
     }
-    interface Sequence extends MultiSelector { type: 'compound'; }
+    interface Sequence extends MultiSelector {
+        type: 'compound';
+    }
     interface Identifier extends Selector {
         type: 'identifier';
         value: string;
@@ -70,15 +82,33 @@ declare namespace query {
         operator?: '=' | '!=' | '>' | '<' | '>=' | '<=';
         value?: Literal | RegExpSelector | Type;
     }
-    interface NthChild extends Nth { type: 'nth-child'; }
-    interface NthLastChild extends Nth { type: 'nth-last-child'; }
-    interface Descendant extends BinarySelector { type: 'descendant'; }
-    interface Child extends BinarySelector { type: 'child'; }
-    interface Sibling extends BinarySelector { type: 'sibling'; }
-    interface Adjacent extends BinarySelector { type: 'adjacent'; }
-    interface Negation extends MultiSelector { type: 'not'; }
-    interface Matches extends MultiSelector { type: 'matches'; }
-    interface Has extends MultiSelector { type: 'has'; }
+    interface NthChild extends Nth {
+        type: 'nth-child';
+    }
+    interface NthLastChild extends Nth {
+        type: 'nth-last-child';
+    }
+    interface Descendant extends BinarySelector {
+        type: 'descendant';
+    }
+    interface Child extends BinarySelector {
+        type: 'child';
+    }
+    interface Sibling extends BinarySelector {
+        type: 'sibling';
+    }
+    interface Adjacent extends BinarySelector {
+        type: 'adjacent';
+    }
+    interface Negation extends MultiSelector {
+        type: 'not';
+    }
+    interface Matches extends MultiSelector {
+        type: 'matches';
+    }
+    interface Has extends MultiSelector {
+        type: 'has';
+    }
     interface Class extends Atom {
         type: 'class';
         name: 'declaration' | 'expression' | 'function' | 'pattern' | 'statement';

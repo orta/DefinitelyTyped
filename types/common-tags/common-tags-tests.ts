@@ -206,7 +206,7 @@ createTag(
         // $ExpectType any[]
         matches;
         return '';
-    })
+    }),
 );
 
 createTag(replaceSubstitutionTransformer('foo', 'bar'));
@@ -218,7 +218,7 @@ createTag(
         // $ExpectType any[]
         matches;
         return '';
-    })
+    }),
 );
 
 createTag(replaceStringTransformer('foo', 'bar'));
@@ -230,7 +230,7 @@ createTag(
         // $ExpectType any[]
         matches;
         return '';
-    })
+    }),
 );
 
 createTag(inlineArrayTransformer());

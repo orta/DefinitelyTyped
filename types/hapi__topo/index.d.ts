@@ -34,7 +34,7 @@ declare class Topo<TNode = any, TGroup = string> {
             before?: TGroup | TGroup[];
             after?: TGroup | TGroup[];
             sort?: number;
-        }
+        },
     ): TNode[];
 
     /**

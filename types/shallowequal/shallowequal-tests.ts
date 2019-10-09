@@ -21,7 +21,7 @@ shallowEqual(
         this; // $ExpectType { foo: string; }
         return undefined;
     },
-    { foo: 'bar' }
+    { foo: 'bar' },
 );
 
 interface Foo {

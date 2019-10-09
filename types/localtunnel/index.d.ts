@@ -8,19 +8,13 @@ export = localtunnel;
 declare function localtunnel(
     port: number,
     opt: localtunnel.TunnelConfig,
-    callback: localtunnel.TunnelCallback
+    callback: localtunnel.TunnelCallback,
 ): localtunnel.Tunnel;
 
-declare function localtunnel(
-    port: number,
-    callback: localtunnel.TunnelCallback
-): localtunnel.Tunnel;
+declare function localtunnel(port: number, callback: localtunnel.TunnelCallback): localtunnel.Tunnel;
 
 declare namespace localtunnel {
-    type TunnelCallback = (
-        err: string,
-        tunnel?: Tunnel
-    ) => void;
+    type TunnelCallback = (err: string, tunnel?: Tunnel) => void;
 
     interface TunnelConfig {
         host?: string;

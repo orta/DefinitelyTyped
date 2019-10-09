@@ -14,24 +14,24 @@ const testHtml = `
 `;
 
 validateHtml({
-  data: testHtml,
-  format: 'json'
+    data: testHtml,
+    format: 'json',
 }).then((validationResults: validateHtml.ParsedJsonAsValidationResults) => {
-  if (validationResults.messages.length === 0) {
-    console.warn(`File "test" contains W3C standard violations or guidelines neglects.`);
-    return;
-  }
-
-  validationResults.messages.forEach((violation: validateHtml.ValidationMessageObject) => {
-    if (violation.type === 'error') {
-      console.log(`W3C standard violation: ${violation.message}`);
+    if (validationResults.messages.length === 0) {
+        console.warn(`File "test" contains W3C standard violations or guidelines neglects.`);
+        return;
     }
 
-    if (violation.type === 'info') {
-      console.warn(`W3C guidelines neglect: ${violation.message}`);
-    }
+    validationResults.messages.forEach((violation: validateHtml.ValidationMessageObject) => {
+        if (violation.type === 'error') {
+            console.log(`W3C standard violation: ${violation.message}`);
+        }
 
-    console.log(violation.extract);
-    console.log(`line: ${violation.lastLine}, column: ${violation.firstColumn}-${violation.lastColumn}\n`);
-  });
+        if (violation.type === 'info') {
+            console.warn(`W3C guidelines neglect: ${violation.message}`);
+        }
+
+        console.log(violation.extract);
+        console.log(`line: ${violation.lastLine}, column: ${violation.firstColumn}-${violation.lastColumn}\n`);
+    });
 });

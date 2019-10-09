@@ -1,8 +1,5 @@
-import { MatcherFn } from "./index";
+import { MatcherFn } from './index';
 
 export default function makeMatcher(
-    makeRegexpFn?: (
-        pattern: string,
-        keys?: Array<{ name: string | number }>
-    ) => RegExp
+    makeRegexpFn?: (pattern: string, keys?: Array<{ name: string | number }>) => RegExp,
 ): MatcherFn;

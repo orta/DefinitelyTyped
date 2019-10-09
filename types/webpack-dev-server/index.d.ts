@@ -172,7 +172,7 @@ declare class WebpackDevServer {
     static addDevServerEntrypoints(
         webpackOptions: webpack.Configuration | webpack.Configuration[],
         config: WebpackDevServer.Configuration,
-        listeningApp?: WebpackDevServer.ListeningApp
+        listeningApp?: WebpackDevServer.ListeningApp,
     ): void;
 
     listen(port: number, hostname: string, callback?: (error?: Error) => void): http.Server;

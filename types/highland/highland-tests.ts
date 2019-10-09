@@ -47,18 +47,18 @@ var anyArrStream: Highland.Stream<any[]>;
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 interface Foo {
-  foo(): string;
+    foo(): string;
 }
 interface Bar {
-  bar(): string;
+    bar(): string;
 }
 
 interface StrFooArrMap {
-  [key: string]: Foo[];
+    [key: string]: Foo[];
 }
 
 interface StrBarArrMap {
-  [key: string]: Bar[];
+    [key: string]: Bar[];
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -126,9 +126,9 @@ fooStream = streamRedirect.to;
 fooStream = _<Foo>();
 fooStream = _(fooArr);
 fooStream = _<Foo>((push, next) => {
-  push(null, foo);
-  push(err);
-  next();
+    push(null, foo);
+    push(err);
+    next();
 });
 
 fooStream = _(fooStream);
@@ -137,13 +137,19 @@ fooStream = _<Foo>(readable, (r, cb) => {
     return;
 });
 fooStream = _<Foo>(readable, (r, cb) => {
-    return () => { return; }
+    return () => {
+        return;
+    };
 });
 fooStream = _<Foo>(readable, (r, cb) => {
     return { continueOnError: true };
 });
 fooStream = _<Foo>(readable, (r, cb) => {
-    return { onDestroy: () => { return; } };
+    return {
+        onDestroy: () => {
+            return;
+        },
+    };
 });
 fooStream = _<Foo>(str, emitter);
 fooStream = _<Foo>(str, emitter, num);
@@ -184,22 +190,17 @@ fooArrStream = fooStream.collect();
 fooStream = fooStream.compact();
 
 barStream = fooStream.consume(
-  (
-    err: Error,
-    x: Foo | Highland.Nil,
-    push: (err: Error, value?: Bar | Highland.Nil) => void,
-    next: () => void
-  ) => {
-    push(err);
-    push(null, bar);
-    next();
-  }
+    (err: Error, x: Foo | Highland.Nil, push: (err: Error, value?: Bar | Highland.Nil) => void, next: () => void) => {
+        push(err);
+        push(null, bar);
+        next();
+    },
 );
 
 barStream = fooStream.consume<Bar>((err, x, push, next) => {
-  push(err);
-  push(null, bar);
-  next();
+    push(err);
+    push(null, bar);
+    next();
 });
 
 fooStream = fooStream.debounce(num);
@@ -208,32 +209,30 @@ fooStream = fooStream.doto((x: Foo) => {});
 
 fooStream = fooStream.drop(2);
 
-fooStream = fooStream.errors(
-  (err: Error, push: (e: Error, x?: Foo) => void) => {
+fooStream = fooStream.errors((err: Error, push: (e: Error, x?: Foo) => void) => {
     push(err);
     push(null, x);
     push(null, foo);
-  }
-);
+});
 
 fooStream = fooStream.errors((err, push) => {
-  push(err);
-  push(null, x);
-  push(null, foo);
+    push(err);
+    push(null, x);
+    push(null, foo);
 });
 
 fooStream = fooStream.filter((x: Foo) => {
-  return bool;
+    return bool;
 });
 
 fooStream = fooStream.find((x: Foo) => {
-  return bool;
+    return bool;
 });
 
 fooStream = fooStream.findWhere(obj);
 
 strFooArrMapStream = fooStream.group((x: Foo) => {
-  return str;
+    return str;
 });
 strFooArrMapStream = fooStream.group(str);
 
@@ -246,7 +245,7 @@ fooStream = fooStream.last();
 fooStream = fooStream.latest();
 
 barStream = fooStream.map((x: Foo) => {
-  return bar;
+    return bar;
 });
 
 barStream = fooStream.pluck<Bar>(str);
@@ -254,19 +253,19 @@ barStream = fooStream.pluck<Bar>(str);
 fooStream = fooStream.ratelimit(3, 1000);
 
 barStream = fooStream.reduce(bar, (memo: Bar, x: Foo) => {
-  return memo;
+    return memo;
 });
 
 barStream = fooStream.reduce1(bar, (memo: Bar, x: Foo) => {
-  return memo;
+    return memo;
 });
 
 fooStream = fooStream.reject((x: Foo) => {
-  return bool;
+    return bool;
 });
 
 barStream = fooStream.scan(bar, (memo: Bar, x: Foo) => {
-  return memo;
+    return memo;
 });
 
 //missing scan1
@@ -290,15 +289,15 @@ fooStream = fooStream.concat(fooStream);
 fooStream = fooStream.concat(fooArr);
 
 fooStream = fooStream.flatFilter((x: Foo) => {
-  return boolStream;
+    return boolStream;
 });
 
 barStream = fooStream.flatMap((x: Foo) => {
-  return barStream;
+    return barStream;
 });
 
 barStream = fooStream.flatMap((x: Foo) => {
-  return bar;
+    return bar;
 });
 
 barStream = fooStream.flatten<Bar>();
@@ -346,8 +345,8 @@ fooStream.toCallback((err: Error, x: Foo) => {});
 fooStream.toCallback((err: Error) => {});
 
 fooStream.toNodeStream();
-fooStream.toNodeStream({objectMode: false});
-fooStream.toNodeStream({objectMode: true});
+fooStream.toNodeStream({ objectMode: false });
+fooStream.toNodeStream({ objectMode: true });
 
 fooStream.toPromise(Promise);
 
@@ -402,7 +401,10 @@ fooStream = _.values(fooArr);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 f = _.compose(f);
-f = _.compose(f, f);
+f = _.compose(
+    f,
+    f,
+);
 
 f = _.curry(fn, foo);
 f = _.curry(fn, foo, bar);

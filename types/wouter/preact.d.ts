@@ -1,9 +1,4 @@
-import {
-    ComponentChildren,
-    ComponentType,
-    FunctionComponent,
-    VNode
-} from "preact";
+import { ComponentChildren, ComponentType, FunctionComponent, VNode } from 'preact';
 
 export type Params = { [paramName: string]: string } | null;
 export type Path = string;

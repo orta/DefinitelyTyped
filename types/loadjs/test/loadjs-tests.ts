@@ -6,16 +6,16 @@ const loadOptions: importedLoadJs.LoadOptions = {
         scriptEl; // $ExpectType HTMLElement
     },
     success: () => {},
-    error: (pathsNotFound) => {
+    error: pathsNotFound => {
         pathsNotFound; // $ExpectType string[]
     },
     async: true,
-    numRetries: 3
+    numRetries: 3,
 };
 
 const readyOptions: importedLoadJs.ReadyOptions = {
     success: () => {},
-    error: (depsNotFound) => {
+    error: depsNotFound => {
         depsNotFound; // $ExpectType string[]
     },
 };

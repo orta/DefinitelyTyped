@@ -8,12 +8,12 @@ new AMap.MapType({});
 const mapType = new AMap.MapType({
     defaultType: 1,
     showTraffic: true,
-    showRoad: true
+    showRoad: true,
 });
 
 // $ExpectError
 new AMap.MapType({
-    defaultType: 2
+    defaultType: 2,
 });
 
 // $ExpectType void

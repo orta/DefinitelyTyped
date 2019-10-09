@@ -1,8 +1,19 @@
 import braintree = require('braintree');
-import { BraintreeGateway, Address, AddressCreateRequest,
-    CreditCard, Customer, PayPalAccount, ApplePayCard, AndroidPayCard,
-    VisaCheckoutCard, SamsungPayCard, MasterpassCard, PaymentMethod,
-    PaymentMethodNonce, Transaction
+import {
+    BraintreeGateway,
+    Address,
+    AddressCreateRequest,
+    CreditCard,
+    Customer,
+    PayPalAccount,
+    ApplePayCard,
+    AndroidPayCard,
+    VisaCheckoutCard,
+    SamsungPayCard,
+    MasterpassCard,
+    PaymentMethod,
+    PaymentMethodNonce,
+    Transaction,
 } from 'braintree';
 
 /**
@@ -48,19 +59,19 @@ const gateway: BraintreeGateway = new braintree.BraintreeGateway({
     };
     const response = await gateway.paymentMethod.create(paymentMethodRequest);
     const { token }: PaymentMethod = response.paymentMethod;
-    const applePayCard = <ApplePayCard> response.paymentMethod;
-    const paypalAccount = <PayPalAccount> response.paymentMethod;
-    const androidPayCard = <AndroidPayCard> response.paymentMethod;
-    const creditCard = <CreditCard> response.paymentMethod;
-    const venmoAccount = <braintree.VenmoAccount> response.paymentMethod;
-    const visaCheckoutCard = <VisaCheckoutCard> response.paymentMethod;
-    const samsungPayCard = <SamsungPayCard> response.paymentMethod;
-    const masterpassCard = <MasterpassCard> response.paymentMethod;
+    const applePayCard = <ApplePayCard>response.paymentMethod;
+    const paypalAccount = <PayPalAccount>response.paymentMethod;
+    const androidPayCard = <AndroidPayCard>response.paymentMethod;
+    const creditCard = <CreditCard>response.paymentMethod;
+    const venmoAccount = <braintree.VenmoAccount>response.paymentMethod;
+    const visaCheckoutCard = <VisaCheckoutCard>response.paymentMethod;
+    const samsungPayCard = <SamsungPayCard>response.paymentMethod;
+    const masterpassCard = <MasterpassCard>response.paymentMethod;
 })();
 
 (async () => {
-  const response = await gateway.paymentMethodNonce.create('token');
-  const nonce = response.paymentMethodNonce.nonce;
+    const response = await gateway.paymentMethodNonce.create('token');
+    const nonce = response.paymentMethodNonce.nonce;
 })();
 
 (async () => {
@@ -71,7 +82,7 @@ const gateway: BraintreeGateway = new braintree.BraintreeGateway({
     const { amount, billing, id }: Transaction = response.transaction;
 
     // Cannot assign to var
-    await gateway.transaction.cloneTransaction(id, { amount: '100.00' , options: {submitForSettlement: true }});
+    await gateway.transaction.cloneTransaction(id, { amount: '100.00', options: { submitForSettlement: true } });
 
     const transactions: Transaction[] = await gateway.transaction.search(() => {
         return;

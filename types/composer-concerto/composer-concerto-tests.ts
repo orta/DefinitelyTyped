@@ -14,7 +14,7 @@ concept PostalAddress {
     o String addressLocality optional
     o String addressCountry optional
 }`,
-    'filename.cto'
+    'filename.cto',
 );
 
 const factory = new Factory(modelManager);

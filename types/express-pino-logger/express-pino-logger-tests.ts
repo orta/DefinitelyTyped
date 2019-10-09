@@ -43,7 +43,7 @@ server.use((req, res, next) => {
 // additional options
 const optionsWithGenReqId: expressPinoLogger.Options = {
     logger,
-    genReqId: (req) => 'foo',
+    genReqId: req => 'foo',
 };
 middleware = expressPinoLogger(optionsWithGenReqId);
 server.use(middleware);

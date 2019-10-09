@@ -30,7 +30,7 @@ storiesOf('Welcome', module)
         () =>
             html`
                 <div></div>
-            `
+            `,
     )
     .add('to Storybook as Array', () => [
         html`
@@ -45,7 +45,7 @@ storiesOf('Welcome', module)
         () => html`
             <div></div>
         `,
-        parameters
+        parameters,
     );
 
 // global addDecorator
@@ -69,19 +69,19 @@ storiesOf<AnyAddon>('withAnyAddon', module)
         'custom story',
         () => html`
             <div></div>
-        `
+        `,
     )
     .addWithSideEffect(
         'more',
         () => html`
             <div></div>
-        `
+        `,
     )
     .add(
         'another story',
         () => html`
             <div></div>
-        `
+        `,
     )
     .add('to Storybook as Array', () => [
         html`
@@ -96,13 +96,13 @@ storiesOf<AnyAddon>('withAnyAddon', module)
         () => html`
             <div></div>
         `,
-        parameters
+        parameters,
     )
     .addWithSideEffect(
         'even more',
         () => html`
             <div></div>
-        `
+        `,
     );
 
 // configure

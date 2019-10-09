@@ -386,21 +386,30 @@ export class Factory {
      * Create a new Resource with a given namespace, type name and id.
      * @throws {TypeNotFoundException} if the type is not registered with the ModelManager
      */
-    newResource(ns: string, type: string, id: string, options?: {
-        disableValidation?: boolean;
-        generate?: string;
-        includeOptionalFields?: boolean;
-        allowEmptyId?: boolean;
-    }): Resource;
+    newResource(
+        ns: string,
+        type: string,
+        id: string,
+        options?: {
+            disableValidation?: boolean;
+            generate?: string;
+            includeOptionalFields?: boolean;
+            allowEmptyId?: boolean;
+        },
+    ): Resource;
     /**
      * Create a new Concept with a given namespace and type name.
      * @throws {TypeNotFoundException} if the type is not registered with the ModelManager
      */
-    newConcept(ns: string, type: string, options?: {
-        disableValidation?: boolean;
-        generate?: string;
-        includeOptionalFields?: boolean;
-    }): Resource;
+    newConcept(
+        ns: string,
+        type: string,
+        options?: {
+            disableValidation?: boolean;
+            generate?: string;
+            includeOptionalFields?: boolean;
+        },
+    ): Resource;
     /**
      * Create a new Relationship with a given namespace, type and identifier.
      * A relationship is a typed pointer to an instance. I.e the relationship
@@ -414,20 +423,30 @@ export class Factory {
      * Create a new transaction object. The identifier of the transaction is
      * set to a UUID.
      */
-    newTransaction(ns: string, type: string, id?: string, options?: {
-        generate?: string;
-        includeOptionalFields?: boolean;
-        allowEmptyId?: boolean;
-    }): Resource;
+    newTransaction(
+        ns: string,
+        type: string,
+        id?: string,
+        options?: {
+            generate?: string;
+            includeOptionalFields?: boolean;
+            allowEmptyId?: boolean;
+        },
+    ): Resource;
     /**
      * Create a new event object. The identifier of the event is
      * set to a UUID.
      */
-    newEvent(ns: string, type: string, id?: string, options?: {
-        generate?: string;
-        includeOptionalFields?: boolean;
-        allowEmptyId?: boolean;
-    }): Resource;
+    newEvent(
+        ns: string,
+        type: string,
+        id?: string,
+        options?: {
+            generate?: string;
+            includeOptionalFields?: boolean;
+            allowEmptyId?: boolean;
+        },
+    ): Resource;
 }
 
 /**
@@ -605,7 +624,12 @@ export class ModelManager {
     /**
      * Add a set of Composer files to the model manager.
      */
-    addModelFiles(modelFiles: string[], fileNames?: string[], disableValidation?: boolean, systemModelTable?: boolean): any[];
+    addModelFiles(
+        modelFiles: string[],
+        fileNames?: string[],
+        disableValidation?: boolean,
+        systemModelTable?: boolean,
+    ): any[];
     /**
      * Validates all models files in this model manager.
      */
@@ -677,7 +701,13 @@ export class ParseException extends BaseFileException {
     /**
      * Create an ParseException
      */
-    constructor(message: string, fileLocation?: string, fileName?: string, fullMessageOverride?: string, component?: string);
+    constructor(
+        message: string,
+        fileLocation?: string,
+        fileName?: string,
+        fullMessageOverride?: string,
+        component?: string,
+    );
 }
 
 /**
@@ -765,13 +795,7 @@ export abstract class Identifiable extends Typed {
      * Note: Only to be called by framework code. Applications should
      * retrieve instances from {@link Factory}
      */
-    constructor(
-        modelManager: ModelManager,
-        classDeclaration: ClassDeclaration,
-        ns: string,
-        type: string,
-        id: string
-    );
+    constructor(modelManager: ModelManager, classDeclaration: ClassDeclaration, ns: string, type: string, id: string);
     /**
      * Get the identifier of this instance
      */
@@ -818,13 +842,7 @@ export class Relationship extends Identifiable {
      * Note: Only to be called by framework code. Applications should
      * retrieve instances from {@link Factory}
      */
-    constructor(
-        modelManager: ModelManager,
-        classDeclaration: ClassDeclaration,
-        ns: string,
-        type: string,
-        id: string
-    );
+    constructor(modelManager: ModelManager, classDeclaration: ClassDeclaration, ns: string, type: string, id: string);
     /**
      * Determine if this identifiable is a relationship.
      */
@@ -836,7 +854,7 @@ export class Relationship extends Identifiable {
         modelManager: ModelManager,
         uriAsstring: string,
         defaultNamespace?: string,
-        defaultType?: string
+        defaultType?: string,
     ): Relationship;
 }
 
@@ -912,12 +930,15 @@ export class Serializer {
      * @throws {Error} - throws an exception if resource is not an instance of
      * Resource or fails validation.
      */
-    toJSON(resource: Resource, options?: {
-        validate?: boolean;
-        convertResourcesToRelationships?: boolean;
-        permitResourcesForRelationships?: boolean;
-        deduplicateResources?: boolean;
-    }): any;
+    toJSON(
+        resource: Resource,
+        options?: {
+            validate?: boolean;
+            convertResourcesToRelationships?: boolean;
+            permitResourcesForRelationships?: boolean;
+            deduplicateResources?: boolean;
+        },
+    ): any;
     /**
      * Create a {@link Resource} from a JavaScript any representation.
      * The JavaScript any should have been created by calling the
@@ -925,10 +946,13 @@ export class Serializer {
      *
      * The Resource is populated based on the JavaScript any.
      */
-    fromJSON(jsonany: any, options?: {
-        acceptResourcesForRelationships: boolean;
-        validate: boolean;
-    }): Resource;
+    fromJSON(
+        jsonany: any,
+        options?: {
+            acceptResourcesForRelationships: boolean;
+            validate: boolean;
+        },
+    ): Resource;
 }
 
 /**

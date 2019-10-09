@@ -6,15 +6,15 @@
 
 /// <reference types="node" />
 
-export * from "./client";
-export { default as Client } from "./client";
-export { default as axios } from "./axios";
-import * as forge from "./crypto/forge";
+export * from './client';
+export { default as Client } from './client';
+export { default as axios } from './axios';
+import * as forge from './crypto/forge';
 export { forge };
 
 export const directory: {
     letsencrypt: {
-        staging: string,
-        production: string,
-    }
+        staging: string;
+        production: string;
+    };
 };

@@ -96,7 +96,7 @@ declare module 'angular' {
              */
             clearAll(): any;
         }
-        
+
         type StorageType = 'localStorage' | 'sessionStorage';
 
         interface ILocalStorageService {
@@ -129,11 +129,11 @@ declare module 'angular' {
              * Returns: value from local storage
              */
             keys(storageType?: StorageType): string[];
-          /**
+            /**
              * Remove a list of items from the local storage by their given keys.
              * The last item in the variable argument list can optionally be the StorageType.
              * Which specifies whether to remove from the session storage or the local storage.
-             * If the last argument is not a valid storage type it is considered to be a key, 
+             * If the last argument is not a valid storage type it is considered to be a key,
              * and localStorage is used by default .
              * If local storage is not supported, use cookies instead.
              * Returns: Boolean
@@ -157,7 +157,13 @@ declare module 'angular' {
              * @param value optional
              * @param key The corresponding key used in local storage
              */
-            bind(scope: angular.IScope, property: string, value?: any, key?: string, storageType?: StorageType): Function;
+            bind(
+                scope: angular.IScope,
+                property: string,
+                value?: any,
+                key?: string,
+                storageType?: StorageType,
+            ): Function;
             /**
              * Return the derive key
              * Returns String

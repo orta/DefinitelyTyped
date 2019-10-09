@@ -2,7 +2,7 @@ import apiFetch, { Middleware, Schema } from '@wordpress/api-fetch';
 
 async function foo() {
     apiFetch<Schema.Post[]>({ path: '/wp/v2/posts' }).then(posts =>
-        posts.map(({ date, title }) => `Post "${title.rendered}" at ${date}`)
+        posts.map(({ date, title }) => `Post "${title.rendered}" at ${date}`),
     );
     const response = await apiFetch({ parse: false });
     if (response.ok) {

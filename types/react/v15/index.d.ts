@@ -76,7 +76,7 @@ declare namespace React {
     type ComponentType<P = {}> = ComponentClass<P> | StatelessComponent<P>;
 
     type Key = string | number;
-    type Ref<T> = string | { bivarianceHack(instance: T | null): any }["bivarianceHack"];
+    type Ref<T> = string | { bivarianceHack(instance: T | null): any }['bivarianceHack'];
 
     // tslint:disable-next-line:interface-over-type-literal
     type ComponentState = {};
@@ -114,7 +114,7 @@ declare namespace React {
 
     // ReactHTML for ReactHTMLElement
     // tslint:disable-next-line:no-empty-interface
-    interface ReactHTMLElement<T extends HTMLElement> extends DetailedReactHTMLElement<AllHTMLAttributes<T>, T> { }
+    interface ReactHTMLElement<T extends HTMLElement> extends DetailedReactHTMLElement<AllHTMLAttributes<T>, T> {}
 
     interface DetailedReactHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMElement<P, T> {
         type: keyof ReactHTML;
@@ -153,14 +153,18 @@ declare namespace React {
 
     type SFCFactory<P> = (props?: Attributes & P, ...children: ReactNode[]) => SFCElement<P>;
 
-    type ComponentFactory<P, T extends Component<P, ComponentState>> =
-        (props?: ClassAttributes<T> & P, ...children: ReactNode[]) => CElement<P, T>;
+    type ComponentFactory<P, T extends Component<P, ComponentState>> = (
+        props?: ClassAttributes<T> & P,
+        ...children: ReactNode[]
+    ) => CElement<P, T>;
 
     type CFactory<P, T extends Component<P, ComponentState>> = ComponentFactory<P, T>;
     type ClassicFactory<P> = CFactory<P, ClassicComponent<P, ComponentState>>;
 
-    type DOMFactory<P extends DOMAttributes<T>, T extends Element> =
-        (props?: ClassAttributes<T> & P | null, ...children: ReactNode[]) => DOMElement<P, T>;
+    type DOMFactory<P extends DOMAttributes<T>, T extends Element> = (
+        props?: ClassAttributes<T> & P | null,
+        ...children: ReactNode[]
+    ) => DOMElement<P, T>;
 
     // tslint:disable-next-line:no-empty-interface
     interface HTMLFactory<T extends HTMLElement> extends DetailedHTMLFactory<AllHTMLAttributes<T>, T> {}
@@ -170,7 +174,10 @@ declare namespace React {
     }
 
     interface SVGFactory extends DOMFactory<SVGAttributes<SVGElement>, SVGElement> {
-        (props?: ClassAttributes<SVGElement> & SVGAttributes<SVGElement> | null, ...children: ReactNode[]): ReactSVGElement;
+        (
+            props?: ClassAttributes<SVGElement> & SVGAttributes<SVGElement> | null,
+            ...children: ReactNode[]
+        ): ReactSVGElement;
     }
 
     //
@@ -192,94 +199,104 @@ declare namespace React {
     function createClass<P, S>(spec: ComponentSpec<P, S>): ClassicComponentClass<P>;
 
     // DOM Elements
-    function createFactory<T extends HTMLElement>(
-        type: keyof ReactHTML): HTMLFactory<T>;
-    function createFactory(
-        type: keyof ReactSVG): SVGFactory;
-    function createFactory<P extends DOMAttributes<T>, T extends Element>(
-        type: string): DOMFactory<P, T>;
+    function createFactory<T extends HTMLElement>(type: keyof ReactHTML): HTMLFactory<T>;
+    function createFactory(type: keyof ReactSVG): SVGFactory;
+    function createFactory<P extends DOMAttributes<T>, T extends Element>(type: string): DOMFactory<P, T>;
 
     // Custom components
     function createFactory<P>(type: SFC<P>): SFCFactory<P>;
     function createFactory<P>(
-        type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>): CFactory<P, ClassicComponent<P, ComponentState>>;
+        type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>,
+    ): CFactory<P, ClassicComponent<P, ComponentState>>;
     function createFactory<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
-        type: ClassType<P, T, C>): CFactory<P, T>;
+        type: ClassType<P, T, C>,
+    ): CFactory<P, T>;
     function createFactory<P>(type: ComponentClass<P>): Factory<P>;
 
     // DOM Elements
     // TODO: generalize this to everything in `keyof ReactHTML`, not just "input"
     function createElement(
-            type: "input",
-            props?: InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement>,
-            ...children: ReactNode[]): DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+        type: 'input',
+        props?: InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement>,
+        ...children: ReactNode[]
+    ): DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
     function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
         type: keyof ReactHTML,
         props?: ClassAttributes<T> & P,
-        ...children: ReactNode[]): DetailedReactHTMLElement<P, T>;
+        ...children: ReactNode[]
+    ): DetailedReactHTMLElement<P, T>;
     function createElement<P extends SVGAttributes<T>, T extends SVGElement>(
         type: keyof ReactSVG,
         props?: ClassAttributes<T> & P,
-        ...children: ReactNode[]): ReactSVGElement;
+        ...children: ReactNode[]
+    ): ReactSVGElement;
     function createElement<P extends DOMAttributes<T>, T extends Element>(
         type: string,
         props?: ClassAttributes<T> & P,
-        ...children: ReactNode[]): DOMElement<P, T>;
+        ...children: ReactNode[]
+    ): DOMElement<P, T>;
 
     // Custom components
-    function createElement<P>(
-        type: SFC<P>,
-        props?: Attributes & P,
-        ...children: ReactNode[]): SFCElement<P>;
+    function createElement<P>(type: SFC<P>, props?: Attributes & P, ...children: ReactNode[]): SFCElement<P>;
     function createElement<P>(
         type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>,
         props?: ClassAttributes<ClassicComponent<P, ComponentState>> & P,
-        ...children: ReactNode[]): CElement<P, ClassicComponent<P, ComponentState>>;
+        ...children: ReactNode[]
+    ): CElement<P, ClassicComponent<P, ComponentState>>;
     function createElement<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
         type: ClassType<P, T, C>,
         props?: ClassAttributes<T> & P,
-        ...children: ReactNode[]): CElement<P, T>;
+        ...children: ReactNode[]
+    ): CElement<P, T>;
     function createElement<P>(
         type: SFC<P> | ComponentClass<P> | string,
         props?: Attributes & P,
-        ...children: ReactNode[]): ReactElement<P>;
+        ...children: ReactNode[]
+    ): ReactElement<P>;
 
     // DOM Elements
     // ReactHTMLElement
     function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
         element: DetailedReactHTMLElement<P, T>,
         props?: P,
-        ...children: ReactNode[]): DetailedReactHTMLElement<P, T>;
+        ...children: ReactNode[]
+    ): DetailedReactHTMLElement<P, T>;
     // ReactHTMLElement, less specific
     function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
         element: ReactHTMLElement<T>,
         props?: P,
-        ...children: ReactNode[]): ReactHTMLElement<T>;
+        ...children: ReactNode[]
+    ): ReactHTMLElement<T>;
     // SVGElement
     function cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(
         element: ReactSVGElement,
         props?: P,
-        ...children: ReactNode[]): ReactSVGElement;
+        ...children: ReactNode[]
+    ): ReactSVGElement;
     // DOM Element (has to be the last, because type checking stops at first overload that fits)
     function cloneElement<P extends DOMAttributes<T>, T extends Element>(
         element: DOMElement<P, T>,
         props?: DOMAttributes<T> & P,
-        ...children: ReactNode[]): DOMElement<P, T>;
+        ...children: ReactNode[]
+    ): DOMElement<P, T>;
 
     // Custom components
     function cloneElement<P extends Q, Q>(
         element: SFCElement<P>,
         props?: Q, // should be Q & Attributes, but then Q is inferred as {}
-        ...children: ReactNode[]): SFCElement<P>;
+        ...children: ReactNode[]
+    ): SFCElement<P>;
     function cloneElement<P extends Q, Q, T extends Component<P, ComponentState>>(
         element: CElement<P, T>,
         props?: Q, // should be Q & ClassAttributes<T>
-        ...children: ReactNode[]): CElement<P, T>;
+        ...children: ReactNode[]
+    ): CElement<P, T>;
     function cloneElement<P extends Q, Q>(
         element: ReactElement<P>,
         props?: Q, // should be Q & Attributes
-        ...children: ReactNode[]): ReactElement<P>;
+        ...children: ReactNode[]
+    ): ReactElement<P>;
 
     function isValidElement<P>(object: {}): object is ReactElement<P>;
 
@@ -296,7 +313,7 @@ declare namespace React {
 
     // Base component for plain JS classes
     // tslint:disable-next-line:no-empty-interface
-    interface Component<P = {}, S = {}> extends ComponentLifecycle<P, S> { }
+    interface Component<P = {}, S = {}> extends ComponentLifecycle<P, S> {}
     class Component<P, S> {
         constructor(props?: P, context?: any);
 
@@ -304,8 +321,8 @@ declare namespace React {
         // See: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365#issuecomment-351013257
         // Also, the ` | S` allows intellisense to not be dumbisense
         setState<K extends keyof S>(
-            state: ((prevState: Readonly<S>, props: P) => (Pick<S, K> | S)) | (Pick<S, K> | S),
-            callback?: () => any
+            state: ((prevState: Readonly<S>, props: P) => Pick<S, K> | S) | (Pick<S, K> | S),
+            callback?: () => any,
         ): void;
 
         forceUpdate(callBack?: () => any): void;
@@ -320,11 +337,11 @@ declare namespace React {
         state: Readonly<S>;
         context: any;
         refs: {
-            [key: string]: ReactInstance
+            [key: string]: ReactInstance;
         };
     }
 
-    class PureComponent<P = {}, S = {}> extends Component<P, S> { }
+    class PureComponent<P = {}, S = {}> extends Component<P, S> {}
 
     interface ClassicComponent<P = {}, S = {}> extends Component<P, S> {
         replaceState(nextState: S, callback?: () => any): void;
@@ -368,8 +385,7 @@ declare namespace React {
      * a single argument, which is useful for many top-level API defs.
      * See https://github.com/Microsoft/TypeScript/issues/7234 for more info.
      */
-    type ClassType<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>> =
-        C &
+    type ClassType<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>> = C &
         (new (props?: P, context?: any) => T) &
         (new (props?: P, context?: any) => { props: P });
 
@@ -452,8 +468,7 @@ declare namespace React {
     }
 
     // tslint:disable-next-line:no-empty-interface
-    interface FormEvent<T> extends SyntheticEvent<T> {
-    }
+    interface FormEvent<T> extends SyntheticEvent<T> {}
 
     interface InvalidEvent<T> extends SyntheticEvent<T> {
         target: EventTarget & T;
@@ -541,7 +556,7 @@ declare namespace React {
     // Event Handler Types
     // ----------------------------------------------------------------------
 
-    type EventHandler<E extends SyntheticEvent<any>> = { bivarianceHack(event: E): void }["bivarianceHack"];
+    type EventHandler<E extends SyntheticEvent<any>> = { bivarianceHack(event: E): void }['bivarianceHack'];
 
     type ReactEventHandler<T> = EventHandler<SyntheticEvent<T>>;
 
@@ -583,13 +598,11 @@ declare namespace React {
         ref?: Ref<T>;
     }
 
-    interface HTMLProps<T> extends AllHTMLAttributes<T>, ClassAttributes<T> {
-    }
+    interface HTMLProps<T> extends AllHTMLAttributes<T>, ClassAttributes<T> {}
 
     type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = ClassAttributes<T> & E;
 
-    interface SVGProps<T> extends SVGAttributes<T>, ClassAttributes<T> {
-    }
+    interface SVGProps<T> extends SVGAttributes<T>, ClassAttributes<T> {}
 
     interface DOMAttributes<T> {
         children?: ReactNode;
@@ -765,7 +778,7 @@ declare namespace React {
     // See CSS 3 CSS-wide keywords https://www.w3.org/TR/css3-values/#common-keywords
     // See CSS 3 Explicit Defaulting https://www.w3.org/TR/css-cascade-3/#defaulting-keywords
     // "all CSS properties can accept these values"
-    type CSSWideKeyword = "initial" | "inherit" | "unset";
+    type CSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
     // See CSS 3 <percentage> type https://drafts.csswg.org/css-values-3/#percentages
     type CSSPercentage = string;
@@ -779,17 +792,24 @@ declare namespace React {
         /**
          * Aligns a flex container's lines within the flex container when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.
          */
-        alignContent?: CSSWideKeyword | "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "stretch";
+        alignContent?:
+            | CSSWideKeyword
+            | 'flex-start'
+            | 'flex-end'
+            | 'center'
+            | 'space-between'
+            | 'space-around'
+            | 'stretch';
 
         /**
          * Sets the default alignment in the cross axis for all of the flex container's items, including anonymous flex items, similarly to how justify-content aligns items along the main axis.
          */
-        alignItems?: CSSWideKeyword | "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
+        alignItems?: CSSWideKeyword | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
         /**
          * Allows the default alignment to be overridden for individual flex items.
          */
-        alignSelf?: CSSWideKeyword | "auto" | "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
+        alignSelf?: CSSWideKeyword | 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
         /**
          * This property allows precise alignment of elements, such as graphics,
@@ -850,7 +870,7 @@ declare namespace React {
          * or scrolls along with its containing block.
          * See CSS 3 background-attachment property https://drafts.csswg.org/css-backgrounds-3/#the-background-attachment
          */
-        backgroundAttachment?: CSSWideKeyword | "scroll" | "fixed" | "local";
+        backgroundAttachment?: CSSWideKeyword | 'scroll' | 'fixed' | 'local';
 
         /**
          * This property describes how the element's background images should blend with each other and the element's background color.
@@ -1196,7 +1216,7 @@ declare namespace React {
          * Describes the number of columns of the element.
          * See CSS 3 column-count property https://www.w3.org/TR/css3-multicol/#cc
          */
-        columnCount?: CSSWideKeyword | number | "auto";
+        columnCount?: CSSWideKeyword | number | 'auto';
 
         /**
          * Specifies how to fill columns (balanced or sequential).
@@ -1332,7 +1352,7 @@ declare namespace React {
         /**
          * The flex-direction CSS property describes how flex items are placed in the flex container, by setting the direction of the flex container's main axis.
          */
-        flexDirection?: CSSWideKeyword | "row" | "row-reverse" | "column" | "column-reverse";
+        flexDirection?: CSSWideKeyword | 'row' | 'row-reverse' | 'column' | 'column-reverse';
 
         /**
          * The flex-flow CSS property defines the flex container's main and cross axis. It is a shorthand property for the flex-direction and flex-wrap properties.
@@ -1373,7 +1393,7 @@ declare namespace React {
          * If wrapping is allowed, this property also enables you to control the direction in which lines are stacked.
          * See CSS flex-wrap property https://drafts.csswg.org/css-flexbox-1/#flex-wrap-property
          */
-        flexWrap?: CSSWideKeyword | "nowrap" | "wrap" | "wrap-reverse";
+        flexWrap?: CSSWideKeyword | 'nowrap' | 'wrap' | 'wrap-reverse';
 
         /**
          * Elements which have the style float are floated horizontally.
@@ -1410,10 +1430,19 @@ declare namespace React {
          * Specifies the size of the font. Used to compute em and ex units.
          * See CSS 3 font-size property https://www.w3.org/TR/css-fonts-3/#propdef-font-size
          */
-        fontSize?: CSSWideKeyword |
-        "xx-small" | "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large" |
-        "larger" | "smaller" |
-        CSSLength | CSSPercentage;
+        fontSize?:
+            | CSSWideKeyword
+            | 'xx-small'
+            | 'x-small'
+            | 'small'
+            | 'medium'
+            | 'large'
+            | 'x-large'
+            | 'xx-large'
+            | 'larger'
+            | 'smaller'
+            | CSSLength
+            | CSSPercentage;
 
         /**
          * The font-size-adjust property adjusts the font-size of the fallback fonts defined with font-family,
@@ -1421,15 +1450,23 @@ declare namespace React {
          * This preserves the readability of the text when fallback happens.
          * See CSS 3 font-size-adjust property https://www.w3.org/TR/css-fonts-3/#propdef-font-size-adjust
          */
-        fontSizeAdjust?: CSSWideKeyword | "none" | number;
+        fontSizeAdjust?: CSSWideKeyword | 'none' | number;
 
         /**
          * Allows you to expand or condense the widths for a normal, condensed, or expanded font face.
          * See CSS 3 font-stretch property https://drafts.csswg.org/css-fonts-3/#propdef-font-stretch
          */
-        fontStretch?: CSSWideKeyword |
-        "normal" | "ultra-condensed" | "extra-condensed" | "condensed" | "semi-condensed" |
-        "semi-expanded" | "expanded" | "extra-expanded" | "ultra-expanded";
+        fontStretch?:
+            | CSSWideKeyword
+            | 'normal'
+            | 'ultra-condensed'
+            | 'extra-condensed'
+            | 'condensed'
+            | 'semi-condensed'
+            | 'semi-expanded'
+            | 'expanded'
+            | 'extra-expanded'
+            | 'ultra-expanded';
 
         /**
          * The font-style property allows normal, italic, or oblique faces to be selected.
@@ -1437,7 +1474,7 @@ declare namespace React {
          * Oblique faces can be simulated by artificially sloping the glyphs of the regular face.
          * See CSS 3 font-style property https://www.w3.org/TR/css-fonts-3/#propdef-font-style
          */
-        fontStyle?: CSSWideKeyword | "normal" | "italic" | "oblique";
+        fontStyle?: CSSWideKeyword | 'normal' | 'italic' | 'oblique';
 
         /**
          * This value specifies whether the user agent is allowed to synthesize bold or oblique font faces when a font family lacks bold or italic faces.
@@ -1458,7 +1495,21 @@ declare namespace React {
          * Specifies the weight or boldness of the font.
          * See CSS 3 'font-weight' property https://www.w3.org/TR/css-fonts-3/#propdef-font-weight
          */
-        fontWeight?: CSSWideKeyword | "normal" | "bold" | "bolder" | "lighter" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        fontWeight?:
+            | CSSWideKeyword
+            | 'normal'
+            | 'bold'
+            | 'bolder'
+            | 'lighter'
+            | 100
+            | 200
+            | 300
+            | 400
+            | 500
+            | 600
+            | 700
+            | 800
+            | 900;
 
         /**
          * Lays out one or more grid items bound by 4 grid lines. Shorthand for setting grid-column-start, grid-column-end, grid-row-start, and grid-row-end in a single declaration.
@@ -1555,7 +1606,14 @@ declare namespace React {
          * along the main-axis of their container.
          * See CSS justify-content property https://www.w3.org/TR/css-flexbox-1/#justify-content-property
          */
-        justifyContent?: CSSWideKeyword | "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
+        justifyContent?:
+            | CSSWideKeyword
+            | 'flex-start'
+            | 'flex-end'
+            | 'center'
+            | 'space-between'
+            | 'space-around'
+            | 'space-evenly';
 
         layoutGrid?: CSSWideKeyword | any;
 
@@ -1588,7 +1646,7 @@ declare namespace React {
          * Specifies the height of an inline block level element.
          * See CSS 2.1 line-height property https://www.w3.org/TR/CSS21/visudet.html#propdef-line-height
          */
-        lineHeight?: CSSWideKeyword | "normal" | number | CSSLength | CSSPercentage;
+        lineHeight?: CSSWideKeyword | 'normal' | number | CSSLength | CSSPercentage;
 
         /**
          * Shorthand property that sets the list-style-type, list-style-position and list-style-image properties in one declaration.
@@ -1773,7 +1831,7 @@ declare namespace React {
          * The overflow property controls how extra content exceeding the bounding box of an element is rendered.
          * It can be used in conjunction with an element that has a fixed width and height, to eliminate text-induced page distortion.
          */
-        overflow?: CSSWideKeyword | "auto" | "hidden" | "scroll" | "visible";
+        overflow?: CSSWideKeyword | 'auto' | 'hidden' | 'scroll' | 'visible';
 
         /**
          * Specifies the preferred scrolling methods for elements that overflow.
@@ -1783,12 +1841,12 @@ declare namespace React {
         /**
          * Controls how extra content exceeding the x-axis of the bounding box of an element is rendered.
          */
-        overflowX?: CSSWideKeyword | "auto" | "hidden" | "scroll" | "visible";
+        overflowX?: CSSWideKeyword | 'auto' | 'hidden' | 'scroll' | 'visible';
 
         /**
          * Controls how extra content exceeding the y-axis of the bounding box of an element is rendered.
          */
-        overflowY?: CSSWideKeyword | "auto" | "hidden" | "scroll" | "visible";
+        overflowY?: CSSWideKeyword | 'auto' | 'hidden' | 'scroll' | 'visible';
 
         /**
          * The padding optional CSS property sets the required padding space on one to four sides of an element.
@@ -1896,7 +1954,7 @@ declare namespace React {
          * The position property controls the type of positioning used by an element within its parent elements.
          * The effect of the position property depends on a lot of factors, for example the position property of parent elements.
          */
-        position?: CSSWideKeyword | "static" | "relative" | "absolute" | "fixed" | "sticky";
+        position?: CSSWideKeyword | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
 
         /**
          * Obsolete: unsupported.
@@ -2380,13 +2438,13 @@ declare namespace React {
          * When elements overlap, z-order determines which one covers the other.
          * See CSS 2 z-index property https://www.w3.org/TR/CSS2/visuren.html#z-index
          */
-        zIndex?: CSSWideKeyword | "auto" | number;
+        zIndex?: CSSWideKeyword | 'auto' | number;
 
         /**
          * Sets the initial zoom factor of a document defined by @viewport.
          * See CSS zoom descriptor https://drafts.csswg.org/css-device-adapt/#zoom-desc
          */
-        zoom?: CSSWideKeyword | "auto" | number | CSSPercentage;
+        zoom?: CSSWideKeyword | 'auto' | number | CSSPercentage;
 
         [propertyName: string]: any;
     }
@@ -2863,7 +2921,7 @@ declare namespace React {
 
     interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
         alt?: string;
-        crossOrigin?: "anonymous" | "use-credentials" | "";
+        crossOrigin?: 'anonymous' | 'use-credentials' | '';
         height?: number | string;
         sizes?: string;
         src?: string;
@@ -3160,14 +3218,26 @@ declare namespace React {
 
         // SVG Specific attributes
         accentHeight?: number | string;
-        accumulate?: "none" | "sum";
-        additive?: "replace" | "sum";
-        alignmentBaseline?: "auto" | "baseline" | "before-edge" | "text-before-edge" | "middle" | "central" | "after-edge" |
-        "text-after-edge" | "ideographic" | "alphabetic" | "hanging" | "mathematical" | "inherit";
-        allowReorder?: "no" | "yes";
+        accumulate?: 'none' | 'sum';
+        additive?: 'replace' | 'sum';
+        alignmentBaseline?:
+            | 'auto'
+            | 'baseline'
+            | 'before-edge'
+            | 'text-before-edge'
+            | 'middle'
+            | 'central'
+            | 'after-edge'
+            | 'text-after-edge'
+            | 'ideographic'
+            | 'alphabetic'
+            | 'hanging'
+            | 'mathematical'
+            | 'inherit';
+        allowReorder?: 'no' | 'yes';
         alphabetic?: number | string;
         amplitude?: number | string;
-        arabicForm?: "initial" | "medial" | "terminal" | "isolated";
+        arabicForm?: 'initial' | 'medial' | 'terminal' | 'isolated';
         ascent?: number | string;
         attributeName?: string;
         attributeType?: string;
@@ -3187,7 +3257,7 @@ declare namespace React {
         clipPathUnits?: number | string;
         clipRule?: number | string;
         colorInterpolation?: number | string;
-        colorInterpolationFilters?: "auto" | "sRGB" | "linearRGB" | "inherit";
+        colorInterpolationFilters?: 'auto' | 'sRGB' | 'linearRGB' | 'inherit';
         colorProfile?: number | string;
         colorRendering?: number | string;
         contentScriptType?: number | string;
@@ -3214,7 +3284,7 @@ declare namespace React {
         externalResourcesRequired?: number | string;
         fill?: string;
         fillOpacity?: number | string;
-        fillRule?: "nonzero" | "evenodd" | "inherit";
+        fillRule?: 'nonzero' | 'evenodd' | 'inherit';
         filter?: string;
         filterRes?: number | string;
         filterUnits?: number | string;
@@ -3337,8 +3407,8 @@ declare namespace React {
         stroke?: string;
         strokeDasharray?: string | number;
         strokeDashoffset?: string | number;
-        strokeLinecap?: "butt" | "round" | "square" | "inherit";
-        strokeLinejoin?: "miter" | "round" | "bevel" | "inherit";
+        strokeLinecap?: 'butt' | 'round' | 'square' | 'inherit';
+        strokeLinejoin?: 'miter' | 'round' | 'bevel' | 'inherit';
         strokeMiterlimit?: number | string;
         strokeOpacity?: number | string;
         strokeWidth?: number | string;
@@ -3518,7 +3588,7 @@ declare namespace React {
         track: DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>;
         u: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
         ul: DetailedHTMLFactory<HTMLAttributes<HTMLUListElement>, HTMLUListElement>;
-        "var": DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
+        var: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
         video: DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
         wbr: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
         webview: DetailedHTMLFactory<WebViewHTMLAttributes<HTMLElement>, HTMLElement>;
@@ -3548,19 +3618,21 @@ declare namespace React {
         use: SVGFactory;
     }
 
-    interface ReactDOM extends ReactHTML, ReactSVG { }
+    interface ReactDOM extends ReactHTML, ReactSVG {}
 
     //
     // React.PropTypes
     // ----------------------------------------------------------------------
 
-    type Validator<T> = { bivarianceHack(object: T, key: string, componentName: string, ...rest: any[]): Error | null }["bivarianceHack"];
+    type Validator<T> = {
+        bivarianceHack(object: T, key: string, componentName: string, ...rest: any[]): Error | null;
+    }['bivarianceHack'];
 
     interface Requireable<T> extends Validator<T> {
         isRequired: Validator<T>;
     }
 
-    type ValidationMap<T> = {[K in keyof T]?: Validator<T> };
+    type ValidationMap<T> = { [K in keyof T]?: Validator<T> };
 
     interface ReactPropTypes {
         any: Requireable<any>;
@@ -3625,17 +3697,21 @@ declare namespace React {
 declare global {
     namespace JSX {
         // tslint:disable-next-line:no-empty-interface
-        interface Element extends React.ReactElement { }
+        interface Element extends React.ReactElement {}
         interface ElementClass extends React.Component<any> {
             render(): JSX.Element | null | false;
         }
-        interface ElementAttributesProperty { props: {}; }
-        interface ElementChildrenAttribute { children: {}; }
+        interface ElementAttributesProperty {
+            props: {};
+        }
+        interface ElementChildrenAttribute {
+            children: {};
+        }
 
         // tslint:disable-next-line:no-empty-interface
-        interface IntrinsicAttributes extends React.Attributes { }
+        interface IntrinsicAttributes extends React.Attributes {}
         // tslint:disable-next-line:no-empty-interface
-        interface IntrinsicClassAttributes<T> extends React.ClassAttributes<T> { }
+        interface IntrinsicClassAttributes<T> extends React.ClassAttributes<T> {}
 
         interface IntrinsicElements {
             // HTML
@@ -3751,7 +3827,7 @@ declare global {
             track: React.DetailedHTMLProps<React.TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>;
             u: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             ul: React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>;
-            "var": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            var: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             video: React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
             wbr: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             webview: React.DetailedHTMLProps<React.WebViewHTMLAttributes<HTMLElement>, HTMLElement>;

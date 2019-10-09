@@ -6,7 +6,7 @@
 
 export function getIfUtils<E extends EnvVars | string>(
     env: { [P in E]: boolean | string } | E,
-    vars?: Array<EnvVars | string>
+    vars?: Array<EnvVars | string>,
 ): IfUtils;
 export function removeEmpty<T>(input: Array<T | undefined>): T[];
 export function removeEmpty<T>(input: { [P in keyof T]: T[P] }): NonEmptyObject<T>;

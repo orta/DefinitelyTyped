@@ -111,7 +111,7 @@ export interface CommonWrapper<P = {}, S = {}, C = Component<P, S>> {
             }[keyof P]
         >
     >(
-        invokePropName: K
+        invokePropName: K,
     ): P[K];
 
     /**
@@ -444,7 +444,7 @@ export class ShallowWrapper<P = {}, S = {}, C = Component> {
      * NOTE: can only be called on wrapper of a single non-DOM component element node.
      */
     dive<C2 extends Component, P2 = C2['props'], S2 = C2['state']>(
-        options?: ShallowRendererProps
+        options?: ShallowRendererProps,
     ): ShallowWrapper<P2, S2, C2>;
     dive<P2, S2>(options?: ShallowRendererProps): ShallowWrapper<P2, S2>;
     dive<P2, S2, C2>(options?: ShallowRendererProps): ShallowWrapper<P2, S2, C2>;
@@ -488,7 +488,7 @@ export class ShallowWrapper<P = {}, S = {}, C = Component> {
      * Returns a wrapper of the node rendered by the provided render prop.
      */
     renderProp<PropName extends keyof P>(
-        prop: PropName
+        prop: PropName,
     ): (...params: Parameters<P[PropName]>) => ShallowWrapper<any, never>;
 
     /**
@@ -704,7 +704,7 @@ export interface MountRendererProps {
  */
 export function shallow<C extends Component, P = C['props'], S = C['state']>(
     node: ReactElement<P>,
-    options?: ShallowRendererProps
+    options?: ShallowRendererProps,
 ): ShallowWrapper<P, S, C>;
 export function shallow<P>(node: ReactElement<P>, options?: ShallowRendererProps): ShallowWrapper<P, any>;
 export function shallow<P, S>(node: ReactElement<P>, options?: ShallowRendererProps): ShallowWrapper<P, S>;
@@ -714,7 +714,7 @@ export function shallow<P, S>(node: ReactElement<P>, options?: ShallowRendererPr
  */
 export function mount<C extends Component, P = C['props'], S = C['state']>(
     node: ReactElement<P>,
-    options?: MountRendererProps
+    options?: MountRendererProps,
 ): ReactWrapper<P, S, C>;
 export function mount<P>(node: ReactElement<P>, options?: MountRendererProps): ReactWrapper<P, any>;
 export function mount<P, S>(node: ReactElement<P>, options?: MountRendererProps): ReactWrapper<P, S>;

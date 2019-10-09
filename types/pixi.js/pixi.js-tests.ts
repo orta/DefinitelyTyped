@@ -8,7 +8,7 @@ function basics() {
             this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.bunny = PIXI.Sprite.fromImage("required/assets/basics/bunny.png");
+            this.bunny = PIXI.Sprite.fromImage('required/assets/basics/bunny.png');
             this.bunny.anchor.set(0.5);
             this.bunny.x = this.app.renderer.width / 2;
             this.bunny.y = this.app.renderer.height / 2;
@@ -37,14 +37,14 @@ function basics() {
             this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.sprite = PIXI.Sprite.fromImage("../../_assets/basics/bunny.png");
+            this.sprite = PIXI.Sprite.fromImage('../../_assets/basics/bunny.png');
             this.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
             this.sprite.anchor.set(0.5);
             this.sprite.x = this.app.renderer.width / 2;
             this.sprite.y = this.app.renderer.height / 2;
             this.sprite.interactive = true;
             this.sprite.buttonMode = true;
-            this.sprite.on("pointerdown", (): void => {
+            this.sprite.on('pointerdown', (): void => {
                 this.sprite.scale.x *= 1.25;
                 this.sprite.scale.y *= 1.25;
             });
@@ -63,7 +63,7 @@ function basics() {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            const texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
+            const texture = PIXI.Texture.fromImage('../../_assets/basics/bunny.png');
 
             for (let i = 0; i < 25; i++) {
                 const bunny = new PIXI.Sprite(texture);
@@ -96,7 +96,7 @@ function basics() {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            const texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
+            const texture = PIXI.Texture.fromImage('../../_assets/basics/bunny.png');
 
             for (let i = 0; i < 25; i++) {
                 const bunny = new PIXI.Sprite(texture);
@@ -115,9 +115,9 @@ function basics() {
         constructor(fragmentSource: string) {
             super(null, fragmentSource, {
                 customUniform: {
-                    type: "1f",
-                    value: 0
-                }
+                    type: '1f',
+                    value: 0,
+                },
             });
         }
     }
@@ -130,14 +130,15 @@ function basics() {
             this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.background = PIXI.Sprite.fromImage("required/assets/bkg-grass.jpg");
+            this.background = PIXI.Sprite.fromImage('required/assets/bkg-grass.jpg');
             this.background.width = this.app.renderer.width;
             this.background.height = this.app.renderer.height;
             this.app.stage.addChild(this.background);
 
             this.app.stop();
 
-            PIXI.loader.add("shader", "_assets/basics/shader.frag")
+            PIXI.loader
+                .add('shader', '_assets/basics/shader.frag')
                 .load((loader: PIXI.loaders.Loader, resource: any): void => {
                     this.filter = new PIXI.Filter(null, resource.shader.data);
                     this.background.filters = [this.filter];
@@ -161,7 +162,7 @@ function basics() {
             const graphics = new PIXI.Graphics();
 
             // set a fill and line style
-            graphics.beginFill(0xFF3300);
+            graphics.beginFill(0xff3300);
             graphics.lineStyle(4, 0xffd900, 1);
 
             // draw a shape
@@ -172,19 +173,19 @@ function basics() {
             graphics.endFill();
 
             // set a fill and a line style again and draw a rectangle
-            graphics.lineStyle(2, 0x0000FF, 1);
-            graphics.beginFill(0xFF700B, 1);
+            graphics.lineStyle(2, 0x0000ff, 1);
+            graphics.beginFill(0xff700b, 1);
             graphics.drawRect(50, 250, 120, 120);
 
             // draw a rounded rectangle
-            graphics.lineStyle(2, 0xFF00FF, 1);
-            graphics.beginFill(0xFF00BB, 0.25);
+            graphics.lineStyle(2, 0xff00ff, 1);
+            graphics.beginFill(0xff00bb, 0.25);
             graphics.drawRoundedRect(150, 450, 300, 100, 15);
             graphics.endFill();
 
             // draw a circle, set the lineStyle to zero so the circle doesn"t have an outline
             graphics.lineStyle(0);
-            graphics.beginFill(0xFFFF0B, 0.5);
+            graphics.beginFill(0xffff0b, 0.5);
             graphics.drawCircle(470, 90, 60);
             graphics.endFill();
 
@@ -207,7 +208,7 @@ function basics() {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            const texture = PIXI.Texture.fromImage("required/assets/basics/bunny.png");
+            const texture = PIXI.Texture.fromImage('required/assets/basics/bunny.png');
 
             for (let i = 0; i < 25; i++) {
                 const bunny = new PIXI.Sprite(texture);
@@ -240,12 +241,12 @@ function basics() {
 
         constructor() {
             PIXI.loader
-                .add("required/assets/basics/fighter.json")
+                .add('required/assets/basics/fighter.json')
                 .load((loader: PIXI.loaders.Loader, resource: any) => {
                     const frames = [];
 
                     for (let i = 0; i < 30; i++) {
-                        const val = i < 10 ? "0" + i : i;
+                        const val = i < 10 ? '0' + i : i;
 
                         frames.push(PIXI.Texture.fromFrame(`rollSequence00${val}.png`));
                     }
@@ -276,29 +277,29 @@ function basics() {
             this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.basicText = new PIXI.Text("Basic text in pixi");
+            this.basicText = new PIXI.Text('Basic text in pixi');
             this.basicText.x = 30;
             this.basicText.y = 90;
             this.app.stage.addChild(this.basicText);
 
             const style = new PIXI.TextStyle({
-                fontFamily: "Arial",
+                fontFamily: 'Arial',
                 fontSize: 36,
-                fontStyle: "italic",
-                fontWeight: "bold",
-                fill: ["#ffffff", "#fff0b5"],
-                stroke: "#4a1850",
+                fontStyle: 'italic',
+                fontWeight: 'bold',
+                fill: ['#ffffff', '#fff0b5'],
+                stroke: '#4a1850',
                 strokeThickness: 5,
                 dropShadow: true,
-                dropShadowColor: "#000000",
+                dropShadowColor: '#000000',
                 dropShadowBlur: 4,
                 dropShadowAngle: Math.PI / 6,
                 dropShadowDistance: 6,
                 wordWrap: true,
-                wordWrapWidth: 440
+                wordWrapWidth: 440,
             });
 
-            this.richText = new PIXI.Text("Rich text with a lot of options and across multiple lines", style);
+            this.richText = new PIXI.Text('Rich text with a lot of options and across multiple lines', style);
             this.richText.x = 30;
             this.richText.y = 180;
             this.app.stage.addChild(this.richText);
@@ -319,7 +320,7 @@ function basics() {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
             }
 
-            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
+            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage('required/assets/snake.png'), this.points);
             this.strip.x = -40;
             this.strip.y = 300;
             this.app.stage.addChild(this.strip);
@@ -335,8 +336,8 @@ function basics() {
 
                 // make the snake
                 for (let i = 0; i < this.points.length; i++) {
-                    this.points[i].y = Math.sin((i * 0.5) + this.count) * 30;
-                    this.points[i].x = i * ropeLength + Math.cos((i * 0.3) + this.count) * 20;
+                    this.points[i].y = Math.sin(i * 0.5 + this.count) * 30;
+                    this.points[i].x = i * ropeLength + Math.cos(i * 0.3 + this.count) * 20;
                 }
                 this.renderPoints();
             });
@@ -368,12 +369,12 @@ function basics() {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            const texture = PIXI.Texture.fromImage("required/assets/p2.jpeg");
+            const texture = PIXI.Texture.fromImage('required/assets/p2.jpeg');
 
             this.tilingSprite = new PIXI.extras.TilingSprite(
                 texture,
                 this.app.renderer.width,
-                this.app.renderer.height
+                this.app.renderer.height,
             );
             this.app.stage.addChild(this.tilingSprite);
 
@@ -419,10 +420,10 @@ function basics() {
             // Add to the stage
             this.app.stage.addChild(this.button);
 
-            this.button.on("pointertap", (): void => {
+            this.button.on('pointertap', (): void => {
                 this.button.destroy();
 
-                const texture = PIXI.Texture.fromVideo("required/assets/testVideo.mp4");
+                const texture = PIXI.Texture.fromVideo('required/assets/testVideo.mp4');
 
                 this.videoSprite = new PIXI.Sprite(texture);
                 this.videoSprite.width = this.app.renderer.width;
@@ -446,13 +447,13 @@ function demos() {
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/bkg.jpg");
+            this.bg = PIXI.Sprite.fromImage('required/assets/bkg.jpg');
             this.app.stage.addChild(this.bg);
 
-            this.cells = PIXI.Sprite.fromImage("required/assets/cells.png");
+            this.cells = PIXI.Sprite.fromImage('required/assets/cells.png');
             this.cells.scale.set(1.5);
 
-            this.mask = PIXI.Sprite.fromImage("required/assets/flowerTop.png");
+            this.mask = PIXI.Sprite.fromImage('required/assets/flowerTop.png');
             this.mask.anchor.set(0.5);
             this.mask.x = 310;
             this.mask.y = 190;
@@ -489,30 +490,28 @@ function demos() {
             this.app.stop();
             document.body.appendChild(this.app.view);
 
-            PIXI.loader
-                .add("spritesheet", "required/assets/mc.json")
-                .load((): void => {
-                    const explosionTextures: PIXI.Texture[] = [];
+            PIXI.loader.add('spritesheet', 'required/assets/mc.json').load((): void => {
+                const explosionTextures: PIXI.Texture[] = [];
 
-                    for (let i = 0; i < 26; i++) {
-                        const texture = PIXI.Texture.fromFrame(`Explosion_Sequence_A ${i + 1}.png`);
-                        explosionTextures.push(texture);
-                    }
+                for (let i = 0; i < 26; i++) {
+                    const texture = PIXI.Texture.fromFrame(`Explosion_Sequence_A ${i + 1}.png`);
+                    explosionTextures.push(texture);
+                }
 
-                    for (let i = 0; i < 50; i++) {
-                        const explosion = new PIXI.extras.AnimatedSprite(explosionTextures);
+                for (let i = 0; i < 50; i++) {
+                    const explosion = new PIXI.extras.AnimatedSprite(explosionTextures);
 
-                        explosion.x = Math.random() * this.app.renderer.width;
-                        explosion.y = Math.random() * this.app.renderer.height;
-                        explosion.anchor.set(0.5);
-                        explosion.rotation = Math.random() * Math.PI;
-                        explosion.scale.set(0.75 + Math.random() * 0.5);
-                        explosion.gotoAndPlay(Math.random() * 27);
-                        this.app.stage.addChild(explosion);
-                    }
+                    explosion.x = Math.random() * this.app.renderer.width;
+                    explosion.y = Math.random() * this.app.renderer.height;
+                    explosion.anchor.set(0.5);
+                    explosion.rotation = Math.random() * Math.PI;
+                    explosion.scale.set(0.75 + Math.random() * 0.5);
+                    explosion.gotoAndPlay(Math.random() * 27);
+                    this.app.stage.addChild(explosion);
+                }
 
-                    this.app.start();
-                });
+                this.app.start();
+            });
         }
     }
 
@@ -532,7 +531,7 @@ function demos() {
                 position: true,
                 rotation: true,
                 uvs: true,
-                tint: true
+                tint: true,
             });
             this.app.stage.addChild(this.sprites);
 
@@ -540,11 +539,11 @@ function demos() {
 
             const totalSprites = this.app.renderer instanceof PIXI.WebGLRenderer ? 10000 : 100;
 
-            const dudeTexture = PIXI.Texture.fromImage("required/assets/tinyMaggot.png");
+            const dudeTexture = PIXI.Texture.fromImage('required/assets/tinyMaggot.png');
 
             for (let i = 0; i < totalSprites; i++) {
                 const dude = new Dude(dudeTexture);
-                dude.tint = Math.random() * 0xE8D4CD;
+                dude.tint = Math.random() * 0xe8d4cd;
                 dude.anchor.set(0.5);
                 dude.scale.set(0.8 + Math.random() * 0.3);
                 dude.x = Math.random() * this.app.renderer.width;
@@ -563,7 +562,7 @@ function demos() {
                 -dudeBoundsPadding,
                 -dudeBoundsPadding,
                 this.app.renderer.width + dudeBoundsPadding * 2,
-                this.app.renderer.height + dudeBoundsPadding * 2
+                this.app.renderer.height + dudeBoundsPadding * 2,
             );
 
             this.tick = 0;
@@ -615,13 +614,13 @@ function demos() {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            this.background = PIXI.Sprite.fromImage("required/assets/BGrotate.jpg");
+            this.background = PIXI.Sprite.fromImage('required/assets/BGrotate.jpg');
             this.app.stage.addChild(this.background);
 
             this.dudeArray = [];
 
             const totalDudes = 20;
-            const dudeTexture = PIXI.Texture.fromImage("required/assets/flowerTop.png");
+            const dudeTexture = PIXI.Texture.fromImage('required/assets/flowerTop.png');
 
             for (let i = 0; i < totalDudes; i++) {
                 const dude = new Dude(dudeTexture);
@@ -643,7 +642,7 @@ function demos() {
                 -dudeBoundsPadding,
                 -dudeBoundsPadding,
                 this.app.renderer.width + dudeBoundsPadding * 2,
-                this.app.renderer.height + dudeBoundsPadding * 2
+                this.app.renderer.height + dudeBoundsPadding * 2,
             );
 
             this.app.ticker.add((): void => {
@@ -684,12 +683,7 @@ function demos() {
             this.app.stop();
 
             this.aliens = [];
-            const alienFrames = [
-                "eggHead.png",
-                "flowerTop.png",
-                "helmlok.png",
-                "skully.png"
-            ];
+            const alienFrames = ['eggHead.png', 'flowerTop.png', 'helmlok.png', 'skully.png'];
 
             this.count = 0;
 
@@ -698,40 +692,38 @@ function demos() {
             this.alienContainer.y = 300;
             this.app.stage.addChild(this.alienContainer);
 
-            PIXI.loader
-                .add("spritesheet", "required/assets/monsters.json")
-                .load((): void => {
-                    for (let i = 0; i < 100; i++) {
-                        const frameName = alienFrames[i % 4];
+            PIXI.loader.add('spritesheet', 'required/assets/monsters.json').load((): void => {
+                for (let i = 0; i < 100; i++) {
+                    const frameName = alienFrames[i % 4];
 
-                        const alien = PIXI.Sprite.fromFrame(frameName);
-                        alien.tint = Math.random() * 0xFFFFFF;
-                        alien.x = Math.random() * 800 - 400;
-                        alien.y = Math.random() * 600 - 300;
-                        alien.anchor.x = 0.5;
-                        alien.anchor.y = 0.5;
-                        this.aliens.push(alien);
-                        this.alienContainer.addChild(alien);
-                    }
-                    this.app.start();
+                    const alien = PIXI.Sprite.fromFrame(frameName);
+                    alien.tint = Math.random() * 0xffffff;
+                    alien.x = Math.random() * 800 - 400;
+                    alien.y = Math.random() * 600 - 300;
+                    alien.anchor.x = 0.5;
+                    alien.anchor.y = 0.5;
+                    this.aliens.push(alien);
+                    this.alienContainer.addChild(alien);
+                }
+                this.app.start();
 
-                    this.app.stage.on("pointerTap", (event: PIXI.interaction.InteractionEvent): void => {
-                        this.alienContainer.cacheAsBitmap = !this.alienContainer.cacheAsBitmap;
-                    });
-                    this.app.ticker.add((): void => {
-                        // let"s rotate the aliens a little bit
-                        for (let i = 0; i < 100; i++) {
-                            const alien = this.aliens[i];
-                            alien.rotation += 0.1;
-                        }
-
-                        this.count += 0.01;
-
-                        this.alienContainer.scale.x = Math.sin(this.count);
-                        this.alienContainer.scale.y = Math.sin(this.count);
-                        this.alienContainer.rotation += 0.01;
-                    });
+                this.app.stage.on('pointerTap', (event: PIXI.interaction.InteractionEvent): void => {
+                    this.alienContainer.cacheAsBitmap = !this.alienContainer.cacheAsBitmap;
                 });
+                this.app.ticker.add((): void => {
+                    // let"s rotate the aliens a little bit
+                    for (let i = 0; i < 100; i++) {
+                        const alien = this.aliens[i];
+                        alien.rotation += 0.1;
+                    }
+
+                    this.count += 0.01;
+
+                    this.alienContainer.scale.x = Math.sin(this.count);
+                    this.alienContainer.scale.y = Math.sin(this.count);
+                    this.alienContainer.rotation += 0.01;
+                });
+            });
         }
     }
 
@@ -744,14 +736,14 @@ function demos() {
             this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            const texture = PIXI.Texture.fromImage("required/assets/bunny.png");
+            const texture = PIXI.Texture.fromImage('required/assets/bunny.png');
             texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
             for (let i = 0; i < 10; i++) {
                 this.createBunny(
                     texture,
                     Math.floor(Math.random() * this.app.renderer.width),
-                    Math.floor(Math.random() * this.app.renderer.height)
+                    Math.floor(Math.random() * this.app.renderer.height),
                 );
             }
         }
@@ -763,22 +755,22 @@ function demos() {
             bunny.anchor.set(0.5);
             bunny.scale.set(3);
             bunny
-                .on("pointerdown", (event: PIXI.interaction.InteractionEvent): void => {
+                .on('pointerdown', (event: PIXI.interaction.InteractionEvent): void => {
                     this.data = event.data;
                     bunny.alpha = 0.5;
                     this.dragging = true;
                 })
-                .on("pointerup", (event: PIXI.interaction.InteractionEvent): void => {
+                .on('pointerup', (event: PIXI.interaction.InteractionEvent): void => {
                     this.data = null;
                     bunny.alpha = 0.5;
                     this.dragging = false;
                 })
-                .on("pointerupoutside", (event: PIXI.interaction.InteractionEvent): void => {
+                .on('pointerupoutside', (event: PIXI.interaction.InteractionEvent): void => {
                     this.data = null;
                     bunny.alpha = 0.5;
                     this.dragging = false;
                 })
-                .on("pointermove", (event: PIXI.interaction.InteractionEvent): void => {
+                .on('pointermove', (event: PIXI.interaction.InteractionEvent): void => {
                     if (this.dragging) {
                         const newPosition = this.data.getLocalPosition(bunny);
                         bunny.x = newPosition.x;
@@ -806,7 +798,7 @@ function demos() {
 
             const graphics = new PIXI.Graphics();
 
-            graphics.beginFill(0xFF3300);
+            graphics.beginFill(0xff3300);
             graphics.lineStyle(10, 0xffd900, 1);
 
             graphics.moveTo(50, 50);
@@ -817,8 +809,8 @@ function demos() {
             graphics.lineTo(50, 50);
             graphics.endFill();
 
-            graphics.lineStyle(10, 0xFF0000, 0.8);
-            graphics.beginFill(0xFF700B, 1);
+            graphics.lineStyle(10, 0xff0000, 0.8);
+            graphics.beginFill(0xff700b, 1);
 
             graphics.moveTo(210, 300);
             graphics.lineTo(450, 320);
@@ -829,15 +821,15 @@ function demos() {
             graphics.lineTo(210, 300);
             graphics.endFill();
 
-            graphics.lineStyle(2, 0x0000FF, 1);
+            graphics.lineStyle(2, 0x0000ff, 1);
             graphics.drawRect(50, 250, 100, 100);
 
             graphics.lineStyle(0);
-            graphics.beginFill(0xFFFF0B, 0.5);
+            graphics.beginFill(0xffff0b, 0.5);
             graphics.drawCircle(470, 200, 100);
             graphics.endFill();
 
-            graphics.lineStyle(20, 0x33FF00);
+            graphics.lineStyle(20, 0x33ff00);
             graphics.moveTo(30, 30);
             graphics.lineTo(600, 300);
 
@@ -852,13 +844,16 @@ function demos() {
 
             this.count = 0;
 
-            this.app.stage.on("pointertap", (): void => {
-                this.graphics.lineStyle(Math.random() * 30, Math.random() * 0xFFFFFF, 1);
+            this.app.stage.on('pointertap', (): void => {
+                this.graphics.lineStyle(Math.random() * 30, Math.random() * 0xffffff, 1);
                 this.graphics.moveTo(Math.random() * 800, Math.random() * 600);
                 this.graphics.bezierCurveTo(
-                    Math.random() * 800, Math.random() * 600,
-                    Math.random() * 800, Math.random() * 600,
-                    Math.random() * 800, Math.random() * 600
+                    Math.random() * 800,
+                    Math.random() * 600,
+                    Math.random() * 800,
+                    Math.random() * 600,
+                    Math.random() * 800,
+                    Math.random() * 600,
                 );
             });
 
@@ -867,7 +862,7 @@ function demos() {
 
                 this.thing.clear();
                 this.thing.lineStyle(10, 0xff0000, 1);
-                this.thing.beginFill(0xffFF00, 0.5);
+                this.thing.beginFill(0xffff00, 0.5);
 
                 this.thing.moveTo(-120 + Math.sin(this.count) * 20, -100 + Math.cos(this.count) * 20);
                 this.thing.lineTo(120 + Math.cos(this.count) * 20, -100 + Math.sin(this.count) * 20);
@@ -889,7 +884,7 @@ function demos() {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            const background = PIXI.Sprite.fromImage("required/assets/button_test_BG.jpg");
+            const background = PIXI.Sprite.fromImage('required/assets/button_test_BG.jpg');
             background.width = this.app.renderer.width;
             background.height = this.app.renderer.height;
             this.background = background;
@@ -897,17 +892,11 @@ function demos() {
 
             this.buttons = [];
 
-            const buttonPositions = [
-                175, 75,
-                655, 75,
-                410, 325,
-                150, 465,
-                685, 445
-            ];
+            const buttonPositions = [175, 75, 655, 75, 410, 325, 150, 465, 685, 445];
 
-            const textureButton = PIXI.Texture.fromImage("../../_assets/button.png");
-            const textureButtonDown = PIXI.Texture.fromImage("../../_assets/buttonDown.png");
-            const textureButtonOver = PIXI.Texture.fromImage("../../_assets/buttonOver.png");
+            const textureButton = PIXI.Texture.fromImage('../../_assets/button.png');
+            const textureButtonDown = PIXI.Texture.fromImage('../../_assets/buttonDown.png');
+            const textureButtonOver = PIXI.Texture.fromImage('../../_assets/buttonOver.png');
 
             for (let i = 0; i < 5; i++) {
                 const button = new PIXI.Sprite(textureButton);
@@ -918,19 +907,19 @@ function demos() {
                 button.buttonMode = true;
 
                 button
-                    .on("pointerdown", (): void => {
+                    .on('pointerdown', (): void => {
                         // blah
                     })
-                    .on("pointerup", (): void => {
+                    .on('pointerup', (): void => {
                         // blah
                     })
-                    .on("pointerupoutside", (): void => {
+                    .on('pointerupoutside', (): void => {
                         // blah
                     })
-                    .on("pointerover", (): void => {
+                    .on('pointerover', (): void => {
                         // blah
                     })
-                    .on("pointerout", (): void => {
+                    .on('pointerout', (): void => {
                         // blah
                     });
 
@@ -963,7 +952,7 @@ function demos() {
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/BGrotate.jpg");
+            this.bg = PIXI.Sprite.fromImage('required/assets/BGrotate.jpg');
             this.bg.anchor.set(0.5);
             this.bg.x = this.app.renderer.width / 2;
             this.bg.y = this.app.renderer.height / 2;
@@ -974,16 +963,16 @@ function demos() {
             this.container.y = this.app.renderer.height / 2;
             this.app.stage.addChild(this.container);
 
-            this.bgFront = PIXI.Sprite.fromImage("required/assets/SceneRotate.jpg");
+            this.bgFront = PIXI.Sprite.fromImage('required/assets/SceneRotate.jpg');
             this.bgFront.anchor.set(0.5);
 
-            this.light2 = PIXI.Sprite.fromImage("required/assets/LightRotate2.png");
+            this.light2 = PIXI.Sprite.fromImage('required/assets/LightRotate2.png');
             this.light2.anchor.set(0.5);
 
-            this.light1 = PIXI.Sprite.fromImage("required/assets/LightRotate1.png");
+            this.light1 = PIXI.Sprite.fromImage('required/assets/LightRotate1.png');
             this.light1.anchor.set(0.5);
 
-            this.panda = PIXI.Sprite.fromImage("required/assets/panda.png");
+            this.panda = PIXI.Sprite.fromImage('required/assets/panda.png');
             this.panda.anchor.set(0.5);
 
             this.container.addChild(this.bgFront, this.light2, this.light1, this.panda);
@@ -999,7 +988,7 @@ function demos() {
 
             this.count = 0;
 
-            this.app.stage.on("pointertap", (): void => {
+            this.app.stage.on('pointertap', (): void => {
                 if (!this.container.mask) {
                     this.container.mask = this.thing;
                 } else {
@@ -1052,14 +1041,8 @@ function demos() {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            this.renderTexture = PIXI.RenderTexture.create(
-                this.app.renderer.width,
-                this.app.renderer.height
-            );
-            this.renderTexture2 = PIXI.RenderTexture.create(
-                this.app.renderer.width,
-                this.app.renderer.height
-            );
+            this.renderTexture = PIXI.RenderTexture.create(this.app.renderer.width, this.app.renderer.height);
+            this.renderTexture2 = PIXI.RenderTexture.create(this.app.renderer.width, this.app.renderer.height);
             this.currentTexture = this.renderTexture;
 
             this.outputSprite = new PIXI.Sprite(this.currentTexture);
@@ -1074,14 +1057,14 @@ function demos() {
             this.app.stage.addChild(this.stuffContainer);
 
             const fruits = [
-                "required/assets/spinObj_01.png",
-                "required/assets/spinObj_02.png",
-                "required/assets/spinObj_03.png",
-                "required/assets/spinObj_04.png",
-                "required/assets/spinObj_05.png",
-                "required/assets/spinObj_06.png",
-                "required/assets/spinObj_07.png",
-                "required/assets/spinObj_08.png"
+                'required/assets/spinObj_01.png',
+                'required/assets/spinObj_02.png',
+                'required/assets/spinObj_03.png',
+                'required/assets/spinObj_04.png',
+                'required/assets/spinObj_05.png',
+                'required/assets/spinObj_06.png',
+                'required/assets/spinObj_07.png',
+                'required/assets/spinObj_08.png',
             ];
 
             this.items = [];
@@ -1139,7 +1122,7 @@ function demos() {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
             }
 
-            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
+            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage('required/assets/snake.png'), this.points);
             this.strip.x = -459;
 
             this.snakeContainer = new PIXI.Container();
@@ -1152,8 +1135,8 @@ function demos() {
             this.app.ticker.add((): void => {
                 this.count += 0.1;
                 for (let i = 0; i < this.points.length; i++) {
-                    this.points[i].y = Math.sin((i * 0.5) + this.count) * 30;
-                    this.points[i].x = i * ropeLength + Math.cos((i * 0.3) + this.count) * 20;
+                    this.points[i].y = Math.sin(i * 0.5 + this.count) * 30;
+                    this.points[i].x = i * ropeLength + Math.cos(i * 0.3 + this.count) * 20;
                 }
             });
         }
@@ -1172,50 +1155,51 @@ function demos() {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            PIXI.loader
-                .add("desyrel", "required/assets/desyrel.xml")
-                .load((): void => {
-                    this.bitmapFontText = new PIXI.extras.BitmapText("bitmap fonts are\n now supported!", { font: "35px Desyrel", align: "right" });
-                    this.bitmapFontText.x = this.app.renderer.width - this.bitmapFontText.textWidth - 20;
-                    this.bitmapFontText.y = 20;
-                    this.app.stage.addChild(this.bitmapFontText);
+            PIXI.loader.add('desyrel', 'required/assets/desyrel.xml').load((): void => {
+                this.bitmapFontText = new PIXI.extras.BitmapText('bitmap fonts are\n now supported!', {
+                    font: '35px Desyrel',
+                    align: 'right',
                 });
+                this.bitmapFontText.x = this.app.renderer.width - this.bitmapFontText.textWidth - 20;
+                this.bitmapFontText.y = 20;
+                this.app.stage.addChild(this.bitmapFontText);
+            });
 
-            this.background = PIXI.Sprite.fromImage("required/assets/textDemoBG.jpg");
+            this.background = PIXI.Sprite.fromImage('required/assets/textDemoBG.jpg');
             this.background.width = this.app.renderer.width;
             this.background.height = this.app.renderer.height;
             this.app.stage.addChild(this.background);
 
-            this.textSample = new PIXI.Text("Pixi.js can has\n multiline text!", {
-                fontFamily: "Snippet",
+            this.textSample = new PIXI.Text('Pixi.js can has\n multiline text!', {
+                fontFamily: 'Snippet',
                 fontSize: 35,
-                fill: "white",
-                align: "left"
+                fill: 'white',
+                align: 'left',
             });
             this.textSample.position.set(20);
 
-            this.spinningText = new PIXI.Text("I\"m fun!", {
-                fontWeight: "bold",
+            this.spinningText = new PIXI.Text('I"m fun!', {
+                fontWeight: 'bold',
                 fontSize: 60,
-                fontFamily: "Arial",
-                fill: "#cc00ff",
-                align: "center",
-                stroke: "#FFFFFF",
-                strokeThickness: 6
+                fontFamily: 'Arial',
+                fill: '#cc00ff',
+                align: 'center',
+                stroke: '#FFFFFF',
+                strokeThickness: 6,
             });
             this.spinningText.anchor.set(0.5);
             this.spinningText.x = this.app.renderer.width / 2;
             this.spinningText.y = this.app.renderer.height / 2;
 
-            this.countingText = new PIXI.Text("COUNT 4Elet: 0", {
-                fontWeight: "bold",
-                fontStyle: "italic",
+            this.countingText = new PIXI.Text('COUNT 4Elet: 0', {
+                fontWeight: 'bold',
+                fontStyle: 'italic',
                 fontSize: 60,
-                fontFamily: "Arvo",
-                fill: "#3e1707",
-                align: "center",
-                stroke: "#a4410e",
-                strokeThickness: 7
+                fontFamily: 'Arvo',
+                fill: '#3e1707',
+                align: 'center',
+                stroke: '#a4410e',
+                strokeThickness: 7,
             });
 
             this.countingText.x = this.app.renderer.width / 2;
@@ -1228,7 +1212,7 @@ function demos() {
 
             this.app.ticker.add((): void => {
                 this.count += 0.05;
-                this.countingText.text = "COUNT 4Elet: " + Math.floor(this.count);
+                this.countingText.text = 'COUNT 4Elet: ' + Math.floor(this.count);
 
                 this.spinningText.rotation += 0.03;
             });
@@ -1248,7 +1232,7 @@ function demos() {
 
             this.bol = false;
 
-            PIXI.loader.add("flowerTop", "required/assets/flowerTop.png");
+            PIXI.loader.add('flowerTop', 'required/assets/flowerTop.png');
             PIXI.loader.load((loader: PIXI.loaders.Loader, resources: any) => {
                 this.texture = resources.flowerTop.texture;
                 this.init();
@@ -1275,20 +1259,25 @@ function demos() {
                 textures.push(rotatedTexture);
             }
 
-            const offsetX = this.app.renderer.width / 16 | 0;
-            const offsetY = this.app.renderer.height / 8 | 0;
-            const gridW = this.app.renderer.width / 4 | 0;
-            const gridH = this.app.renderer.height / 5 | 0;
+            const offsetX = (this.app.renderer.width / 16) | 0;
+            const offsetY = (this.app.renderer.height / 8) | 0;
+            const gridW = (this.app.renderer.width / 4) | 0;
+            const gridH = (this.app.renderer.height / 5) | 0;
 
             for (let i = 0; i < 16; i++) {
                 const dude = new PIXI.Sprite(textures[i < 8 ? i * 2 : (i - 8) * 2 + 1]);
                 dude.scale.x = 0.5;
                 dude.scale.y = 0.5;
                 dude.x = offsetX + gridW * (i % 4);
-                dude.y = offsetY + gridH * (i / 4 | 0);
+                dude.y = offsetY + gridH * ((i / 4) | 0);
                 this.app.stage.addChild(dude);
 
-                const text = new PIXI.Text("rotate = " + dude.texture.rotate, { fontFamily: "Courier New", fontSize: "12px", fill: "white", align: "left" });
+                const text = new PIXI.Text('rotate = ' + dude.texture.rotate, {
+                    fontFamily: 'Courier New',
+                    fontSize: '12px',
+                    fill: 'white',
+                    align: 'left',
+                });
                 text.x = dude.x;
                 text.y = dude.y - 20;
                 this.app.stage.addChild(text);
@@ -1309,9 +1298,9 @@ function demos() {
 
             this.bol = false;
 
-            this.texture = PIXI.Texture.fromImage("required/assets/flowerTop.png");
+            this.texture = PIXI.Texture.fromImage('required/assets/flowerTop.png');
 
-            this.secondTexture = PIXI.Texture.fromImage("required/assets/eggHead.png");
+            this.secondTexture = PIXI.Texture.fromImage('required/assets/eggHead.png');
 
             this.dude = new PIXI.Sprite(this.texture);
             this.dude.anchor.set(0.5);
@@ -1321,7 +1310,7 @@ function demos() {
             this.dude.buttonMode = true;
             this.app.stage.addChild(this.dude);
 
-            this.dude.on("pointertap", (): void => {
+            this.dude.on('pointertap', (): void => {
                 this.bol = !this.bol;
                 if (this.bol) {
                     this.dude.texture = this.secondTexture;
@@ -1348,7 +1337,7 @@ function demos() {
 
             const totalDudes = 20;
 
-            const dudeTexture = PIXI.Texture.fromImage("required/assets/eggHead.png");
+            const dudeTexture = PIXI.Texture.fromImage('required/assets/eggHead.png');
 
             for (let i = 0; i < totalDudes; i++) {
                 const dude = new Dude(dudeTexture);
@@ -1356,7 +1345,7 @@ function demos() {
                 dude.scale.set(0.8 + Math.random() * 0.3);
                 dude.x = Math.random() * this.app.renderer.width;
                 dude.y = Math.random() * this.app.renderer.height;
-                dude.tint = Math.random() * 0xFFFFFF;
+                dude.tint = Math.random() * 0xffffff;
                 dude.direction = Math.random() * Math.PI * 2;
                 dude.turningSpeed = Math.random() - 0.8;
                 dude.speed = 2 + Math.random() * 2;
@@ -1366,10 +1355,12 @@ function demos() {
             }
 
             const dudeBoundsPadding = 100;
-            const dudeBounds = new PIXI.Rectangle(-dudeBoundsPadding,
+            const dudeBounds = new PIXI.Rectangle(
+                -dudeBoundsPadding,
                 -dudeBoundsPadding,
                 this.app.renderer.width + dudeBoundsPadding * 2,
-                this.app.renderer.height + dudeBoundsPadding * 2);
+                this.app.renderer.height + dudeBoundsPadding * 2,
+            );
 
             this.app.ticker.add((): void => {
                 for (const dude of this.aliens) {
@@ -1402,7 +1393,7 @@ function demos() {
             this.app = new PIXI.Application(800, 600, { transparent: true });
             document.body.appendChild(this.app.view);
 
-            this.bunny = PIXI.Sprite.fromImage("required/assets/bunny.png");
+            this.bunny = PIXI.Sprite.fromImage('required/assets/bunny.png');
 
             this.bunny.anchor.set(0.5);
 
@@ -1432,18 +1423,18 @@ function filters() {
             this.app = new PIXI.Application(800, 600);
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/depth_blur_BG.jpg");
+            this.bg = PIXI.Sprite.fromImage('required/assets/depth_blur_BG.jpg');
             this.bg.width = this.app.renderer.width;
             this.bg.height = this.app.renderer.height;
             this.app.stage.addChild(this.bg);
 
-            this.littleDudes = PIXI.Sprite.fromImage("required/assets/depth_blur_dudes.jpg");
-            this.littleDudes.x = (this.app.renderer.width / 2) - 315;
+            this.littleDudes = PIXI.Sprite.fromImage('required/assets/depth_blur_dudes.jpg');
+            this.littleDudes.x = this.app.renderer.width / 2 - 315;
             this.littleDudes.y = 200;
             this.app.stage.addChild(this.littleDudes);
 
-            this.littleRobot = PIXI.Sprite.fromImage("required/assets/depth_blur_moby.jpg");
-            this.littleRobot.x = (this.app.renderer.width / 2) - 200;
+            this.littleRobot = PIXI.Sprite.fromImage('required/assets/depth_blur_moby.jpg');
+            this.littleRobot.x = this.app.renderer.width / 2 - 200;
             this.littleRobot.y = 100;
             this.app.stage.addChild(this.littleRobot);
 
@@ -1461,8 +1452,8 @@ function filters() {
                 const blurAmount = Math.cos(this.count);
                 const blurAmount2 = Math.sin(this.count);
 
-                this.blurFilter1.blur = 20 * (blurAmount);
-                this.blurFilter2.blur = 20 * (blurAmount2);
+                this.blurFilter1.blur = 20 * blurAmount;
+                this.blurFilter2.blur = 20 * blurAmount2;
             });
         }
     }
@@ -1490,7 +1481,7 @@ function filters() {
                 -padding,
                 -padding,
                 this.app.renderer.width + padding * 2,
-                this.app.renderer.height + padding * 2
+                this.app.renderer.height + padding * 2,
             );
             this.maggots = [];
 
@@ -1512,7 +1503,7 @@ function filters() {
                 this.maggots.push(maggot);
             }
 
-            this.displacementSprite = PIXI.Sprite.fromImage("required/assets/displace.png");
+            this.displacementSprite = PIXI.Sprite.fromImage('required/assets/displace.png');
             const displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
             this.app.stage.addChild(this.displacementSprite);
 
@@ -1521,12 +1512,12 @@ function filters() {
             displacementFilter.scale.x = 110;
             displacementFilter.scale.y = 110;
 
-            this.ring = PIXI.Sprite.fromImage("required/assets/ring.png");
+            this.ring = PIXI.Sprite.fromImage('required/assets/ring.png');
             this.ring.anchor.set(0.5);
             this.ring.visible = false;
             this.app.stage.addChild(this.ring);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/bkg-grass.jpg");
+            this.bg = PIXI.Sprite.fromImage('required/assets/bkg-grass.jpg');
             this.bg.width = this.app.renderer.width;
             this.bg.height = this.app.renderer.height;
             this.bg.alpha = 0.4;
@@ -1534,9 +1525,7 @@ function filters() {
 
             this.count = 0;
 
-            this.app.stage
-                .on("mousemove", this.onPointerMove)
-                .on("touchmove", this.onPointerMove);
+            this.app.stage.on('mousemove', this.onPointerMove).on('touchmove', this.onPointerMove);
 
             this.app.ticker.add((): void => {
                 this.count += 0.05;
@@ -1570,7 +1559,7 @@ function filters() {
             this.displacementSprite.y = eventData.data.global.y - this.displacementSprite.height / 2;
             this.ring.x = eventData.data.global.x - 25;
             this.ring.y = eventData.data.global.y;
-        }
+        };
     }
     class DisplacementMapDude extends PIXI.Sprite {
         direction: number = 0;
@@ -1579,7 +1568,7 @@ function filters() {
         original: PIXI.Point = new PIXI.Point();
 
         constructor() {
-            super(PIXI.Texture.fromImage("../../_assets/maggot.png"));
+            super(PIXI.Texture.fromImage('../../_assets/maggot.png'));
         }
     }
 
@@ -1601,7 +1590,7 @@ function filters() {
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/BGrotate.jpg");
+            this.bg = PIXI.Sprite.fromImage('required/assets/BGrotate.jpg');
             this.bg.anchor.set(0.5);
             this.bg.x = this.app.renderer.width / 2;
             this.bg.y = this.app.renderer.height / 2;
@@ -1613,19 +1602,19 @@ function filters() {
             this.container.position.y = this.app.renderer.height / 2;
             this.app.stage.addChild(this.container);
 
-            this.bgFront = PIXI.Sprite.fromImage("required/assets/SceneRotate.jpg");
+            this.bgFront = PIXI.Sprite.fromImage('required/assets/SceneRotate.jpg');
             this.bgFront.anchor.set(0.5);
             this.container.addChild(this.bgFront);
 
-            this.light2 = PIXI.Sprite.fromImage("required/assets/LightRotate2.png");
+            this.light2 = PIXI.Sprite.fromImage('required/assets/LightRotate2.png');
             this.light2.anchor.set(0.5);
             this.container.addChild(this.light2);
 
-            this.light1 = PIXI.Sprite.fromImage("../../_assets/LightRotate1.png");
+            this.light1 = PIXI.Sprite.fromImage('../../_assets/LightRotate1.png');
             this.light1.anchor.set(0.5);
             this.container.addChild(this.light1);
 
-            this.panda = PIXI.Sprite.fromImage("required/assets/panda.png");
+            this.panda = PIXI.Sprite.fromImage('required/assets/panda.png');
             this.panda.anchor.set(0.5);
             this.container.addChild(this.panda);
 
@@ -1634,16 +1623,16 @@ function filters() {
             this.count = 0;
             this.enabled = true;
 
-            this.app.stage.on("pointertap", (): void => {
+            this.app.stage.on('pointertap', (): void => {
                 this.enabled = !this.enabled;
                 this.app.stage.filters = this.enabled ? [this.filter] : null;
             });
 
-            this.help = new PIXI.Text("Click or tap to turn filters on / off.", {
-                fontFamily: "Arial",
+            this.help = new PIXI.Text('Click or tap to turn filters on / off.', {
+                fontFamily: 'Arial',
                 fontSize: 12,
-                fontWeight: "bold",
-                fill: "white"
+                fontWeight: 'bold',
+                fill: 'white',
             });
             this.help.y = this.app.renderer.height - 25;
             this.help.x = 10;

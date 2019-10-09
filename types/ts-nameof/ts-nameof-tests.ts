@@ -6,8 +6,8 @@ namespace TestNamespace {
 }
 
 class TestClass {
-    prop1 = "";
-    prop2 = "";
+    prop1 = '';
+    prop2 = '';
 }
 
 // nameof tests
@@ -30,16 +30,16 @@ nameof.toArray(testInstance.prop1, testInstance.prop2); // $ExpectType string[]
 nameof.toArray<TestClass>(t => [t.prop1]); // $ExpectType string[]
 
 // nameof.interpolate tests
-nameof.interpolate("" as string); // $ExpectType string
+nameof.interpolate('' as string); // $ExpectType string
 
 // reference type test
-const myObj = { test: "" };
+const myObj = { test: '' };
 nameof(myObj); // $ExpectType string
 nameof.full(myObj); // $ExpectType string
 nameof.toArray(myObj); // $ExpectType string[]
 
 // primitive type test
-const myStr = "";
+const myStr = '';
 nameof(myStr); // $ExpectType string
 nameof.full(myStr); // $ExpectType string
 nameof.toArray(myStr); // $ExpectType string[]

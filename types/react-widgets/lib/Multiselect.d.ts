@@ -1,14 +1,12 @@
-import * as React from "react";
-import { ReactWidgetsCommonDropdownProps, AutoFocus } from "./CommonProps";
+import * as React from 'react';
+import { ReactWidgetsCommonDropdownProps, AutoFocus } from './CommonProps';
 
-interface MultiselectProps
-    extends ReactWidgetsCommonDropdownProps<MultiselectClass>,
-        AutoFocus {
+interface MultiselectProps extends ReactWidgetsCommonDropdownProps<MultiselectClass>, AutoFocus {
     /**
      * Enables the list option creation UI. onFilter will only the UI when actively filtering for a list item.
      * @default 'onFilter'
      */
-    allowCreate?: boolean | "onFilter";
+    allowCreate?: boolean | 'onFilter';
     /**
      * The current values of the Multiselect. The value should can null, or an array of
      * valueField values, or an array of objects (such as a few items in the data array)
@@ -26,11 +24,11 @@ interface MultiselectProps
         dataItems: any[],
         metadata: {
             dataItem: any;
-            action: "insert" | "remove";
+            action: 'insert' | 'remove';
             originalEvent?: any;
             lastValue?: any[];
             searchTerm?: string;
-        }
+        },
     ) => void;
     /**
      * This handler fires when an item has been selected from the list. It fires before the
@@ -40,7 +38,7 @@ interface MultiselectProps
         value: any,
         metadata: {
             originalEvent: any;
-        }
+        },
     ) => void;
     /**
      * This handler fires when the user chooses to create a new tag, not in the data list. It is
@@ -111,10 +109,10 @@ interface MultiselectProps
     onSearch?: (
         searchTerm: string,
         metadata: {
-            action: "clear" | "input";
+            action: 'clear' | 'input';
             lastSearchTerm?: string;
             originalEvent?: any;
-        }
+        },
     ) => void;
     /**
      * Whether or not the Multiselect is open. When unset (undefined) the Multiselect will
@@ -135,12 +133,7 @@ interface MultiselectProps
      * item (analogous to the array.filter builtin)
      * @default startsWith
      */
-    filter?:
-        | false
-        | "startsWith"
-        | "endsWith"
-        | "contains"
-        | ((dataItem: any, searchTerm: string) => boolean);
+    filter?: false | 'startsWith' | 'endsWith' | 'contains' | ((dataItem: any, searchTerm: string) => boolean);
     /**
      * Use in conjunction with the filter prop. Filter the list without regard for case. This
      * only applies to non function values for filter.

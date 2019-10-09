@@ -1,23 +1,23 @@
 /// Module
 function ModuleTest(): void {
-    Module.environment = "WEB";
-    Module.environment = "NODE";
+    Module.environment = 'WEB';
+    Module.environment = 'NODE';
     Module.noInitialRun = false;
     Module.logReadFiles = false;
-    Module.filePackagePrefixURL = "http://www.example.org/";
+    Module.filePackagePrefixURL = 'http://www.example.org/';
     Module.preinitializedWebGLContext = new WebGLRenderingContext();
-    Module.onAbort = (what) => console.log('abort');
+    Module.onAbort = what => console.log('abort');
     Module.onRuntimeInitialized = () => console.log('init');
 
-    const package: ArrayBuffer = Module.getPreloadedPackage("package-name", 100);
+    const package: ArrayBuffer = Module.getPreloadedPackage('package-name', 100);
     const exports: Emscripten.WebAssemblyExports = Module.instantiateWasm(
-        [{name: "func-name", kind: "function"}],
-        (module: WebAssembly.Module) => {}
+        [{ name: 'func-name', kind: 'function' }],
+        (module: WebAssembly.Module) => {},
     );
-    const memFile: string = Module.locateFile("http://www.example.org/file.mem");
-    Module.onCustomMessage(new MessageEvent("TestType"));
+    const memFile: string = Module.locateFile('http://www.example.org/file.mem');
+    Module.onCustomMessage(new MessageEvent('TestType'));
 
-    Module.print = (text) => alert('stdout: ' + text);
+    Module.print = text => alert('stdout: ' + text);
 
     let int_sqrt = Module.cwrap('int_sqrt', 'number', ['number']);
     int_sqrt = Module.cwrap('int_sqrt', null, ['number']);
@@ -31,10 +31,10 @@ function ModuleTest(): void {
     Module.HEAPU8.set(myTypedArray, buf);
     Module.ccall('my_function', 'number', ['number'], [buf]);
     Module.ccall('my_function', null, ['number'], [buf]);
-    Module.ccall('my_function', null, ['number'], [buf], {async: true});
+    Module.ccall('my_function', null, ['number'], [buf], { async: true });
     Module.cwrap('my_function', 'string', ['number', 'boolean', 'array']);
     Module.cwrap('my_function', null, ['number']);
-    Module.cwrap('my_function', 'string', ['number', 'boolean', 'array'], {async: true});
+    Module.cwrap('my_function', 'string', ['number', 'boolean', 'array'], { async: true });
     Module._free(buf);
     Module.destroy({});
 }
@@ -51,13 +51,13 @@ function FSTest(): void {
         FS.mkdir('/data');
         FS.mount(IDBFS, {}, '/data');
 
-        FS.syncfs(true, (err) => {
+        FS.syncfs(true, err => {
             // handle callback
         });
     }
 
     function myAppShutdown() {
-        FS.syncfs((err) => {
+        FS.syncfs(err => {
             // handle callback
         });
     }
@@ -75,8 +75,8 @@ function FSTest(): void {
     FS.writeFile('file', 'foobar');
     FS.symlink('file', 'link');
 
-    FS.writeFile('forbidden', 'can\'t touch this');
-    FS.chmod('forbidden', parseInt("0000", 8));
+    FS.writeFile('forbidden', "can't touch this");
+    FS.chmod('forbidden', parseInt('0000', 8));
 
     FS.writeFile('file', 'foobar');
     FS.truncate('file', 3);
@@ -93,7 +93,7 @@ function FSTest(): void {
     FS.write(wstream, data, 0, data.length, 0);
     FS.close(wstream);
 
-    const lookup = FS.lookupPath("path", { parent: true });
+    const lookup = FS.lookupPath('path', { parent: true });
 }
 
 /// String conversions

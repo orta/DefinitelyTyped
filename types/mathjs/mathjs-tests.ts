@@ -349,7 +349,7 @@ Units examples
             aliases: ['knots', 'kt', 'kts'],
             prefixes: 'long',
         },
-        { override: true }
+        { override: true },
     );
     math.createUnit(
         {
@@ -364,7 +364,7 @@ Units examples
         },
         {
             override: true,
-        }
+        },
     );
     // use Unit as definition
     math.createUnit('c', { definition: b });
@@ -454,7 +454,7 @@ declare module 'mathjs' {
             testFun,
             value: 10,
         },
-        {}
+        {},
     );
 
     math.testFun();
@@ -521,7 +521,7 @@ Factory Test
             divideDependencies,
             formatDependencies,
         },
-        config
+        config,
     );
 
     // Use the created functions

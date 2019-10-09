@@ -7,17 +7,17 @@
 /// <reference types="react" />
 
 declare namespace qrcode {
-	interface QRCodeProps {
-		value: string;
-		size?: number;
-		includeMargin?: boolean;
-		bgColor?: string;
-		fgColor?: string;
-		level?: "L"|"M"|"Q"|"H";
-		renderAs?: "svg" | "canvas";
-	}
+    interface QRCodeProps {
+        value: string;
+        size?: number;
+        includeMargin?: boolean;
+        bgColor?: string;
+        fgColor?: string;
+        level?: 'L' | 'M' | 'Q' | 'H';
+        renderAs?: 'svg' | 'canvas';
+    }
 
-	type QRCode = React.ComponentClass<QRCodeProps>;
+    type QRCode = React.ComponentClass<QRCodeProps>;
 }
 
 declare const qrcode: qrcode.QRCode;

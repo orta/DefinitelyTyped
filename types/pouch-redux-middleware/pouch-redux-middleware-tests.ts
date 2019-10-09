@@ -6,11 +6,11 @@ const types = {
     DELETE_TODO: 'delete-todo',
     BATCH_INSERT_TODO: 'batch-insert-todo',
     INSERT_TODO: 'insert-todo',
-    UPDATE_TODO: 'update-todo'
+    UPDATE_TODO: 'update-todo',
 };
 
 const path: Path<{}> = {
-    path: "/test",
+    path: '/test',
     db: new PouchDB('test'),
     actions: {
         remove: doc => ({ type: types.DELETE_TODO, id: doc._id }),

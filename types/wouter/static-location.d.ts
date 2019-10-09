@@ -1,7 +1,5 @@
-import { Path } from "./index";
+import { Path } from './index';
 
-declare function staticLocationHook(
-    path?: Path
-): () => [Path, (x: Path) => Path];
+declare function staticLocationHook(path?: Path): () => [Path, (x: Path) => Path];
 
 export = staticLocationHook;

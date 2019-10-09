@@ -24,5 +24,4 @@ export interface CustomConfig {
     getCustomBrowser?: () => Promise<Browser>;
 }
 
-export function imageSnapshot(customConfig?: CustomConfig): ({ context }: { context: StoryContext }) =>
-    Promise<void>;
+export function imageSnapshot(customConfig?: CustomConfig): ({ context }: { context: StoryContext }) => Promise<void>;

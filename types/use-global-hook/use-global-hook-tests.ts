@@ -2,16 +2,18 @@ import useStore, { Store, InitializerFunction } from 'use-global-hook';
 import React = require('react');
 
 interface stateType {
-  value: string;
+    value: string;
 }
 
 type setFunc = (value: string) => void;
 
 interface associatedActionsType {
-  setValue: setFunc;
+    setValue: setFunc;
 }
 
-const initializer: InitializerFunction<stateType, associatedActionsType> = (store: Store<stateType, associatedActionsType>) => {
+const initializer: InitializerFunction<stateType, associatedActionsType> = (
+    store: Store<stateType, associatedActionsType>,
+) => {
     store.actions.setValue('');
     store.state.value;
     store.setState({ value: 'string' });

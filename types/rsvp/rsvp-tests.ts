@@ -177,10 +177,10 @@ function testDenodeify() {
     // resulting object.
     assertType<(value: A1) => RSVP.Promise<{ first: D1 }>>(RSVP.denodeify(nodeFn1Arg1CbParam, ['first']));
     assertType<(value: A1) => RSVP.Promise<{ first: D1; second: D2 }>>(
-        RSVP.denodeify(nodeFn1Arg2CbParam, ['first', 'second'])
+        RSVP.denodeify(nodeFn1Arg2CbParam, ['first', 'second']),
     );
     assertType<(value: A1) => RSVP.Promise<{ first: D1; second: D2; third: D3 }>>(
-        RSVP.denodeify(nodeFn1Arg3CbParam, ['first', 'second', 'third'])
+        RSVP.denodeify(nodeFn1Arg3CbParam, ['first', 'second', 'third']),
     );
 
     const foo = RSVP.denodeify(nodeFn1Arg2CbParam, ['quux', 'baz']);
@@ -198,7 +198,7 @@ function testFilter() {
     RSVP.filter(
         [RSVP.resolve('a string'), RSVP.resolve(112233)],
         item => String(item).length < 10,
-        'short string'
+        'short string',
     ).then(results => {
         assertType<Array<string | number>>(results);
     });
@@ -324,7 +324,7 @@ function testOnAndOff() {
 
     RSVP.off('whatever', (value: any) => {
         console.log(
-            `any old value will do: ${value !== undefined && value !== null ? value.toString() : 'even undefined'}`
+            `any old value will do: ${value !== undefined && value !== null ? value.toString() : 'even undefined'}`,
         );
     });
 }

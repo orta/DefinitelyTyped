@@ -65,14 +65,12 @@ declare var $: (arg?: any) => JQuery;
     void URITemplate;
     ```
     */
-    URI(
-      'http://user:pass@example.org:80/foo/bar.html?foo=bar&bar=baz#frag',
-    ).equals(
-      URI.expand!('http://user:pass@example.org:80{/p*}{?q*}{#h}', {
-        p: ['foo', 'bar.html'],
-        q: { foo: 'bar', bar: 'baz' },
-        h: 'frag',
-      }),
+    URI('http://user:pass@example.org:80/foo/bar.html?foo=bar&bar=baz#frag').equals(
+        URI.expand!('http://user:pass@example.org:80{/p*}{?q*}{#h}', {
+            p: ['foo', 'bar.html'],
+            q: { foo: 'bar', bar: 'baz' },
+            h: 'frag',
+        }),
     );
 
     // Basic URITemplate type usage
@@ -81,7 +79,7 @@ declare var $: (arg?: any) => JQuery;
             p: ['foo', 'bar.html'],
             q: { foo: 'bar', bar: 'baz' },
             h: 'frag',
-        })
+        }),
     );
 
     // Using a callback for a specific key value.
@@ -90,7 +88,7 @@ declare var $: (arg?: any) => JQuery;
             p: key => ['foo', 'bar.html'],
             q: { foo: 'bar', bar: 'baz' },
             h: 'frag',
-        })
+        }),
     );
 
     // Using a callback for entire data parameter.
@@ -104,7 +102,7 @@ declare var $: (arg?: any) => JQuery;
                 case 'h':
                     return 'frag';
             }
-        })
+        }),
     );
 
     // Supports null/undefined values for certain keys
@@ -113,7 +111,7 @@ declare var $: (arg?: any) => JQuery;
             p: ['foo', 'bar.html'],
             q: null,
             h: undefined,
-        })
+        }),
     );
 
     const template = URITemplate('/items/{?page,count}');
@@ -153,7 +151,7 @@ declare var $: (arg?: any) => JQuery;
         uri.hasQuery('string', (value: string, name: string, data: string) => {
             return true;
         }),
-        true
+        true,
     );
 
     /*

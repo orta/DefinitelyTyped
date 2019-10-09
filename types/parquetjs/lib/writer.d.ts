@@ -35,7 +35,7 @@ export class ParquetWriter {
                   rowGroupSize?: number;
                   bitWidth?: number;
                   disableEnvelope?: boolean;
-              }
+              },
     ): Promise<ParquetWriter>;
 
     static openStream(
@@ -53,7 +53,7 @@ export class ParquetWriter {
                   rowGroupSize?: number;
                   bitWidth?: number;
                   disableEnvelope?: boolean;
-              }
+              },
     ): Promise<ParquetWriter>;
 
     constructor(
@@ -71,7 +71,7 @@ export class ParquetWriter {
                   rowGroupSize?: number;
                   bitWidth?: number;
                   disableEnvelope?: boolean;
-              }
+              },
     );
 
     appendRow(row: RowInterface): Promise<void>;
@@ -122,7 +122,7 @@ export class ParquetEnvelopeWriter {
                   rowGroupSize?: number;
                   bitWidth?: number;
                   disableEnvelope?: boolean;
-              }
+              },
     ): Promise<ParquetEnvelopeWriter>;
 
     constructor(
@@ -142,7 +142,7 @@ export class ParquetEnvelopeWriter {
                   rowGroupSize?: number;
                   bitWidth?: number;
                   disableEnvelope?: boolean;
-              }
+              },
     );
 
     writeSection(buf: Buffer): Promise<void>;
@@ -173,12 +173,10 @@ export class ParquetTransformer extends stream.Transform {
                   rowGroupSize?: number;
                   bitWidth?: number;
                   disableEnvelope?: boolean;
-              }
+              },
     );
 
-    _transform(row: RowInterface,
-      encoding: string | null | undefined,
-      callback: () => void): void;
+    _transform(row: RowInterface, encoding: string | null | undefined, callback: () => void): void;
 
     _flush(callback: () => void): void;
 }

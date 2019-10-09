@@ -9,7 +9,7 @@ immediate(
         arg2; // $ExpectType number
     },
     'foo',
-    1
+    1,
 );
 // $ExpectError
 immediate((arg1, arg2) => {}, 'foo');

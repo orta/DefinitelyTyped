@@ -72,7 +72,7 @@ export interface EditorProps {
         text: string,
         html: string,
         editorState: EditorState,
-        onChange: (editorState: EditorState) => void
+        onChange: (editorState: EditorState) => void,
     ): boolean;
 }
 

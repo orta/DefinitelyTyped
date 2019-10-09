@@ -4,7 +4,7 @@ import websocket = require('koa-websocket');
 const app = websocket(new Koa());
 
 app.ws.use(async (ctx, next) => {
-    ctx.websocket.on('message', (message) => {
+    ctx.websocket.on('message', message => {
         console.log(message);
         const server = ctx.app.ws.server;
         if (server) {
@@ -28,7 +28,7 @@ interface MyState {
 const typedApp = websocket(new Koa<MyState>());
 
 typedApp.ws.use(async (ctx, next) => {
-    ctx.websocket.on('message', (message) => {
+    ctx.websocket.on('message', message => {
         console.log(message + ctx.state.persist);
         const server = ctx.app.ws.server;
         if (server) {

@@ -1,4 +1,4 @@
-import * as forge from "./crypto/forge";
+import * as forge from './crypto/forge';
 
 export type AccountKey = forge.PrivateKey;
 export type Certificate = string | Buffer;
@@ -26,8 +26,7 @@ export interface CreateAccountRequest extends AccountRequest {
 
 // At this time there are no parameters that are restricted to updates.
 // tslint:disable-next-line:no-empty-interface
-export interface UpdateAccountRequest extends AccountRequest {
-}
+export interface UpdateAccountRequest extends AccountRequest {}
 
 export interface Account {
     status?: string;
@@ -53,7 +52,7 @@ export interface HasStatus {
 }
 
 export interface Order extends HasStatus {
-    status: "pending" | "ready" | "processing" | "valid" | "invalid";
+    status: 'pending' | 'ready' | 'processing' | 'valid' | 'invalid';
     expires?: string;
     identifiers: Identifier[];
     notBefore?: string;
@@ -72,17 +71,17 @@ export interface Challenge extends HasStatus {
 }
 
 export interface Http01Challenge extends Challenge {
-    type: "http-01";
+    type: 'http-01';
     token: string;
 }
 
 export interface Dns01Challenge extends Challenge {
-    type: "dns-01";
+    type: 'dns-01';
     token: string;
 }
 
 export interface Authorization extends HasStatus {
-    status: "pending" | "valid" | "invalid" | "deactivated" | "expired" | "revoked";
+    status: 'pending' | 'valid' | 'invalid' | 'deactivated' | 'expired' | 'revoked';
     identifier: Identifier;
     expires?: string;
     challenges: Challenge[];

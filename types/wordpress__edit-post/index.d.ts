@@ -163,7 +163,7 @@ export function initializeEditor(
     postId: string | number,
     settings?: Partial<EditorSettings>,
     // FIXME: it is unclear what this is
-    initialEdits?: object
+    initialEdits?: object,
 ): void;
 
 /**
@@ -184,7 +184,7 @@ export function reinitializeEditor(
     target: Element,
     settings?: Partial<EditorSettings>,
     // FIXME: it is unclear what this is
-    initialEdits?: object
+    initialEdits?: object,
 ): void;
 
 export {

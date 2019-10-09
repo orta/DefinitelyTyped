@@ -8,11 +8,11 @@
 declare module '@mapbox/mapbox-sdk/lib/classes/mapi-client' {
     import { MapiRequest, DirectionsApproach } from '@mapbox/mapbox-sdk/lib/classes/mapi-request';
     export default class MapiClient {
-                       constructor(config: SdkConfig);
-                       accessToken: string;
-                       origin?: string;
-                       createRequest(requestOptions: any): MapiRequest;
-                   }
+        constructor(config: SdkConfig);
+        accessToken: string;
+        origin?: string;
+        createRequest(requestOptions: any): MapiRequest;
+    }
 
     interface SdkConfig {
         accessToken: string;
@@ -1293,13 +1293,13 @@ declare module '@mapbox/mapbox-sdk/services/static' {
         width: number;
         height: number;
         position:
-        | {
-            coordinates: LngLatLike | 'auto';
-            zoom: number;
-            bearing?: number;
-            pitch?: number;
-        }
-        | 'auto';
+            | {
+                  coordinates: LngLatLike | 'auto';
+                  zoom: number;
+                  bearing?: number;
+                  pitch?: number;
+              }
+            | 'auto';
         overlays?: CustomMarkerOverlay[] | PathOverlay[] | GeoJsonOverlay[];
         highRes?: boolean;
         insertOverlayBeforeLayer?: string;
@@ -1347,8 +1347,8 @@ declare module '@mapbox/mapbox-sdk/services/styles' {
     import MapiClient, { SdkConfig } from '@mapbox/mapbox-sdk/lib/classes/mapi-client';
 
     /*********************************************************************************************************************
-    * Style Types
-    *********************************************************************************************************************/
+     * Style Types
+     *********************************************************************************************************************/
     export default function Styles(config: SdkConfig | MapiClient): StylesService;
 
     interface StylesService {

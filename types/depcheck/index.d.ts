@@ -9,7 +9,7 @@ declare function depcheck(rootDir: string, options: depcheck.Options): Promise<d
 declare function depcheck<T>(
     rootDir: string,
     options: depcheck.Options,
-    callback: (results: depcheck.Results) => T
+    callback: (results: depcheck.Results) => T,
 ): Promise<T>;
 
 declare namespace depcheck {

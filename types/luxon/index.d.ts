@@ -21,15 +21,7 @@ export interface ZoneOptions {
     keepCalendarTime?: boolean;
 }
 
-export type ToRelativeUnit =
-    | 'years'
-    | 'quarters'
-    | 'months'
-    | 'weeks'
-    | 'days'
-    | 'hours'
-    | 'minutes'
-    | 'seconds';
+export type ToRelativeUnit = 'years' | 'quarters' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds';
 
 export interface ToRelativeOptions {
     /** The DateTime to use as the basis to which this time is compared. Defaults to now. */
@@ -162,11 +154,7 @@ export class DateTime {
     /**
      * @deprecated 0.3.0. Use fromFormatExplain instead
      */
-    static fromStringExplain(
-        text: string,
-        format: string,
-        options?: DateTimeOptions,
-    ): ExplainedFormat;
+    static fromStringExplain(text: string, format: string, options?: DateTimeOptions): ExplainedFormat;
     static invalid(reason: any): DateTime;
     static isDateTime(o: any): o is DateTime;
     static local(
@@ -428,18 +416,9 @@ export interface IntervalObject {
 }
 
 export class Interval {
-    static after(
-        start: DateTime | DateObject | Date,
-        duration: Duration | number | DurationObject,
-    ): Interval;
-    static before(
-        end: DateTime | DateObject | Date,
-        duration: Duration | number | DurationObject,
-    ): Interval;
-    static fromDateTimes(
-        start: DateTime | DateObject | Date,
-        end: DateTime | DateObject | Date,
-    ): Interval;
+    static after(start: DateTime | DateObject | Date, duration: Duration | number | DurationObject): Interval;
+    static before(end: DateTime | DateObject | Date, duration: Duration | number | DurationObject): Interval;
+    static fromDateTimes(start: DateTime | DateObject | Date, end: DateTime | DateObject | Date): Interval;
     static fromISO(string: string, options?: DateTimeOptions): Interval;
     static invalid(reason?: string): Interval;
     static isInterval(o: any): o is Interval;
@@ -524,6 +503,6 @@ export class FixedOffsetZone extends Zone {
     static parseSpecifier(s: string): FixedOffsetZone;
 }
 
-export class InvalidZone extends Zone { }
+export class InvalidZone extends Zone {}
 
-export class LocalZone extends Zone { }
+export class LocalZone extends Zone {}

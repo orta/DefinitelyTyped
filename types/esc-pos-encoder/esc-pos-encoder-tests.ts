@@ -44,25 +44,15 @@ const result6 = encoder
     .line('A line of normal text')
     .encode();
 
-const result7 = encoder
-    .barcode('3130630574613', 'ean13', 60)
-    .encode();
+const result7 = encoder.barcode('3130630574613', 'ean13', 60).encode();
 
-const result8 = encoder
-    .qrcode('https://nielsleenheer.com', 1, 8, 'h')
-    .encode();
+const result8 = encoder.qrcode('https://nielsleenheer.com', 1, 8, 'h').encode();
 
 const img = new Image();
 img.src = 'https://...';
 
-const result9 = encoder
-    .image(img, 300, 300, 'atkinson')
-    .encode();
+const result9 = encoder.image(img, 300, 300, 'atkinson').encode();
 
-const result10 = encoder
-    .cut('partial')
-    .encode();
+const result10 = encoder.cut('partial').encode();
 
-const result11 = encoder
-    .raw([0x1c, 0x2e])
-    .encode();
+const result11 = encoder.raw([0x1c, 0x2e]).encode();

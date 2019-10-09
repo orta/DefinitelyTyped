@@ -8,14 +8,14 @@
 
 declare function HtmlValidator(
     options:
-        HtmlValidator.OptionsForHtmlFileAsValidationTargetAndObjectAsResult |
-        HtmlValidator.OptionsForExternalUrlAsValidationTargetAndObjectAsResult
+        | HtmlValidator.OptionsForHtmlFileAsValidationTargetAndObjectAsResult
+        | HtmlValidator.OptionsForExternalUrlAsValidationTargetAndObjectAsResult,
 ): Promise<HtmlValidator.ParsedJsonAsValidationResults>;
 
 declare function HtmlValidator(
     options:
-        HtmlValidator.OptionsForHtmlFileAsValidationTargetAndTextAsResults |
-        HtmlValidator.OptionsForExternalUrlAsValidationTargetAndTextAsResults
+        | HtmlValidator.OptionsForHtmlFileAsValidationTargetAndTextAsResults
+        | HtmlValidator.OptionsForExternalUrlAsValidationTargetAndTextAsResults,
 ): Promise<string>;
 
 declare namespace HtmlValidator {
@@ -41,50 +41,50 @@ declare namespace HtmlValidator {
         xhtml = 'xhtml',
         xml = 'xml',
         gnu = 'gnu',
-        text = 'text'
+        text = 'text',
     }
 
     interface OptionsForHtmlFileAsValidationTargetAndObjectAsResult extends OptionsForHtmlFileAsValidationTarget {
-      format?: 'json';
+        format?: 'json';
     }
 
     interface OptionsForHtmlFileAsValidationTargetAndTextAsResults extends OptionsForHtmlFileAsValidationTarget {
-      format: 'html' | 'xhtml' | 'xml' | 'gnu' | 'text';
+        format: 'html' | 'xhtml' | 'xml' | 'gnu' | 'text';
     }
 
     interface OptionsForExternalUrlAsValidationTargetAndObjectAsResult extends OptionsForExternalUrlAsValidationTarget {
-      format?: 'json';
+        format?: 'json';
     }
 
     interface OptionsForExternalUrlAsValidationTargetAndTextAsResults extends OptionsForHtmlFileAsValidationTarget {
-      format: 'html' | 'xhtml' | 'xml' | 'gnu' | 'text';
+        format: 'html' | 'xhtml' | 'xml' | 'gnu' | 'text';
     }
 
     interface ParsedJsonAsValidationResults {
-      messages: ValidationMessageObject[];
+        messages: ValidationMessageObject[];
     }
 
     // Could be used to avoid string literals
     enum ValidationMessageTypes {
         error = 'error',
-        info = 'info'
+        info = 'info',
     }
 
     // Could be used to avoid string literals
     enum ValidationMessageSubTypes {
-        warning = 'warning'
+        warning = 'warning',
     }
 
     interface ValidationMessageObject {
-      type: 'error' | 'info';
-      subType?: 'warning';
-      lastLine: number;
-      firstColumn: number;
-      lastColumn: number;
-      hiliteStart: number;
-      hiliteLength: number;
-      message: string;
-      extract: string;
+        type: 'error' | 'info';
+        subType?: 'warning';
+        lastLine: number;
+        firstColumn: number;
+        lastColumn: number;
+        hiliteStart: number;
+        hiliteLength: number;
+        message: string;
+        extract: string;
     }
 }
 

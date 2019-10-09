@@ -37,7 +37,8 @@ class CustomPlugin implements Plugin {
 }
 
 // Test a plugin with missing 'hooks' property
-class BadPlugin implements Plugin { // $ExpectError
+class BadPlugin implements Plugin {
+    // $ExpectError
     hoooks: Plugin.Hooks; // emulate a bad 'hooks' definition with a typo
     constructor(badArg: number) {}
 }

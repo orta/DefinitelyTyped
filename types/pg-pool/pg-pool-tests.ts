@@ -34,10 +34,12 @@ new pool4.Client().sayHi();
 
 pool.connect().then(client => {
     client.sayHi();
-    client.query('select $1::text as name', ['pg-pool']).then(res => {
-        client.release();
-        console.log('hello from', res.rows[0].name);
-    })
+    client
+        .query('select $1::text as name', ['pg-pool'])
+        .then(res => {
+            client.release();
+            console.log('hello from', res.rows[0].name);
+        })
         .catch(e => {
             client.release();
             console.error('query error', e.message, e.stack);

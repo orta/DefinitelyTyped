@@ -97,7 +97,7 @@ export class Mnemonic {
 }
 
 export enum LibraNetwork {
-    Testnet = 'testnet'
+    Testnet = 'testnet',
 }
 
 export interface LibraLibConfig {
@@ -118,18 +118,18 @@ export class LibraClient {
     getAccountTransaction(
         address: AccountAddressLike,
         sequenceNumber: BigNumber | string | number,
-        fetchEvents?: boolean
+        fetchEvents?: boolean,
     ): Promise<LibraSignedTransactionWithProof | null>;
 
     mintWithFaucetService(
         receiver: AccountAddress | string,
         numCoins: BigNumber | string | number,
-        waitForConfirmation?: boolean
+        waitForConfirmation?: boolean,
     ): Promise<string>;
 
     waitForConfirmation(
         accountAddress: AccountAddress | string,
-        transactionSequenceNumber: number | string | BigNumber
+        transactionSequenceNumber: number | string | BigNumber,
     ): Promise<void>;
 
     signTransaction(transaction: LibraTransaction, keyPair: KeyPair): Promise<LibraSignedTransaction>;
@@ -137,7 +137,7 @@ export class LibraClient {
     transferCoins(
         sender: Account,
         recipientAddress: string,
-        numCoins: number | string | BigNumber
+        numCoins: number | string | BigNumber,
     ): Promise<LibraTransactionResponse>;
 
     execute(transaction: LibraTransaction, sender: Account): Promise<LibraTransactionResponse>;
@@ -367,12 +367,12 @@ export namespace LibraTransaction {
 }
 
 export interface LibraTransactionResponse {
-  signedTransaction: LibraSignedTransaction;
-  validatorId: Uint8Array;
-  acStatus?: LibraAdmissionControlStatus | number;
-  mempoolStatus?: LibraMempoolTransactionStatus | number;
-  vmStatus?: LibraVMStatusError;
-  awaitConfirmation(client: LibraClient): Promise<void>;
+    signedTransaction: LibraSignedTransaction;
+    validatorId: Uint8Array;
+    acStatus?: LibraAdmissionControlStatus | number;
+    mempoolStatus?: LibraMempoolTransactionStatus | number;
+    vmStatus?: LibraVMStatusError;
+    awaitConfirmation(client: LibraClient): Promise<void>;
 }
 
 export function LibraTransactionResponse(
@@ -391,7 +391,7 @@ export enum LibraAdmissionControlStatus {
     UNKNOWN = -1,
     ACCEPTED = 0,
     BLACKLISTED = 1,
-    REJECTED = 2
+    REJECTED = 2,
 }
 
 export enum LibraMempoolTransactionStatus {
@@ -401,7 +401,7 @@ export enum LibraMempoolTransactionStatus {
     INVALIDSEQNUMBER = 2,
     MEMPOOLISFULL = 3,
     TOOMANYTRANSACTIONS = 4,
-    INVALIDUPDATE = 5
+    INVALIDUPDATE = 5,
 }
 
 export interface LibraSignedTransaction {
@@ -410,7 +410,11 @@ export interface LibraSignedTransaction {
     signature: Uint8Array;
 }
 
-export function LibraSignedTransaction(transaction: LibraTransaction, publicKey: Uint8Array, signature: Uint8Array): void;
+export function LibraSignedTransaction(
+    transaction: LibraTransaction,
+    publicKey: Uint8Array,
+    signature: Uint8Array,
+): void;
 
 export interface LibraTransactionEvent {
     data: Uint8Array;
@@ -425,9 +429,18 @@ export interface LibraSignedTransactionWithProof {
     events?: LibraTransactionEvent[];
 }
 
-export function LibraSignedTransactionWithProof(signedTransaction: LibraSignedTransaction, proof?: object, events?: LibraTransactionEvent[]): void;
+export function LibraSignedTransactionWithProof(
+    signedTransaction: LibraSignedTransaction,
+    proof?: object,
+    events?: LibraTransactionEvent[],
+): void;
 
-export function LibraTransactionEvent(data: Uint8Array, sequenceNumber: BigNumber, address?: AccountAddress, path?: Uint8Array): void;
+export function LibraTransactionEvent(
+    data: Uint8Array,
+    sequenceNumber: BigNumber,
+    address?: AccountAddress,
+    path?: Uint8Array,
+): void;
 
 export interface WalletConfig {
     mnemonic?: string;

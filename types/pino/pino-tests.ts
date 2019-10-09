@@ -31,20 +31,17 @@ pino({
 
 pino({
     browser: {
-        write(o) {
-        }
-    }
+        write(o) {},
+    },
 });
 
 pino({
     browser: {
         write: {
-            info(o) {
-            },
-            error(o) {
-            }
-        }
-    }
+            info(o) {},
+            error(o) {},
+        },
+    },
 });
 
 pino({ base: null });
@@ -64,9 +61,11 @@ log.child({ foo: 'bar', level: 'debug' }).debug('debug!');
 const customSerializers = {
     test() {
         return 'this is my serializer';
-    }
+    },
 };
-pino().child({ serializers: customSerializers }).info({ test: 'should not show up' });
+pino()
+    .child({ serializers: customSerializers })
+    .info({ test: 'should not show up' });
 const child2 = log.child({ father: true });
 const childChild = child2.child({ baby: true });
 
@@ -111,49 +110,49 @@ const handler = pino.final(logExtreme, (err: Error, finalLogger: pino.BaseLogger
 handler(new Error('error'));
 
 const redacted = pino({
-    redact: ['path']
+    redact: ['path'],
 });
 
 redacted.info({
     msg: 'logged with redacted properties',
-    path: 'Not shown'
+    path: 'Not shown',
 });
 
 const anotherRedacted = pino({
     redact: {
         paths: ['anotherPath'],
-        censor: 'Not the log you\re looking for'
-    }
+        censor: 'Not the log you\re looking for',
+    },
 });
 
 anotherRedacted.info({
     msg: 'another logged with redacted properties',
-    anotherPath: 'Not shown'
+    anotherPath: 'Not shown',
 });
 
 const pretty = pino({
-	prettyPrint: {
-		colorize: true,
-		crlf: false,
-		errorLikeObjectKeys: ['err', 'error'],
-		errorProps: '',
-		levelFirst: false,
-		messageKey: 'msg',
-		timestampKey: "timestamp",
-		translateTime: 'UTC:h:MM:ss TT Z',
-		search: 'foo == `bar`'
-	}
+    prettyPrint: {
+        colorize: true,
+        crlf: false,
+        errorLikeObjectKeys: ['err', 'error'],
+        errorProps: '',
+        levelFirst: false,
+        messageKey: 'msg',
+        timestampKey: 'timestamp',
+        translateTime: 'UTC:h:MM:ss TT Z',
+        search: 'foo == `bar`',
+    },
 });
 
 // Properties/types imported from pino-std-serializers
 const wrappedErrSerializer = pino.stdSerializers.wrapErrorSerializer((err: pino.SerializedError) => {
-  return {...err, newProp: 'foo'};
+    return { ...err, newProp: 'foo' };
 });
 const wrappedReqSerializer = pino.stdSerializers.wrapRequestSerializer((req: pino.SerializedRequest) => {
-  return {...req, newProp: 'foo'};
+    return { ...req, newProp: 'foo' };
 });
 const wrappedResSerializer = pino.stdSerializers.wrapResponseSerializer((res: pino.SerializedResponse) => {
-  return {...res, newProp: 'foo'};
+    return { ...res, newProp: 'foo' };
 });
 
 const socket = new Socket();

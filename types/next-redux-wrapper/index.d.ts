@@ -9,10 +9,7 @@
 
 import { IncomingMessage, ServerResponse } from 'http';
 import { ComponentType } from 'react';
-import {
-    MapDispatchToPropsParam, MapStateToPropsParam,
-    MergeProps, Options as ConnectOptions
-} from 'react-redux';
+import { MapDispatchToPropsParam, MapStateToPropsParam, MergeProps, Options as ConnectOptions } from 'react-redux';
 import { Store } from 'redux';
 
 declare namespace nextReduxWrapper {
@@ -38,13 +35,19 @@ declare namespace nextReduxWrapper {
 
     type NextStoreCreator<TInitialState, TStateProps, TDispatchProps, TOwnProps, TMergedProps> = (
         initialState: TInitialState,
-        options: StoreCreatorOptions<TInitialState, TStateProps, TDispatchProps, TOwnProps, TMergedProps>
+        options: StoreCreatorOptions<TInitialState, TStateProps, TDispatchProps, TOwnProps, TMergedProps>,
     ) => Store<TInitialState>;
 }
 
-declare function nextReduxWrapper<TInitialState = any, TStateProps = any, TDispatchProps = any, TOwnProps = any, TMergedProps = any>(
+declare function nextReduxWrapper<
+    TInitialState = any,
+    TStateProps = any,
+    TDispatchProps = any,
+    TOwnProps = any,
+    TMergedProps = any
+>(
     makeStore: nextReduxWrapper.NextStoreCreator<TInitialState, TStateProps, TDispatchProps, TOwnProps, TMergedProps>,
-    config?: nextReduxWrapper.Options
+    config?: nextReduxWrapper.Options,
 ): (ComponentType: ComponentType<TOwnProps & TMergedProps>) => nextReduxWrapper.NextReduxWrappedComponent<TOwnProps>;
 
 export default nextReduxWrapper;

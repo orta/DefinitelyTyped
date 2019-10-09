@@ -1,28 +1,28 @@
 /// <reference types="node" />
 
- import {
-  CancelFrame,
-  ErrorFrame,
-  Frame,
-  KeepAliveFrame,
-  LeaseFrame,
-  PayloadFrame,
-  RequestChannelFrame,
-  RequestFnfFrame,
-  RequestNFrame,
-  RequestResponseFrame,
-  RequestStreamFrame,
-  ResumeFrame,
-  ResumeOkFrame,
-  SetupFrame,
+import {
+    CancelFrame,
+    ErrorFrame,
+    Frame,
+    KeepAliveFrame,
+    LeaseFrame,
+    PayloadFrame,
+    RequestChannelFrame,
+    RequestFnfFrame,
+    RequestNFrame,
+    RequestResponseFrame,
+    RequestStreamFrame,
+    ResumeFrame,
+    ResumeOkFrame,
+    SetupFrame,
 } from 'rsocket-types';
 
 import { Encoders } from './RSocketEncoding';
 
 export interface FrameWithPayload {
-  data: any;
-  flags: number;
-  metadata: any;
+    data: any;
+    flags: number;
+    metadata: any;
 }
 
 /**
@@ -80,7 +80,12 @@ export function serializeSetupFrame(frame: SetupFrame, encoders: Encoders<any>):
 /**
  * Reads a SETUP frame from the buffer and returns it.
  */
-export function deserializeSetupFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): SetupFrame;
+export function deserializeSetupFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): SetupFrame;
 
 /**
  * Writes an ERROR frame into a new buffer and returns it.
@@ -93,7 +98,12 @@ export function serializeErrorFrame(frame: ErrorFrame, encoders: Encoders<any>):
 /**
  * Reads an ERROR frame from the buffer and returns it.
  */
-export function deserializeErrorFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): ErrorFrame;
+export function deserializeErrorFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): ErrorFrame;
 
 /**
  * Writes a KEEPALIVE frame into a new buffer and returns it.
@@ -106,7 +116,12 @@ export function serializeKeepAliveFrame(frame: KeepAliveFrame, encoders: Encoder
 /**
  * Reads a KEEPALIVE frame from the buffer and returns it.
  */
-export function deserializeKeepAliveFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): KeepAliveFrame;
+export function deserializeKeepAliveFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): KeepAliveFrame;
 
 /**
  * Writes a LEASE frame into a new buffer and returns it.
@@ -119,7 +134,12 @@ export function serializeLeaseFrame(frame: LeaseFrame, encoders: Encoders<any>):
 /**
  * Reads a LEASE frame from the buffer and returns it.
  */
-export function deserializeLeaseFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): LeaseFrame;
+export function deserializeLeaseFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): LeaseFrame;
 /**
  * Writes a REQUEST_FNF or REQUEST_RESPONSE frame to a new buffer and returns
  * it.
@@ -128,9 +148,19 @@ export function deserializeLeaseFrame(buffer: Buffer, streamId: number, flags: n
  */
 export function serializeRequestFrame(frame: RequestFnfFrame | RequestResponseFrame, encoders: Encoders<any>): Buffer;
 
-export function deserializeRequestFnfFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): RequestFnfFrame;
+export function deserializeRequestFnfFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): RequestFnfFrame;
 
-export function deserializeRequestResponseFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): RequestResponseFrame;
+export function deserializeRequestResponseFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): RequestResponseFrame;
 
 /**
  * Writes a REQUEST_STREAM or REQUEST_CHANNEL frame to a new buffer and returns
@@ -141,11 +171,24 @@ export function deserializeRequestResponseFrame(buffer: Buffer, streamId: number
  * Prefix size is for requestN (uint32 = 4).
  */
 export const REQUEST_MANY_HEADER = 4;
-export function serializeRequestManyFrame(frame: RequestStreamFrame | RequestChannelFrame, encoders: Encoders<any>): Buffer;
+export function serializeRequestManyFrame(
+    frame: RequestStreamFrame | RequestChannelFrame,
+    encoders: Encoders<any>,
+): Buffer;
 
-export function deserializeRequestStreamFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): RequestStreamFrame;
+export function deserializeRequestStreamFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): RequestStreamFrame;
 
-export function deserializeRequestChannelFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): RequestChannelFrame;
+export function deserializeRequestChannelFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): RequestChannelFrame;
 
 /**
  * Writes a REQUEST_N frame to a new buffer and returns it.
@@ -155,21 +198,36 @@ export function deserializeRequestChannelFrame(buffer: Buffer, streamId: number,
 export const REQUEST_N_HEADER = 4;
 export function serializeRequestNFrame(frame: RequestNFrame, encoders: Encoders<any>): Buffer;
 
-export function deserializeRequestNFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): RequestNFrame;
+export function deserializeRequestNFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): RequestNFrame;
 
 /**
  * Writes a CANCEL frame to a new buffer and returns it.
  */
 export function serializeCancelFrame(frame: CancelFrame, encoders: Encoders<any>): Buffer;
 
-export function deserializeCancelFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): CancelFrame;
+export function deserializeCancelFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): CancelFrame;
 
 /**
  * Writes a PAYLOAD frame to a new buffer and returns it.
  */
 export function serializePayloadFrame(frame: PayloadFrame, encoders: Encoders<any>): Buffer;
 
-export function deserializePayloadFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): PayloadFrame;
+export function deserializePayloadFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): PayloadFrame;
 
 /**
  * Writes a RESUME frame into a new buffer and returns it.
@@ -184,7 +242,12 @@ export function deserializePayloadFrame(buffer: Buffer, streamId: number, flags:
 export const RESUME_FIXED_SIZE = 22;
 export function serializeResumeFrame(frame: ResumeFrame, encoders: Encoders<any>): Buffer;
 
-export function deserializeResumeFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): ResumeFrame;
+export function deserializeResumeFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): ResumeFrame;
 
 /**
  * Writes a RESUME_OK frame into a new buffer and returns it.
@@ -195,7 +258,12 @@ export function deserializeResumeFrame(buffer: Buffer, streamId: number, flags: 
 export const RESUME_OK_FIXED_SIZE = 8;
 export function serializeResumeOkFrame(frame: ResumeOkFrame, encoders: Encoders<any>): Buffer;
 
-export function deserializeResumeOkFrame(buffer: Buffer, streamId: number, flags: number, encoders: Encoders<any>): ResumeOkFrame;
+export function deserializeResumeOkFrame(
+    buffer: Buffer,
+    streamId: number,
+    flags: number,
+    encoders: Encoders<any>,
+): ResumeOkFrame;
 
 /**
  * Write the header of the frame into the buffer.
@@ -212,20 +280,10 @@ export function getPayloadLength(frame: FrameWithPayload, encoders: Encoders<any
  * Write the payload of a frame into the given buffer. Only applies to frame
  * types that MAY have both metadata and data.
  */
-export function writePayload(
-  frame: FrameWithPayload,
-  buffer: Buffer,
-  encoders: Encoders<any>,
-  offset: number
-): void;
+export function writePayload(frame: FrameWithPayload, buffer: Buffer, encoders: Encoders<any>, offset: number): void;
 
 /**
  * Read the payload from a buffer and write it into the frame. Only applies to
  * frame types that MAY have both metadata and data.
  */
-export function readPayload(
-  buffer: Buffer,
-  frame: FrameWithPayload,
-  encoders: Encoders<any>,
-  offset: number
-): void;
+export function readPayload(buffer: Buffer, frame: FrameWithPayload, encoders: Encoders<any>, offset: number): void;

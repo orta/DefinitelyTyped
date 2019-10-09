@@ -25,7 +25,7 @@ export interface Options {
 }
 
 export type SecAccessible =
-    'AccessibleWhenUnlocked'
+    | 'AccessibleWhenUnlocked'
     | 'AccessibleAfterFirstUnlock'
     | 'AccessibleAlways'
     | 'AccessibleWhenPasscodeSetThisDeviceOnly'
@@ -34,7 +34,7 @@ export type SecAccessible =
     | 'AccessibleAlwaysThisDeviceOnly';
 
 export type SecAccessControl =
-    'UserPresence'
+    | 'UserPresence'
     | 'BiometryAny'
     | 'BiometryCurrentSet'
     | 'DevicePasscode'
@@ -52,36 +52,25 @@ export function setInternetCredentials(
     server: string,
     username: string,
     password: string,
-    options?: Options
+    options?: Options,
 ): Promise<boolean>;
 
-export function getInternetCredentials(
-    server: string
-): Promise<UserCredentials>;
+export function getInternetCredentials(server: string): Promise<UserCredentials>;
 
-export function resetInternetCredentials(
-    server: string
-): Promise<boolean>;
+export function resetInternetCredentials(server: string): Promise<boolean>;
 
 export function setGenericPassword(
     username: string,
     password: string,
-    serviceOrOptions?: string | Options
+    serviceOrOptions?: string | Options,
 ): Promise<boolean>;
 
 export function getGenericPassword(
-    serviceOrOptions?: string | Options
-): Promise<boolean | {service: string, username: string, password: string}>;
+    serviceOrOptions?: string | Options,
+): Promise<boolean | { service: string; username: string; password: string }>;
 
-export function resetGenericPassword(
-    serviceOrOptions?: string | Options
-): Promise<boolean>;
+export function resetGenericPassword(serviceOrOptions?: string | Options): Promise<boolean>;
 
-export function requestSharedWebCredentials(
-): Promise<SharedWebCredentials>;
+export function requestSharedWebCredentials(): Promise<SharedWebCredentials>;
 
-export function setSharedWebCredentials(
-    server: string,
-    username: string,
-    password: string
-): Promise<boolean>;
+export function setSharedWebCredentials(server: string, username: string, password: string): Promise<boolean>;

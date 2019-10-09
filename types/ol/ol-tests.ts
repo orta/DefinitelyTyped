@@ -1,7 +1,16 @@
 import { Collection, Map, MapBrowserEvent, Overlay, PluggableMap, View } from 'ol';
 import { unByKey } from 'ol/Observable';
 import { stableSort } from 'ol/array';
-import { Control, FullScreen, MousePosition, OverviewMap, ScaleLine, ZoomSlider, ZoomToExtent, defaults as defaultControls } from 'ol/control';
+import {
+    Control,
+    FullScreen,
+    MousePosition,
+    OverviewMap,
+    ScaleLine,
+    ZoomSlider,
+    ZoomToExtent,
+    defaults as defaultControls,
+} from 'ol/control';
 import { Options as ControlOptions } from 'ol/control/Control';
 import { toStringXY } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
@@ -126,7 +135,12 @@ const geojsonObj = {
             type: 'Feature',
             geometry: {
                 type: 'MultiLineString',
-                coordinates: [[[-1000000, -750000], [-1000000, 750000]], [[1000000, -750000], [1000000, 750000]], [[-750000, -1000000], [750000, -1000000]], [[-750000, 1000000], [750000, 1000000]]],
+                coordinates: [
+                    [[-1000000, -750000], [-1000000, 750000]],
+                    [[1000000, -750000], [1000000, 750000]],
+                    [[-750000, -1000000], [750000, -1000000]],
+                    [[-750000, 1000000], [750000, 1000000]],
+                ],
             },
         },
         {
@@ -331,7 +345,7 @@ class CustomControl extends Control {
         this._eventKeys.push(
             view.on('change:center', evt => {
                 console.log(evt.oldValue, view.getCenter());
-            })
+            }),
         );
     }
 

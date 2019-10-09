@@ -7,7 +7,7 @@
 type parseBase = <T = Uint8Array>(
     data: string,
     options?: {
-        out?: { new(): T };
+        out?: { new (): T };
         loose?: boolean;
     },
 ) => T;
@@ -49,15 +49,11 @@ export namespace codec {
         data: string,
         encoding: Encoding,
         options?: {
-            out?: { new(): T };
+            out?: { new (): T };
             loose?: boolean;
         },
     ): T;
-    function stringify(
-        data: object,
-        encoding: Encoding,
-        options?: { pad?: boolean }
-    ): string;
+    function stringify(data: object, encoding: Encoding, options?: { pad?: boolean }): string;
 }
 
 export {};

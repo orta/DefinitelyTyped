@@ -18,14 +18,9 @@ const message = xml(
     'message',
     { to: recipient },
     xml('body', {}, 1 + 2),
-    xml('days', days.map(day => xml('day', {}, day)))
+    xml('days', days.map(day => xml('day', {}, day))),
 );
-xml.x(
-    'message',
-    { to: recipient },
-    xml('body', {}, 1 + 2),
-    xml('days', days.map(day => xml('day', {}, day)))
-);
+xml.x('message', { to: recipient }, xml('body', {}, 1 + 2), xml('days', days.map(day => xml('day', {}, day))));
 
 message.attrs;
 message.getChild('body')!.text();

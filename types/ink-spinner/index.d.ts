@@ -24,16 +24,19 @@ type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 type ChalkColorModels = Pick<Chalk, 'rgb' | 'hsl' | 'hsv' | 'hwb' | 'bgRgb' | 'bgHsl' | 'bgHsv' | 'bgHwb'>;
 type ChalkKeywordsAndHexes = Pick<Chalk, 'keyword' | 'hex' | 'bgKeyword' | 'bgHex'>;
-type ChalkCommons = Omit<Chalk, keyof ChalkColorModels | keyof ChalkKeywordsAndHexes | 'constructor' | 'level' | 'enabled'>;
+type ChalkCommons = Omit<
+    Chalk,
+    keyof ChalkColorModels | keyof ChalkKeywordsAndHexes | 'constructor' | 'level' | 'enabled'
+>;
 
 interface SpinnerProps {
     type?: cliSpinners.SpinnerName;
 }
 
-type ChalkProps = BooleansPartial<ChalkCommons>
-    & StringifyPartial<ChalkKeywordsAndHexes>
-    & TupleOfNumbersPartial<ChalkColorModels>;
+type ChalkProps = BooleansPartial<ChalkCommons> &
+    StringifyPartial<ChalkKeywordsAndHexes> &
+    TupleOfNumbersPartial<ChalkColorModels>;
 
-declare class Spinner extends Component<SpinnerProps & ChalkProps> { }
+declare class Spinner extends Component<SpinnerProps & ChalkProps> {}
 
 export = Spinner;

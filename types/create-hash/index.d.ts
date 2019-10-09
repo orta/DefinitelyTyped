@@ -16,16 +16,7 @@ declare namespace createHash {
     }
 
     type encoding = 'utf8' | 'hex' | 'base64';
-    type algorithm =
-        | 'md5'
-        | 'rmd160'
-        | 'ripemd160'
-        | 'sha'
-        | 'sha1'
-        | 'sha224'
-        | 'sha256'
-        | 'sha384'
-        | 'sha512';
+    type algorithm = 'md5' | 'rmd160' | 'ripemd160' | 'sha' | 'sha1' | 'sha224' | 'sha256' | 'sha384' | 'sha512';
 }
 
 declare function createHash(algorithm: createHash.algorithm, options?: any): createHash.HashAlgorithm;

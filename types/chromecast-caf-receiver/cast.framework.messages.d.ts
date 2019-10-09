@@ -893,7 +893,7 @@ export class QueueData {
         repeatMode?: RepeatMode,
         items?: QueueItem[],
         startIndex?: number,
-        startTime?: number
+        startTime?: number,
     );
 
     /**

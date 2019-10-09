@@ -4,7 +4,7 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.8
 
-import { CSSProperties, Component } from "react";
+import { CSSProperties, Component } from 'react';
 
 export interface Size {
     width: number;
@@ -30,7 +30,7 @@ export interface CropperProps {
     aspect?: number;
     minZoom?: number;
     maxZoom?: number;
-    cropShape?: "rect" | "round";
+    cropShape?: 'rect' | 'round';
     cropSize?: Size;
     showGrid?: boolean;
     zoomSpeed?: number;
@@ -40,14 +40,14 @@ export interface CropperProps {
     onCropComplete?: (croppedArea: Area, croppedAreaPixels: Area) => void;
     onImgError?: () => void;
     style?: {
-        containerStyle: React.CSSProperties,
-        imageStyle: React.CSSProperties,
-        cropAreaStyle: React.CSSProperties
+        containerStyle: React.CSSProperties;
+        imageStyle: React.CSSProperties;
+        cropAreaStyle: React.CSSProperties;
     };
     classes?: {
-        containerClassName: string,
-        imageClassName: string,
-        cropAreaClassName: string
+        containerClassName: string;
+        imageClassName: string;
+        cropAreaClassName: string;
     };
     restrictPosition?: boolean;
     initialCroppedAreaPixels?: Area;

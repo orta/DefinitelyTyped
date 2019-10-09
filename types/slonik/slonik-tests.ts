@@ -1,26 +1,26 @@
 import {
-  createSqlTag,
-  IdentifierNormalizerType,
-  CheckIntegrityConstraintViolationError,
-  createBenchmarkingInterceptor,
-  createBigintTypeParser,
-  createFieldNameTransformationInterceptor,
-  createInterceptorPreset,
-  createPool,
-  createQueryNormalizationInterceptor,
-  createTimestampTypeParser,
-  createTimestampWithTimeZoneTypeParser,
-  createTypeParserPreset,
-  DataIntegrityError,
-  ForeignKeyIntegrityConstraintViolationError,
-  IntegrityConstraintViolationError,
-  NotFoundError,
-  NotNullIntegrityConstraintViolationError,
-  SlonikError,
-  sql,
-  TypeParserType,
-  UniqueIntegrityConstraintViolationError,
-  SqlTaggedTemplateType
+    createSqlTag,
+    IdentifierNormalizerType,
+    CheckIntegrityConstraintViolationError,
+    createBenchmarkingInterceptor,
+    createBigintTypeParser,
+    createFieldNameTransformationInterceptor,
+    createInterceptorPreset,
+    createPool,
+    createQueryNormalizationInterceptor,
+    createTimestampTypeParser,
+    createTimestampWithTimeZoneTypeParser,
+    createTypeParserPreset,
+    DataIntegrityError,
+    ForeignKeyIntegrityConstraintViolationError,
+    IntegrityConstraintViolationError,
+    NotFoundError,
+    NotNullIntegrityConstraintViolationError,
+    SlonikError,
+    sql,
+    TypeParserType,
+    UniqueIntegrityConstraintViolationError,
+    SqlTaggedTemplateType,
 } from 'slonik';
 import { ArrayTokenSymbol, TupleListTokenSymbol } from 'slonik/symbols';
 
@@ -36,7 +36,7 @@ const VALUE = 'foo';
 const pool = createPool('postgres://localhost');
 
 // $ExpectType Promise<{ connectResult: string; }>
-pool.connect(async (connection) => {
+pool.connect(async connection => {
     const result = await connection.query(sql`SELECT 1`);
     // $ExpectType QueryResultType<QueryResultRowType<string>>
     result;
@@ -64,110 +64,112 @@ pool.connect(async (connection) => {
     await connection.query(`SELECT foo`);
 
     // $ExpectType { transactionResult: string; }
-    await connection.transaction(async (transactionConnection) => {
-      await transactionConnection.query(sql`INSERT INTO foo (bar) VALUES ('baz')`);
-      await transactionConnection.query(sql`INSERT INTO qux (quux) VALUES ('corge')`);
-      return { transactionResult: 'foo' };
+    await connection.transaction(async transactionConnection => {
+        await transactionConnection.query(sql`INSERT INTO foo (bar) VALUES ('baz')`);
+        await transactionConnection.query(sql`INSERT INTO qux (quux) VALUES ('corge')`);
+        return { transactionResult: 'foo' };
     });
 
     // $ExpectType QueryResultType<QueryResultRowType<string>>
-    await connection.transaction(async (t1) => {
-      await t1.query(sql`INSERT INTO foo (bar) VALUES ('baz')`);
+    await connection.transaction(async t1 => {
+        await t1.query(sql`INSERT INTO foo (bar) VALUES ('baz')`);
 
-      return t1.transaction((t2) => {
-        return t2.query(sql`INSERT INTO qux (quux) VALUES ('corge')`);
-      });
+        return t1.transaction(t2 => {
+            return t2.query(sql`INSERT INTO qux (quux) VALUES ('corge')`);
+        });
     });
 
     // $ExpectType void
-    await connection.transaction(async (t1) => {
-      await t1.query(sql`INSERT INTO foo (bar) VALUES ('baz')`);
+    await connection.transaction(async t1 => {
+        await t1.query(sql`INSERT INTO foo (bar) VALUES ('baz')`);
 
-      try {
-        await t1.transaction(async (t2) => {
-          await t2.query(sql`INSERT INTO qux (quux) VALUES ('corge')`);
+        try {
+            await t1.transaction(async t2 => {
+                await t2.query(sql`INSERT INTO qux (quux) VALUES ('corge')`);
 
-          return Promise.reject(new Error('foo'));
-        });
-      } catch (error) { /* empty */ }
+                return Promise.reject(new Error('foo'));
+            });
+        } catch (error) {
+            /* empty */
+        }
     });
     return { connectResult: 'foo' };
-  });
+});
 pool.query(sql`SELECT * FROM table WHERE name = '${VALUE}'`);
 
 const typedQuery = async () => {
-  interface Foo { foo: string; }
-  interface FooBar extends Foo { bar: number; }
-  const getFooQuery = (limit: number) =>
-    sql<Foo>`select foo from foobartable limit ${limit}`;
+    interface Foo {
+        foo: string;
+    }
+    interface FooBar extends Foo {
+        bar: number;
+    }
+    const getFooQuery = (limit: number) => sql<Foo>`select foo from foobartable limit ${limit}`;
 
-  const getFooBarQuery = (limit: number) =>
-    sql<FooBar>`select foo, bar from foobartable limit ${limit}`;
+    const getFooBarQuery = (limit: number) => sql<FooBar>`select foo, bar from foobartable limit ${limit}`;
 
-  // $ExpectType QueryResultType<FooBar>
-  await pool.query(getFooBarQuery(10));
+    // $ExpectType QueryResultType<FooBar>
+    await pool.query(getFooBarQuery(10));
 
-  // $ExpectType string
-  await pool.oneFirst(getFooQuery(10));
+    // $ExpectType string
+    await pool.oneFirst(getFooQuery(10));
 
-  // $ExpectType FooBar
-  await pool.one(getFooBarQuery(10));
+    // $ExpectType FooBar
+    await pool.one(getFooBarQuery(10));
 
-  // $ExpectType string | null
-  await pool.maybeOneFirst(getFooQuery(10));
+    // $ExpectType string | null
+    await pool.maybeOneFirst(getFooQuery(10));
 
-  // $ExpectType FooBar | null
-  await pool.maybeOne(getFooBarQuery(10));
+    // $ExpectType FooBar | null
+    await pool.maybeOne(getFooBarQuery(10));
 
-  // $ExpectType FooBar[]
-  await pool.any(getFooBarQuery(10));
+    // $ExpectType FooBar[]
+    await pool.any(getFooBarQuery(10));
 };
 
 createPool('postgres://localhost', {
-  interceptors: [
-    {
-      afterPoolConnection: async (ctx, connection) => {
-        await connection.query(sql`LOAD 'auto_explain'`);
-        await connection.query(sql`SET auto_explain.log_analyze=true`);
-        await connection.query(sql`SET auto_explain.log_format=json`);
-        await connection.query(sql`SET auto_explain.log_min_duration=0`);
-        await connection.query(sql`SET auto_explain.log_timing=true`);
-        await connection.query(sql`SET client_min_messages=log`);
-      },
-      transformRow: (ctx, query, row, fields) => {
-        ctx.queryId; // $ExpectType string
-        query.sql; // $ExpectType string
-        fields[0].dataTypeID; // $ExpectType number
-        row.foo; // $ExpectType QueryResultRowColumnType
-        return row;
-      }
-    }
-  ]
+    interceptors: [
+        {
+            afterPoolConnection: async (ctx, connection) => {
+                await connection.query(sql`LOAD 'auto_explain'`);
+                await connection.query(sql`SET auto_explain.log_analyze=true`);
+                await connection.query(sql`SET auto_explain.log_format=json`);
+                await connection.query(sql`SET auto_explain.log_min_duration=0`);
+                await connection.query(sql`SET auto_explain.log_timing=true`);
+                await connection.query(sql`SET client_min_messages=log`);
+            },
+            transformRow: (ctx, query, row, fields) => {
+                ctx.queryId; // $ExpectType string
+                query.sql; // $ExpectType string
+                fields[0].dataTypeID; // $ExpectType number
+                row.foo; // $ExpectType QueryResultRowColumnType
+                return row;
+            },
+        },
+    ],
 });
 
 //
 // INTERCEPTOR
 // ----------------------------------------------------------------------
 createPool('postgres://', {
-  interceptors: []
+    interceptors: [],
 });
 
 createPool('postgres://', {
-  interceptors: [
-    ...createInterceptorPreset()
-  ]
+    interceptors: [...createInterceptorPreset()],
 });
 
 const interceptors = [
     createBenchmarkingInterceptor(),
     createQueryNormalizationInterceptor(),
     createFieldNameTransformationInterceptor({
-        format: 'CAMEL_CASE'
-    })
+        format: 'CAMEL_CASE',
+    }),
 ];
 
 const connection = createPool('postgres://', {
-    interceptors
+    interceptors,
 });
 
 connection.any(sql`
@@ -186,17 +188,15 @@ const typeParser: TypeParserType<number> = {
         // $ExpectType string
         value;
         return parseInt(value, 10);
-    }
+    },
 };
 
 createPool('postgres://', {
-  typeParsers: [typeParser]
+    typeParsers: [typeParser],
 });
 
 createPool('postgres://', {
-  typeParsers: [
-    ...createTypeParserPreset()
-  ]
+    typeParsers: [...createTypeParserPreset()],
 });
 
 createBigintTypeParser();
@@ -210,45 +210,32 @@ createTimestampWithTimeZoneTypeParser();
     await connection.query(sql`
         INSERT INTO (foo, bar, baz)
         SELECT *
-        FROM ${sql.unnest(
-            [
-                [1, 2, 3],
-                [4, 5, 6]
-            ],
-            [
-                'int4',
-                'int4',
-                'int4'
-            ]
-            )}
+        FROM ${sql.unnest([[1, 2, 3], [4, 5, 6]], ['int4', 'int4', 'int4'])}
     `);
 })();
 
 (async () => {
-    const uniquePairs = [
-        ['a', 1],
-        ['b', 2]
-      ];
+    const uniquePairs = [['a', 1], ['b', 2]];
 
-      let placeholderIndex = 1;
+    let placeholderIndex = 1;
 
-      const whereConditionSql = uniquePairs
+    const whereConditionSql = uniquePairs
         .map(needleColumns => {
-          return needleColumns
-            .map((column) => {
-              return `${column} = $${placeholderIndex++}`;
-            })
-            .join(' AND ');
+            return needleColumns
+                .map(column => {
+                    return `${column} = $${placeholderIndex++}`;
+                })
+                .join(' AND ');
         })
         .join(' OR ');
 
-      const values = [];
+    const values = [];
 
-      for (const pairValues of uniquePairs) {
+    for (const pairValues of uniquePairs) {
         values.push(...pairValues);
-      }
+    }
 
-      const query = sql`
+    const query = sql`
         SELECT
           id
         FROM foo
@@ -256,70 +243,61 @@ createTimestampWithTimeZoneTypeParser();
           ${sql.raw(whereConditionSql, values)}
       `;
 
-      await connection.any(query);
+    await connection.any(query);
 })();
 
 //
 // SQL
 // ----------------------------------------------------------------------
 (async () => {
-  // ExpectType SqlSqlTokenType
-  const query0 = sql`SELECT ${'foo'} FROM bar`;
-  // ExpectType SqlSqlTokenType
-  const query1 = sql`SELECT ${'baz'} FROM (${query0})`;
+    // ExpectType SqlSqlTokenType
+    const query0 = sql`SELECT ${'foo'} FROM bar`;
+    // ExpectType SqlSqlTokenType
+    const query1 = sql`SELECT ${'baz'} FROM (${query0})`;
 
-  await connection.query(sql`
+    await connection.query(sql`
       SELECT (${sql.json([1, 2, { test: 12, other: 'test' }])})
   `);
 
-  await connection.query(sql`
+    await connection.query(sql`
       SELECT (${sql.json('test')})
   `);
 
-  await connection.query(sql`
+    await connection.query(sql`
       SELECT (${sql.json(null)})
   `);
 
-  await connection.query(sql`
+    await connection.query(sql`
       SELECT (${sql.json(123)})
   `);
 
-  await connection.query(sql`
+    await connection.query(sql`
       SELECT (${sql.json({
-        nested: {
-          object: { is: { this: 'test', other: 12, and: new Date('123') } },
-        },
+          nested: {
+              object: { is: { this: 'test', other: 12, and: new Date('123') } },
+          },
       })})
   `);
 
-  // $ExpectError
-  sql`SELECT ${sql.json(undefined)}`;
+    // $ExpectError
+    sql`SELECT ${sql.json(undefined)}`;
 
-  await connection.query(sql`
+    await connection.query(sql`
       SELECT bar, baz
-      FROM ${sql.unnest(
-          [
-              [1, 'foo'],
-              [2, 'bar']
-          ],
-          [
-              'int4',
-              'text'
-          ]
-      )} AS foo(bar, baz)
+      FROM ${sql.unnest([[1, 'foo'], [2, 'bar']], ['int4', 'text'])} AS foo(bar, baz)
   `);
 
-  sql`
+    sql`
       SELECT 1
       FROM ${sql.identifier(['bar', 'baz'])}
   `;
 
-  sql`
+    sql`
       SELECT 1
       FROM ${sql.raw('"bar"')}
   `;
 
-  sql`
+    sql`
       SELECT ${sql.raw('$1', [1])}
   `;
 })();
@@ -327,95 +305,76 @@ createTimestampWithTimeZoneTypeParser();
 //
 // createSQLTag
 // ----------------------------------------------------------------------
-(() => {
-  let sql: SqlTaggedTemplateType;
+() => {
+    let sql: SqlTaggedTemplateType;
 
-  sql = createSqlTag();
+    sql = createSqlTag();
 
-  sql`
+    sql`
       SELECT 1;
   `;
 
-  let normalizeIdentifier: IdentifierNormalizerType;
+    let normalizeIdentifier: IdentifierNormalizerType;
 
-  normalizeIdentifier = (input: string) =>
-      input
-          .split('')
-          .reverse()
-          .join('');
+    normalizeIdentifier = (input: string) =>
+        input
+            .split('')
+            .reverse()
+            .join('');
 
-  sql = createSqlTag({
-      normalizeIdentifier,
-  });
+    sql = createSqlTag({
+        normalizeIdentifier,
+    });
 
-  sql = createSqlTag({});
-});
+    sql = createSqlTag({});
+};
 
 //
 // ERRORS
 // ----------------------------------------------------------------------
-new  SlonikError();
-new  NotFoundError();
-new  DataIntegrityError();
-new  IntegrityConstraintViolationError(new Error("Foo"), "some-constraint");
-new  NotNullIntegrityConstraintViolationError(new Error("Foo"), "some-constraint");
-new  ForeignKeyIntegrityConstraintViolationError(new Error("Foo"), "some-constraint");
-new  UniqueIntegrityConstraintViolationError(new Error("Foo"), "some-constraint");
-new  CheckIntegrityConstraintViolationError(new Error("Foo"), "some-constraint");
+new SlonikError();
+new NotFoundError();
+new DataIntegrityError();
+new IntegrityConstraintViolationError(new Error('Foo'), 'some-constraint');
+new NotNullIntegrityConstraintViolationError(new Error('Foo'), 'some-constraint');
+new ForeignKeyIntegrityConstraintViolationError(new Error('Foo'), 'some-constraint');
+new UniqueIntegrityConstraintViolationError(new Error('Foo'), 'some-constraint');
+new CheckIntegrityConstraintViolationError(new Error('Foo'), 'some-constraint');
 
 const samplesFromDocs = async () => {
-  // some samples generated by parsing the readme from slonik's github page
-  // start samples from readme
-  const sample1 = async () => {
-    await connection.query(sql`
+    // some samples generated by parsing the readme from slonik's github page
+    // start samples from readme
+    const sample1 = async () => {
+        await connection.query(sql`
       INSERT INTO (foo, bar, baz)
       SELECT *
-      FROM ${sql.unnest(
-        [
-          [1, 2, 3],
-          [4, 5, 6]
-        ],
-        [
-          'int4',
-          'int4',
-          'int4'
-        ]
-      )}
+      FROM ${sql.unnest([[1, 2, 3], [4, 5, 6]], ['int4', 'int4', 'int4'])}
     `);
-  };
+    };
 
-  const sample2 = async () => {
-    await connection.query(sql`
+    const sample2 = async () => {
+        await connection.query(sql`
       SELECT (${sql.array([1, 2, 3], 'int4')})
     `);
-  };
+    };
 
-  const sample3 = async () => {
-    sql`SELECT id FROM foo WHERE id = ANY(${sql.array([1, 2, 3], 'int4')})`;
-    sql`SELECT id FROM foo WHERE id != ALL(${sql.array([1, 2, 3], 'int4')})`;
-  };
+    const sample3 = async () => {
+        sql`SELECT id FROM foo WHERE id = ANY(${sql.array([1, 2, 3], 'int4')})`;
+        sql`SELECT id FROM foo WHERE id != ALL(${sql.array([1, 2, 3], 'int4')})`;
+    };
 
-  const sample4 = async () => {
-    await connection.query(sql`
+    const sample4 = async () => {
+        await connection.query(sql`
       SELECT bar, baz
-      FROM ${sql.unnest(
-        [
-          [1, 'foo'],
-          [2, 'bar']
-        ],
-        [
-          'int4',
-          'text'
-        ]
-      )} AS foo(bar, baz)
+      FROM ${sql.unnest([[1, 'foo'], [2, 'bar']], ['int4', 'text'])} AS foo(bar, baz)
     `);
-  };
+    };
 
-  const sample5 = async () => {
-    sql`
+    const sample5 = async () => {
+        sql`
       SELECT 1
       FROM ${sql.identifier(['bar', 'baz'])}
     `;
-  };
-  // end samples from readme
+    };
+    // end samples from readme
 };

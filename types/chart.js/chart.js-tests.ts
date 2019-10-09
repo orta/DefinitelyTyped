@@ -5,7 +5,7 @@ import { BorderWidth, Chart, ChartData, Point, ChartColor } from 'chart.js';
 // => chartjs.Chart
 
 const plugin = {
-    afterDraw: (chartInstance: Chart, easing: Chart.Easing, options?: any) => { },
+    afterDraw: (chartInstance: Chart, easing: Chart.Easing, options?: any) => {},
 };
 
 const ctx = new CanvasRenderingContext2D();
@@ -29,7 +29,7 @@ const chart: Chart = new Chart(ctx, {
                 borderWidth: { top: 1, right: 1, bottom: 0, left: 1 },
                 label: 'test',
                 data: [1, 3, 5],
-            }
+            },
         ],
     },
     options: {
@@ -133,7 +133,7 @@ const scaleOptions: Chart.RadialLinearScale = {
         color: 'rgba(0, 0, 0, 0.1)',
         lineWidth: 1,
         borderDash: [],
-        borderDashOffset: 0.0
+        borderDashOffset: 0.0,
     },
     pointLabels: {
         callback: () => 'pointLabels callback',
@@ -141,7 +141,7 @@ const scaleOptions: Chart.RadialLinearScale = {
         fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         fontSize: 10,
         fontStyle: 'normal',
-        lineHeight: 1.2
+        lineHeight: 1.2,
     },
     ticks: tickOptions,
     display: false,
@@ -160,8 +160,8 @@ const scaleOptions: Chart.RadialLinearScale = {
         zeroLineColor: 'rgba(0, 0, 0, 0.25)',
         zeroLineBorderDash: [],
         zeroLineBorderDashOffset: 0.0,
-        offsetGridLines: false
-    }
+        offsetGridLines: false,
+    },
 };
 const radarChartOptions: Chart.RadialChartOptions = {
     legend: { display: false },
@@ -216,28 +216,30 @@ if (radialChart.aspectRatio !== null) {
 console.log(radialChart.options === radialChart.config.options);
 
 const chartWithScriptedOptions = new Chart(new CanvasRenderingContext2D(), {
-    type: "bar",
+    type: 'bar',
     data: {
-        labels: ["a", "b", "c", "d", "e"],
-        datasets: [{
-            label: "test",
-            data: [1, 3, 5, 4, 2],
-            backgroundColor: ({ dataset, dataIndex }): ChartColor => {
-                if (dataset === undefined || dataset.data === undefined || dataIndex === undefined) {
-                    return "black";
-                }
-                const value = dataset.data[dataIndex];
-                if (typeof value !== "number") {
-                    return "black";
-                }
-                return value > 3 ? "red" : "green";
+        labels: ['a', 'b', 'c', 'd', 'e'],
+        datasets: [
+            {
+                label: 'test',
+                data: [1, 3, 5, 4, 2],
+                backgroundColor: ({ dataset, dataIndex }): ChartColor => {
+                    if (dataset === undefined || dataset.data === undefined || dataIndex === undefined) {
+                        return 'black';
+                    }
+                    const value = dataset.data[dataIndex];
+                    if (typeof value !== 'number') {
+                        return 'black';
+                    }
+                    return value > 3 ? 'red' : 'green';
+                },
+                borderWidth: ({ dataset, dataIndex }): BorderWidth => {
+                    if (dataset === undefined || dataset.data === undefined || dataIndex === undefined) {
+                        return 1;
+                    }
+                    return { top: 1, right: 1, bottom: 0, left: 1 };
+                },
             },
-            borderWidth: ({ dataset, dataIndex }): BorderWidth => {
-                if (dataset === undefined || dataset.data === undefined || dataIndex === undefined) {
-                    return 1;
-                }
-                return { top: 1, right: 1, bottom: 0, left: 1 };
-            }
-        }],
-    }
+        ],
+    },
 });

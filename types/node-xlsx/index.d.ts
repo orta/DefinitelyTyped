@@ -12,7 +12,7 @@
  */
 export function parse(
     mixed: string | ArrayBuffer,
-    options?: {}
+    options?: {},
 ): Array<{
     name: string;
     data: Array<[]>;
@@ -24,10 +24,7 @@ export function parse(
  * @param options spannig multiple rows A1:A4
  * @returns returns a buffer of worksheets
  */
-export function build(
-    worksheets: Array<{ name: string; data: any[][] }>,
-    options?: {}
-): ArrayBuffer;
+export function build(worksheets: Array<{ name: string; data: any[][] }>, options?: {}): ArrayBuffer;
 declare const _default: {
     parse: typeof parse;
     build: typeof build;

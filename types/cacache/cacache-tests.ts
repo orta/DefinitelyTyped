@@ -34,9 +34,9 @@ cacache.put(cachePath, 'registry.npmjs.org|cacache@1.0.0', Buffer.from([])).then
 });
 
 fs.createReadStream('').pipe(
-  cacache.put
-    .stream(cachePath, 'registry.npmjs.org|cacache@1.0.0')
-    .on('integrity', d => console.log(`integrity digest is ${d}`)),
+    cacache.put
+        .stream(cachePath, 'registry.npmjs.org|cacache@1.0.0')
+        .on('integrity', d => console.log(`integrity digest is ${d}`)),
 );
 
 cacache.rm.all(cachePath).then(() => {

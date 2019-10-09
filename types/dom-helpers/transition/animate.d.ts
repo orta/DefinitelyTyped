@@ -15,7 +15,7 @@ declare function _animate(
     properties: { [key: string]: any },
     duration?: number,
     easing?: boolean,
-    callback?: () => void
+    callback?: () => void,
 ): { cancel: () => void };
 
 declare const animate: typeof _animate;

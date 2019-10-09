@@ -121,17 +121,43 @@ export function crypto_auth_hmacsha512_keygen(outputFormat?: StringOutputFormat 
 
 export function crypto_auth_hmacsha512_verify(tag: Uint8Array, message: string | Uint8Array, key: Uint8Array): boolean;
 
-export function crypto_box_curve25519xchacha20poly1305_keypair(publicKey: Uint8Array, secretKey: Uint8Array, outputFormat?: Uint8ArrayOutputFormat | null): KeyPair;
+export function crypto_box_curve25519xchacha20poly1305_keypair(
+    publicKey: Uint8Array,
+    secretKey: Uint8Array,
+    outputFormat?: Uint8ArrayOutputFormat | null,
+): KeyPair;
 
-export function crypto_box_curve25519xchacha20poly1305_keypair(publicKey: Uint8Array, secretKey: Uint8Array, outputFormat?: StringOutputFormat | null): StringKeyPair;
+export function crypto_box_curve25519xchacha20poly1305_keypair(
+    publicKey: Uint8Array,
+    secretKey: Uint8Array,
+    outputFormat?: StringOutputFormat | null,
+): StringKeyPair;
 
-export function crypto_box_curve25519xchacha20poly1305_seal(message: Uint8Array, publicKey: Uint8Array, outputFormat?: Uint8ArrayOutputFormat | null): Uint8Array;
+export function crypto_box_curve25519xchacha20poly1305_seal(
+    message: Uint8Array,
+    publicKey: Uint8Array,
+    outputFormat?: Uint8ArrayOutputFormat | null,
+): Uint8Array;
 
-export function crypto_box_curve25519xchacha20poly1305_seal(message: Uint8Array, publicKey: Uint8Array, outputFormat?: StringOutputFormat | null): string;
+export function crypto_box_curve25519xchacha20poly1305_seal(
+    message: Uint8Array,
+    publicKey: Uint8Array,
+    outputFormat?: StringOutputFormat | null,
+): string;
 
-export function crypto_box_curve25519xchacha20poly1305_seal_open(ciphertext: Uint8Array, publicKey: Uint8Array, secretKey: Uint8Array, outputFormat?: Uint8ArrayOutputFormat | null): Uint8Array;
+export function crypto_box_curve25519xchacha20poly1305_seal_open(
+    ciphertext: Uint8Array,
+    publicKey: Uint8Array,
+    secretKey: Uint8Array,
+    outputFormat?: Uint8ArrayOutputFormat | null,
+): Uint8Array;
 
-export function crypto_box_curve25519xchacha20poly1305_seal_open(ciphertext: Uint8Array, publicKey: Uint8Array, secretKey: Uint8Array, outputFormat?: StringOutputFormat | null): string;
+export function crypto_box_curve25519xchacha20poly1305_seal_open(
+    ciphertext: Uint8Array,
+    publicKey: Uint8Array,
+    secretKey: Uint8Array,
+    outputFormat?: StringOutputFormat | null,
+): string;
 
 export function crypto_hash_sha256(
     message: string | Uint8Array,
@@ -260,9 +286,19 @@ export function crypto_sign_ed25519_sk_to_seed(
     outputFormat?: StringOutputFormat | null,
 ): string;
 
-export function crypto_stream_chacha20(outLength: number, key: Uint8Array, nonce: Uint8Array, outputFormat?: StringOutputFormat | null): string;
+export function crypto_stream_chacha20(
+    outLength: number,
+    key: Uint8Array,
+    nonce: Uint8Array,
+    outputFormat?: StringOutputFormat | null,
+): string;
 
-export function crypto_stream_chacha20(outLength: number, key: Uint8Array, nonce: Uint8Array, outputFormat?: Uint8ArrayOutputFormat | null): Uint8Array;
+export function crypto_stream_chacha20(
+    outLength: number,
+    key: Uint8Array,
+    nonce: Uint8Array,
+    outputFormat?: Uint8ArrayOutputFormat | null,
+): Uint8Array;
 
 export function crypto_stream_chacha20_ietf_xor(
     input_message: string | Uint8Array,

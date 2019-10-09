@@ -10,7 +10,7 @@ import { Plugin } from 'postcss';
 import { Stats } from 'browserslist';
 
 declare namespace autoprefixer {
-    type BrowserslistTarget = (string | string[] | { [key: string]: string[]; });
+    type BrowserslistTarget = string | string[] | { [key: string]: string[] };
 
     interface Options {
         env?: string;

@@ -1,4 +1,4 @@
-import { getProxyForUrl } from "proxy-from-env";
+import { getProxyForUrl } from 'proxy-from-env';
 
 // $ExpectType string
-getProxyForUrl("http://microsoft.github.io/TypeSearch/");
+getProxyForUrl('http://microsoft.github.io/TypeSearch/');

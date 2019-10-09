@@ -1,1 +1,12 @@
 *.json
+types/activex*
+types/winrt-uwp/*
+types/arcgis-js-api/index.d.ts
+types/adone/*
+types/dojo/*
+types/echarts/*
+types/office-js/*
+types/devexpress-web/*
+types/node/*
+types/winrt/*
+types/openfin/*

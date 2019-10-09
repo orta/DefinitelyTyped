@@ -40,7 +40,7 @@ export class VASTTracker extends NodeJS.EventEmitter {
         /**
          * Current playback time in seconds.
          */
-        progress: number
+        progress: number,
     ): void;
     /**
      * Update the mute state and call the mute/unmute tracking URLs. Emit a mute or unmute event.
@@ -49,7 +49,7 @@ export class VASTTracker extends NodeJS.EventEmitter {
         /**
          * Indicate if the video is muted or not.
          */
-        muted: boolean
+        muted: boolean,
     ): void;
     /**
      * Update the pause state and call the resume/pause tracking URLs. Emit a resume or pause event.
@@ -58,7 +58,7 @@ export class VASTTracker extends NodeJS.EventEmitter {
         /**
          * Indicate if the video is paused or not.
          */
-        paused: boolean
+        paused: boolean,
     ): void;
     /**
      * Update the fullscreen state and call the fullscreen tracking URLs. Emit a fullscreen or exitFullscreen event.
@@ -67,7 +67,7 @@ export class VASTTracker extends NodeJS.EventEmitter {
         /**
          * Indicate the fullscreen mode.
          */
-        fullscreen: boolean
+        fullscreen: boolean,
     ): void;
     /**
      * Update the expand state and call the expand/collapse tracking URLs. Emit a expand or collapse event
@@ -87,7 +87,7 @@ export class VASTTracker extends NodeJS.EventEmitter {
         /**
          * The time in seconds until the skip button is displayed.
          */
-        duration: number
+        duration: number,
     ): void;
     /**
      * Report the impression URI. Can only be called once. Will report the following URI:
@@ -105,7 +105,7 @@ export class VASTTracker extends NodeJS.EventEmitter {
         /**
          * Replaces [ERRORCODE] macro. [ERRORCODE] values are liste in the VAST specification.
          */
-        errorCode: string
+        errorCode: string,
     ): void;
     /**
      * Must be called when the user watched the linear creative until its end. Call the complete tracking URLs.
@@ -201,7 +201,7 @@ export class VASTParser extends NodeJS.EventEmitter {
          */
         urlTemplates: string[],
         errorCode: Pick<VastError, 'ERRORCODE'>,
-        ...data: Array<Pick<VastError, Exclude<keyof VastError, 'ERRORCODE'>>>,
+        ...data: Array<Pick<VastError, Exclude<keyof VastError, 'ERRORCODE'>>>
     ): void;
     /**
      * Fetches a VAST document for the given url.
@@ -219,7 +219,7 @@ export class VASTParser extends NodeJS.EventEmitter {
         /**
          * url of original wrapper
          */
-        originalUrl?: string
+        originalUrl?: string,
     ): Promise<Document>;
     /**
      * Fetches and parses a VAST for the given url.
@@ -261,11 +261,7 @@ export function UrlHandlerCbType(err: null, xml: XMLDocument): void;
 export function UrlHandlerCbType(err: Error): void;
 
 export interface VASTClientUrlHandler {
-    get(
-        url: string,
-        options: { timeout: number, withCredentials: boolean },
-        cb: typeof UrlHandlerCbType,
-    ): void;
+    get(url: string, options: { timeout: number; withCredentials: boolean }, cb: typeof UrlHandlerCbType): void;
 }
 
 export interface VastRequestOptions {

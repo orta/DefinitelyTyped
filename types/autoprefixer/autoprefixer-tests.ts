@@ -22,16 +22,8 @@ const ap2: Transformer = autoprefixer({
 // Using environment map in "overrideBrowserslist"
 const ap3: Transformer = autoprefixer({
     overrideBrowserslist: {
-        production: [
-            '> 1%',
-            'ie 10',
-        ],
-        modern: [
-            'last 1 chrome version',
-            'last 1 firefox version',
-        ],
-        ssr: [
-            'node 12',
-        ],
+        production: ['> 1%', 'ie 10'],
+        modern: ['last 1 chrome version', 'last 1 firefox version'],
+        ssr: ['node 12'],
     },
 });

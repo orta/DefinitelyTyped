@@ -5,10 +5,10 @@ const generator = new UIDGenerator(128, 'abc'); // $ExpectType UIDGenerator
 
 generator.generateSync(); // $ExpectType string
 generator.generate(uid => {
-  uid; // $ExpectType string
+    uid; // $ExpectType string
 });
 generator.generate().then(uid => {
-  uid; // $ExpectType string
+    uid; // $ExpectType string
 });
 
 generator.bitSize; // $ExpectType number
